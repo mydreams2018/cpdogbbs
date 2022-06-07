@@ -6,6 +6,7 @@ import Login from "./views/Login"
 import Home from "./views/Home";
 import NoFound from "./views/NoFound";
 import DocCookies from "./utils/Cookies";
+import FixedUtils from "./utils/FixedUtils";
 
 const {Header, Content, Footer } = Layout;
 const menusTitle = [
@@ -88,6 +89,7 @@ function App() {
                 Ant Design ©2022 Created by 刘大胖
             </Footer>
         </Layout>
+        <FixedUtils />
     </div>
   );
 }
