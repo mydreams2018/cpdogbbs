@@ -1,9 +1,13 @@
 import './Login.css';
-
+import {useEffect} from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
+import {autoViewformlogin} from "../utils/customEvent";
 
 function Login(props){
+    useEffect(()=>{
+        autoViewformlogin();
+    });
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
     };
