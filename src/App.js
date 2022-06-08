@@ -20,7 +20,7 @@ console.log(process.env);
 
 function App() {
     console.log("首页");
-    const [authToken, setAuthToken] = useState(() => DocCookies.getItem("auth-token"));
+    const [authToken, setAuthToken] = useState(() => false);
     const navigate = useNavigate();
     const locationPath = useLocation();
     let locationKey;
