@@ -1,0 +1,11 @@
+注意：此功能适用于 react-scripts@1.0.0 及更高版本。
+
+.env：默认值。
+.env.local：本地覆盖。此文件将针对除测试之外的所有环境加载。
+.env.development、、：特定于环境的设置。.env.test.env.production
+.env.development.local、 、 ： 特定于环境的设置的本地覆盖。.env.test.local.env.production.local
+左侧的文件比右侧的文件具有更高的优先级：
+
+npm start: , , , .env.development.local .env.local .env.development .env
+npm run build: , , , .env.production.local .env.local .env.production .env
+npm test： ， ， （缺少注释） .env.test.local .env.test .env .env.local

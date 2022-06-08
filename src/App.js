@@ -5,6 +5,8 @@ import {Routes,Route ,useNavigate,useLocation} from "react-router-dom";
 import Login from "./views/Login"
 import Home from "./views/Home";
 import NoFound from "./views/NoFound";
+import Forget from "./views/Forget";
+import Register from "./views/Register";
 import DocCookies from "./utils/Cookies";
 import FixedUtils from "./utils/FixedUtils";
 
@@ -23,7 +25,7 @@ function App() {
     const [authToken, setAuthToken] = useState(() => false);
     const navigate = useNavigate();
     const locationPath = useLocation();
-    let locationKey;
+    let locationKey='1';
     menusTitle.forEach(item => {
         if(item.path===locationPath.pathname){
             locationKey = item.key;
@@ -35,7 +37,7 @@ function App() {
             <Header
                 style={{
                     position: 'fixed',
-                    zIndex: 1,
+                    zIndex: 6,
                     width: '100%',
                 }}>
                 <div className="logo" />
@@ -78,6 +80,8 @@ function App() {
                         minHeight: 380}}>
                     <Routes>
                         <Route path="/" element={authToken?<Home />:<Login />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/forget" element={<Forget />} />
                         <Route path="*" element={<NoFound />} />
                     </Routes>
                 </div>

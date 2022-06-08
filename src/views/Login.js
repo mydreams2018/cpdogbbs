@@ -1,16 +1,39 @@
 import './Login.css';
-import {useEffect} from 'react';
+import {useEffect,useState} from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
 import {autoViewformlogin} from "../utils/customEvent";
+import {useNavigate } from "react-router-dom";
 
-function Login(props){
+import axios from "axios";
+
+function Login (props){
+    let navigate = useNavigate();
+    const [checkCode, setCheckCode] = useState(()=>{
+        axios({
+            method: 'get',
+            url: 'https://www.kungreat.cn/api/image',
+            headers: {'Content-Type': 'text/plain',
+                "Accept":"*/*"},
+            responseType: 'text'
+        }).then(function (response) {
+            if(response.data){
+                setCheckCode(response.data);
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
+    });
     useEffect(()=>{
         autoViewformlogin();
     });
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
     };
+    const navigatePath = (e,ph)=>{
+        e.preventDefault();
+        navigate(ph,{replace:false});
+    }
     return (
         <div id="view-form-login">
             <Form
@@ -55,7 +78,7 @@ function Login(props){
                     ]}>
                     <Input
                         prefix={<LockOutlined className="site-form-item-icon" />}
-                        placeholder="checkcode"
+                        placeholder="请回答:"
                     />
                 </Form.Item>
 
@@ -63,8 +86,8 @@ function Login(props){
                     <Form.Item name="remember" valuePropName="checked" noStyle>
                         <Checkbox>Remember me</Checkbox>
                     </Form.Item>
-                    <a className="login-form-forgot" href="">
-                        check-code
+                    <a className="login-form-forgot" href="javascript:void(0)">
+                        {checkCode}
                     </a>
                 </Form.Item>
 
@@ -72,8 +95,8 @@ function Login(props){
                     <Button type="primary" htmlType="submit" className="login-form-button">
                         Log in
                     </Button>
-                    <a href=""> Register now</a>
-                    <a className="login-form-forgot" href="">
+                    <a href="javascript:void(0)" onClick={(event)=>navigatePath(event,'/register')}> Register now</a>
+                    <a className="login-form-forgot" href="javascript:void(0)" onClick={(event)=>navigatePath(event,'/forget')}>
                         Forgot password
                     </a>
                 </Form.Item>
