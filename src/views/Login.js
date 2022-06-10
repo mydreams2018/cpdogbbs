@@ -3,37 +3,19 @@ import {useEffect,useState} from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
 import {autoViewformlogin} from "../utils/customEvent";
-import {useNavigate } from "react-router-dom";
 
-import axios from "axios";
+import {getApiImg} from '../utils/HttpUtils'
 
 function Login (props){
-    let navigate = useNavigate();
-    const [checkCode, setCheckCode] = useState(()=>{
-        axios({
-            method: 'get',
-            url: 'https://www.kungreat.cn/api/image',
-            headers: {'Content-Type': 'text/plain',
-                "Accept":"*/*"},
-            responseType: 'text'
-        }).then(function (response) {
-            if(response.data){
-                setCheckCode(response.data);
-            }
-        }).catch(function (error) {
-            console.log(error);
-        });
-    });
+    const [checkCode, setCheckCode] = useState("");
     useEffect(()=>{
+        getApiImg(setCheckCode);
         autoViewformlogin();
-    });
+    },[]);
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
     };
-    const navigatePath = (e,ph)=>{
-        e.preventDefault();
-        navigate(ph,{replace:false});
-    }
+
     return (
         <div id="view-form-login">
             <Form
@@ -86,17 +68,17 @@ function Login (props){
                     <Form.Item name="remember" valuePropName="checked" noStyle>
                         <Checkbox>Remember me</Checkbox>
                     </Form.Item>
-                    <a className="login-form-forgot" href="javascript:void(0)">
+                    <div className="login-form-forgot">
                         {checkCode}
-                    </a>
+                    </div>
                 </Form.Item>
 
                 <Form.Item>
                     <Button type="primary" htmlType="submit" className="login-form-button">
                         Log in
                     </Button>
-                    <a href="javascript:void(0)" onClick={(event)=>navigatePath(event,'/register')}> Register now</a>
-                    <a className="login-form-forgot" href="javascript:void(0)" onClick={(event)=>navigatePath(event,'/forget')}>
+                    <a href={"/register"} > Register now</a>
+                    <a className="login-form-forgot" href={"/forget"}>
                         Forgot password
                     </a>
                 </Form.Item>
