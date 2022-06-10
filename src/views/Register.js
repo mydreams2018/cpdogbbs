@@ -3,10 +3,8 @@ import {useEffect,useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {
     Button,
-    Col,
     Form,
     Input,
-    Row,
     Select,notification
 } from 'antd';
 const { Option } = Select;
@@ -199,26 +197,17 @@ function Register(){
                 </Select>
             </Form.Item>
 
-            <Form.Item label="Captcha" extra="We must make sure that your are a human.">
-                <Row gutter={8}>
-                    <Col span={12}>
-                        <Form.Item
+                        <Form.Item label="Captcha" extra="We must make sure that your are a human."
                             name="image_code"
-                            noStyle
                             rules={[
                                 {
                                     required: true,
                                     message: 'Please input the captcha you got!',
                                 },
                             ]}>
-                            <Input />
+                            <Input suffix={checkCode ? checkCode:<span />} />
                         </Form.Item>
-                    </Col>
-                    <Col span={12}>
-                        <Button > {checkCode} </Button>
-                    </Col>
-                </Row>
-            </Form.Item>
+
 
             <Form.Item {...tailFormItemLayout}>
                 <Button type="primary" htmlType="submit">
