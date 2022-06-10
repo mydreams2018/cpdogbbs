@@ -3,9 +3,7 @@ import axios from "axios";
 function getApiImg(setCheckCode){
     axios({
         method: 'get',
-        url: 'https://www.kungreat.cn/api/image',
-        headers: {'Content-Type': 'text/plain',
-            "Accept":"*/*"},
+        url: '/api/image',
         responseType: 'text'
     }).then(function (response) {
         if(response.data){
@@ -16,4 +14,21 @@ function getApiImg(setCheckCode){
     });
 }
 
-export {getApiImg}
+function getRigister(obj,callback){
+    axios({
+        method: 'post',
+        url: '/api/register',
+        data:obj,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        responseType: 'json'
+    }).then(function (response) {
+            callback(response.data);
+        }).catch(function (error) {
+            console.log(error);
+            callback(null);
+        });
+}
+
+export {getApiImg,getRigister}

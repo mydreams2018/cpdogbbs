@@ -1,15 +1,22 @@
-import {getApiImg} from '../utils/HttpUtils'
+import {getApiImg,getRigister} from '../utils/HttpUtils'
 import {useEffect,useState} from 'react';
+import {useNavigate} from "react-router-dom";
 import {
     Button,
     Col,
     Form,
     Input,
     Row,
-    Select,
+    Select,notification
 } from 'antd';
 const { Option } = Select;
-
+const openNotificationWithIcon = (type,msg) => {
+    notification[type]({
+        message: '提醒',
+        description: msg,
+        duration:1.5
+    });
+};
 const formItemLayout = {
     labelCol: {
         xs: {
@@ -42,10 +49,8 @@ const tailFormItemLayout = {
 };
 
 function Register(){
+    const navigate = useNavigate();
     const [form] = Form.useForm();
-    const onFinish = (values) => {
-        console.log('Received values of form: ', values);
-    };
 
     const prefixSelector = (
         <Form.Item name="prefix" noStyle>
@@ -62,6 +67,17 @@ function Register(){
     useEffect(()=>{
         getApiImg(setCheckCode);
     },[]);
+    const onFinish = (values) => {
+        getRigister(values,(res)=>{
+            if(res.status===1){
+                openNotificationWithIcon('success',res.msg);
+                navigate("/");
+            }else{
+                openNotificationWithIcon('warning',res.msg);
+                getApiImg(setCheckCode);
+            }
+        });
+    };
     return (
         <Form
             {...formItemLayout}
