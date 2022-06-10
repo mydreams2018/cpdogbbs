@@ -22,7 +22,7 @@ console.log(process.env);
 
 function App() {
     console.log("首页");
-    const [authToken, setAuthToken] = useState(() => false);
+    const [authToken, setAuthToken] = useState(() => DocCookies.getItem("auth-user"));
     const navigate = useNavigate();
     const locationPath = useLocation();
     let locationKey='1';
@@ -79,7 +79,10 @@ function App() {
                         padding: 24,
                         minHeight: 380}}>
                     <Routes>
-                        <Route path="/" element={authToken?<Home />:<Login />} />
+                        <Route path="/" element={authToken?<Home />:<Login onClick={(token) => {
+                            DocCookies.setItem('auth-user',token,null,"/");
+                            setAuthToken(token);
+                        }} />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/forget" element={<Forget />} />
                         <Route path="*" element={<NoFound />} />

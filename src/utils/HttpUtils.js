@@ -31,4 +31,21 @@ function getRigister(obj,callback){
         });
 }
 
-export {getApiImg,getRigister}
+function userLogin(obj,callback){
+    axios({
+        method: 'post',
+        url: '/api/defaultLogin',
+        data:obj,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        responseType: 'json'
+    }).then(function (response) {
+        callback(response.data);
+    }).catch(function (error) {
+        console.log(error);
+        callback(null);
+    });
+}
+
+export {getApiImg,getRigister,userLogin}
