@@ -1,69 +1,43 @@
-import {LikeOutlined, MessageOutlined, StarOutlined} from '@ant-design/icons';
-import {Avatar, List, Space} from 'antd';
-import React from 'react';
 import './HomeView.css'
-const data = Array.from({
-    length: 23,
-}).map((_, i) => ({
-    href: 'https://ant.design',
-    title: `ant design part ${i+1}`,
-    avatar: 'https://joeschmoe.io/api/v1/random',
-    description:
-        'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-    content:
-        'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-}));
+import React, {useEffect, useState} from 'react';
+import MyCarousel from "../components/MyCarousel";
+import {Tabs} from 'antd';
+import {FireOutlined, UndoOutlined} from '@ant-design/icons';
 
-const IconText = ({icon, text}) => (
-    <Space>
-        {React.createElement(icon)}
-        {text}
-    </Space>
-);
+const {TabPane} = Tabs;
+
+const imgs = ["https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png", "/logo192.png"]
 
 function Home() {
-
+    const [MyCarouselImgs] = useState(imgs);
     return (
         <div className="home-view">
-            <List
-                itemLayout="vertical"
-                size="large"
-                pagination={{
-                    onChange: (page) => {
-                        console.log(page);
-                    },
-                    pageSize: 10,
-                    total:19,
-                    style:{paddingRight:25}
-                }}
-                dataSource={data}
-                renderItem={(item) => (
-                    <List.Item
-                        key={item.title}
-                        actions={[
-                            <IconText icon={StarOutlined} text="156" key="list-vertical-star-o"/>,
-                            <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o"/>,
-                            <IconText icon={MessageOutlined} text="2" key="list-vertical-message"/>,
-                        ]}
-                        extra={
-                            <img
-                                width={272}
-                                alt="logo"
-                                src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-                            />
-                        }
-                    >
-                        <List.Item.Meta
-                            avatar={<Avatar src={item.avatar} title={'dfsdsdf'}/>}
-                            title={<a href={item.href}>{item.title}</a>}
-                            description={item.description}
-                        />
-                        {item.content}
-                    </List.Item>
-                )}
-            />
+            <div className={"left"}>
+                <MyCarousel imgs={MyCarouselImgs}/>
+                <Tabs defaultActiveKey="1" centered>
+                    <TabPane tab={
+                        <span>
+                        <UndoOutlined />
+                          最新
+                        </span>
+                    } key="1">
+                        最新
+                    </TabPane>
+                    <TabPane tab={
+                        <span>
+                         <FireOutlined />
+                          热议
+                        </span>
+                    } key="2">
+                        热议
+                    </TabPane>
+                </Tabs>
+            </div>
+            <div className={"right"}>
+                right
+            </div>
         </div>
-     );
+    );
 }
 
 export default Home;

@@ -1,4 +1,10 @@
 .home-view {
-  background-color: #fff;
-  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+.home-view .left {
+  width: 60%;
+}
+.home-view .right {
+  width: 30%;
 }
