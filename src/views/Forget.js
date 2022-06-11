@@ -2,7 +2,7 @@ import {Button, Form, Input, notification} from 'antd';
 import React,{useState,useEffect} from 'react';
 import {getApiImg,rePassWord} from "../utils/HttpUtils";
 import {useNavigate} from "react-router-dom";
-
+import './Forget.css'
 const layout = {
     labelCol: {
         span: 8,
@@ -49,8 +49,8 @@ function Forget() {
         getApiImg(setCheckCode);
     },[]);
     return (
-        <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}
-              style={{width: 360, margin: '0 auto',paddingTop:20}}>
+        <Form {...layout} className={"forget-view"} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}
+              style={{width: 360,paddingTop:20}}>
             <Form.Item
                 name={['user', 'account']}
                 label="用户名"
