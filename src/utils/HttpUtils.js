@@ -27,7 +27,7 @@ function getRigister(obj,callback){
             callback(response.data);
         }).catch(function (error) {
             console.log(error);
-            callback(null);
+            callback(error);
         });
 }
 
@@ -44,8 +44,25 @@ function userLogin(obj,callback){
         callback(response.data);
     }).catch(function (error) {
         console.log(error);
-        callback(null);
+        callback(error);
     });
 }
 
-export {getApiImg,getRigister,userLogin}
+function rePassWord(obj,callback){
+    axios({
+        method: 'post',
+        url: '/api/user/resetPassword',
+        data:obj,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        responseType: 'json'
+    }).then(function (response) {
+        callback(response.data);
+    }).catch(function (error) {
+        console.log(error);
+        callback(error);
+    });
+}
+
+export {getApiImg,getRigister,userLogin,rePassWord}

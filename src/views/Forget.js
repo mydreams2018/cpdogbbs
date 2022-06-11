@@ -1,6 +1,7 @@
-import {Button, Form, Input} from 'antd';
+import {Button, Form, Input, notification} from 'antd';
 import React,{useState,useEffect} from 'react';
-import {getApiImg} from "../utils/HttpUtils";
+import {getApiImg,rePassWord} from "../utils/HttpUtils";
+import {useNavigate} from "react-router-dom";
 
 const layout = {
     labelCol: {
@@ -9,6 +10,13 @@ const layout = {
     wrapperCol: {
         span: 16,
     },
+};
+const openNotificationWithIcon = (type,msg) => {
+    notification[type]({
+        message: '提醒',
+        description: msg,
+        duration:1.5
+    });
 };
 /* eslint-disable no-template-curly-in-string */
 
@@ -24,9 +32,18 @@ const validateMessages = {
 };
 
 function Forget() {
+    const navigate = useNavigate();
     const [checkCode, setCheckCode] = useState("");
     const onFinish = (values) => {
-        console.log(values);
+        rePassWord(values.user,(rps)=>{
+            if(rps.status===1){
+                openNotificationWithIcon('success',rps.msg);
+                navigate("/");
+            }else{
+                openNotificationWithIcon('warning',rps.msg);
+                getApiImg(setCheckCode);
+            }
+        })
     };
     useEffect(()=>{
         getApiImg(setCheckCode);
