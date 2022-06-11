@@ -2,20 +2,28 @@ import './App.css';
 import {Layout, Menu} from 'antd';
 import React,{useState} from 'react';
 import {Routes,Route ,useNavigate,useLocation} from "react-router-dom";
+import {HomeOutlined,createFromIconfontCN ,LinkedinFilled,SettingOutlined} from '@ant-design/icons';
 import Login from "./views/Login"
 import Home from "./views/Home";
 import NoFound from "./views/NoFound";
 import Forget from "./views/Forget";
 import Register from "./views/Register";
+import UserView from "./views/UserView";
 import DocCookies from "./utils/Cookies";
 import FixedUtils from "./utils/FixedUtils";
 
 const {Header, Content, Footer } = Layout;
+const IconFont = createFromIconfontCN({
+    scriptUrl: [
+        '//at.alicdn.com/t/font_1788044_0dwu4guekcwr.js', // icon-javascript, icon-java, icon-shoppingcart (overrided)
+    ],
+});
 const menusTitle = [
-    {key:'1',label:'首页',path:"/"},
-    {key:'2',label:'java',path:"/java"},
-    {key:'3',label:'react',path:"/react"},
-    {key:'4',label:'更新日志',path:"/logs"},
+    {key:'1',label:'首页',path:"/",icon:<HomeOutlined />},
+    {key:'2',label:'java',path:"/java",icon: <IconFont type="icon-java" />},
+    {key:'3',label:'react',path:"/react",icon: <IconFont type="icon-javascript" />},
+    {key:'4',label:'地图',path:"/address",icon: <LinkedinFilled />},
+    {key:'5',label:'用户',path:"/user",icon: <SettingOutlined /> },
 ];
 
 console.log(process.env);
@@ -25,7 +33,7 @@ function App() {
     const [authToken, setAuthToken] = useState(() => DocCookies.getItem("auth-user"));
     const navigate = useNavigate();
     const locationPath = useLocation();
-    let locationKey='1';
+    let locationKey='5';
     menusTitle.forEach(item => {
         if(item.path===locationPath.pathname){
             locationKey = item.key;
@@ -45,6 +53,7 @@ function App() {
                     theme="dark"
                     mode="horizontal"
                     defaultSelectedKeys={[locationKey]}
+                    forceSubMenuRender={true}
                     onSelect={function({ item, key, keyPath, selectedKeys, domEvent }){
                        switch (key) {
                            case "1":
@@ -57,7 +66,10 @@ function App() {
                                navigate("/react");
                                break;
                            case "4":
-                               navigate("/logs");
+                               navigate("/address");
+                               break;
+                           case "5":
+                               navigate("/user");
                                break;
                        }
                     }}
@@ -65,6 +77,7 @@ function App() {
                         key: item.key,
                         label: item.label,
                         title: item.label,
+                        icon:item.icon
                     }))}
                 />
             </Header>
@@ -79,12 +92,13 @@ function App() {
                         padding: 24,
                         minHeight: 380}}>
                     <Routes>
-                        <Route path="/" element={authToken?<Home />:<Login onClick={(token) => {
+                        <Route path="/" element={<Home />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/forget" element={<Forget />} />
+                        <Route path="/user" element={authToken?<UserView />:<Login onClick={(token) => {
                             DocCookies.setItem('auth-user',token,null,"/");
                             setAuthToken(token);
                         }} />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/forget" element={<Forget />} />
                         <Route path="*" element={<NoFound />} />
                     </Routes>
                 </div>
