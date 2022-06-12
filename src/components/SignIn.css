@@ -1,0 +1,29 @@
+.sign-in {
+  background-color: #fff;
+  margin-top: 30px;
+}
+.sign-in .sign-titile {
+  display: flex;
+}
+.sign-in .sign-titile span:nth-child(1) {
+  padding: 10px;
+  color: turquoise;
+  cursor: pointer;
+}
+.sign-in .sign-titile span:nth-child(2) {
+  flex: 1;
+  padding: 10px;
+  text-align: end;
+  font-size: 15px;
+  color: tomato;
+}
+.sign-in .sign-con {
+  padding: 10px;
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sign-in .sign-con > span {
+  color: slategrey;
+}

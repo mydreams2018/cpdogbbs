@@ -4,9 +4,11 @@ import MyCarousel from "../components/MyCarousel";
 import {Tabs} from 'antd';
 import {FireOutlined, UndoOutlined} from '@ant-design/icons';
 import ListSimple from "../components/ListSimple";
+import ReplyWeek from "../components/ReplyWeek";
+import SignIn from "../components/SignIn";
 const {TabPane} = Tabs;
 
-const imgs = ["https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png", "/logo192.png"]
+const imgs = ["https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png", "/logo192.png","https://joeschmoe.io/api/v1/random"]
 
 function Home() {
     const [MyCarouselImgs] = useState(imgs);
@@ -33,7 +35,8 @@ function Home() {
                 <ListSimple />
             </div>
             <div className={"right"}>
-                right
+                <ReplyWeek showTitle={true} imgs={MyCarouselImgs} />
+                <SignIn />
             </div>
         </div>
     );

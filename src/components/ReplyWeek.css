@@ -1,0 +1,10 @@
+/* tile uploaded pictures */
+.reply-week {
+  min-height: 380px;
+  width: 100%;
+  background-color: #fff;
+  padding: 15px;
+}
+.reply-week .ant-space-item {
+  border: solid 2px gray;
+}
