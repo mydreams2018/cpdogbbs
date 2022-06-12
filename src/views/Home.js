@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import MyCarousel from "../components/MyCarousel";
 import {Tabs} from 'antd';
 import {FireOutlined, UndoOutlined} from '@ant-design/icons';
-
+import ListSimple from "../components/ListSimple";
 const {TabPane} = Tabs;
 
 const imgs = ["https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png", "/logo192.png"]
@@ -21,7 +21,6 @@ function Home() {
                           最新
                         </span>
                     } key="1">
-                        最新
                     </TabPane>
                     <TabPane tab={
                         <span>
@@ -29,9 +28,9 @@ function Home() {
                           热议
                         </span>
                     } key="2">
-                        热议
                     </TabPane>
                 </Tabs>
+                <ListSimple />
             </div>
             <div className={"right"}>
                 right

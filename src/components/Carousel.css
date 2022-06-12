@@ -1,3 +1,7 @@
+.my-carousel {
+  background-color: #fff;
+  margin-bottom: 10px;
+}
 .my-carousel .swiper {
   width: 100%;
   height: 100%;
