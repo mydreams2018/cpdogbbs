@@ -12,6 +12,7 @@ import UserView from "./views/UserView";
 import Address from "./views/Address";
 import DocCookies from "./utils/Cookies";
 import FixedUtils from "./utils/FixedUtils";
+import {APILoader} from "@uiw/react-amap";
 
 const {Header, Content, Footer } = Layout;
 const IconFont = createFromIconfontCN({
@@ -95,7 +96,11 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/register" element={<Register />} />
-                        <Route path="/address" element={<Address />} />
+                        <Route path="/address" element={
+                            <APILoader version="2.0.5" akay="a7a90e05a37d3f6bf76d4a9032fc9129">
+                            <Address />
+                            </APILoader>
+                        } />
                         <Route path="/forget" element={<Forget />} />
                         <Route path="/user" element={authToken?<UserView />:<Login onClick={(token) => {
                             DocCookies.setItem('auth-user',token,null,"/");
