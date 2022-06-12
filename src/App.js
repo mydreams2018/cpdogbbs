@@ -9,6 +9,7 @@ import NoFound from "./views/NoFound";
 import Forget from "./views/Forget";
 import Register from "./views/Register";
 import UserView from "./views/UserView";
+import Address from "./views/Address";
 import DocCookies from "./utils/Cookies";
 import FixedUtils from "./utils/FixedUtils";
 
@@ -94,6 +95,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/register" element={<Register />} />
+                        <Route path="/address" element={<Address />} />
                         <Route path="/forget" element={<Forget />} />
                         <Route path="/user" element={authToken?<UserView />:<Login onClick={(token) => {
                             DocCookies.setItem('auth-user',token,null,"/");

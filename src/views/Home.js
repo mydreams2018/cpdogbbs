@@ -6,6 +6,7 @@ import {FireOutlined, UndoOutlined} from '@ant-design/icons';
 import ListSimple from "../components/ListSimple";
 import ReplyWeek from "../components/ReplyWeek";
 import SignIn from "../components/SignIn";
+import TimeLine from "../components/TimeLine";
 const {TabPane} = Tabs;
 
 const imgs = ["https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png", "/logo192.png","https://joeschmoe.io/api/v1/random"]
@@ -37,6 +38,7 @@ function Home() {
             <div className={"right"}>
                 <ReplyWeek showTitle={true} imgs={MyCarouselImgs} />
                 <SignIn />
+                <TimeLine />
             </div>
         </div>
     );
