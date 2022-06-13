@@ -6,6 +6,7 @@ import {FireOutlined, UndoOutlined} from '@ant-design/icons';
 import ListSimple from "../components/ListSimple";
 import ReplyWeek from "../components/ReplyWeek";
 import SignIn from "../components/SignIn";
+import Cooperation from "../components/Cooperation";
 import TimeLine from "../components/TimeLine";
 const {TabPane} = Tabs;
 
@@ -38,6 +39,7 @@ function Home() {
             <div className={"right"}>
                 <ReplyWeek showTitle={true} imgs={MyCarouselImgs} />
                 <SignIn />
+                <Cooperation />
                 <TimeLine />
             </div>
         </div>
