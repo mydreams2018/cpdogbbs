@@ -1,0 +1,8 @@
+.base-search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.base-search .ant-tabs-nav {
+  margin: 0;
+}
