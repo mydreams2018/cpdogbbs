@@ -1,4 +1,4 @@
-import { Avatar, List, Skeleton } from 'antd';
+import {Avatar, Image, List, Skeleton} from 'antd';
 import React, { useEffect, useState } from 'react';
 import { CheckCircleTwoTone, HeartTwoTone,MessageTwoTone } from '@ant-design/icons';
 
@@ -27,7 +27,7 @@ const ListSimple = () => {
                     actions={[<CheckCircleTwoTone twoToneColor="#52c41a" />, <HeartTwoTone title={"已经"} twoToneColor="#eb2f96" />]}>
                     <Skeleton avatar title={false} loading={item.loading} active>
                         <List.Item.Meta
-                            avatar={<Avatar src={item.picture.large} />}
+                            avatar={<Avatar src={<Image src={item.picture.large} />} />}
                             title={
                                 <div>
                                     <a href="https://ant.design">{item.name?.last}</a>

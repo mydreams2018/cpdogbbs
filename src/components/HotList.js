@@ -1,4 +1,4 @@
-import { Avatar, List } from 'antd';
+import {Avatar, Image, List} from 'antd';
 import './HotList.css'
 const data = [
     {
@@ -26,13 +26,13 @@ const data = [
 const HotList = () => (
     <List
         className={"hot-list scollbox"}
-        header={<h4 style={{textAlign:"center",color:"#389e0d",marginBottom:0}}>推荐贴</h4>}
+        header={<h4 style={{textAlign:"center",color:"#389e0d",marginBottom:0,lineHeight:'30px'}}>推荐贴</h4>}
         itemLayout="horizontal"
         dataSource={data}
         renderItem={(item) => (
             <List.Item>
                 <List.Item.Meta
-                    avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+                    avatar={<Avatar src={<Image src={"https://joeschmoe.io/api/v1/random"} />} />}
                     title={<a href="https://ant.design">{item.title}</a>}
                     description="Ant Design, a design language for background applications, is refined by Ant UED Team"
                 />
