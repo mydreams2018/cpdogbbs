@@ -1,0 +1,10 @@
+.base-view {
+  display: flex;
+  justify-content: space-around;
+}
+.base-view .left {
+  width: 60%;
+}
+.base-view .right {
+  width: 35%;
+}
