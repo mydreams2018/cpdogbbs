@@ -1,0 +1,9 @@
+.hot-list {
+  background-color: #fff;
+  height: 380px;
+  overflow-y: auto;
+}
+.hot-list .ant-list-header {
+  padding-top: 0;
+  padding-bottom: 0;
+}
