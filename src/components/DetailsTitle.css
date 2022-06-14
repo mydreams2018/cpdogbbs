@@ -1,0 +1,13 @@
+.details-title {
+  overflow: hidden;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.details-title span:nth-child(2) {
+  float: right;
+  cursor: pointer;
+}
+.details-title span:nth-child(3) {
+  float: right;
+  cursor: pointer;
+}
