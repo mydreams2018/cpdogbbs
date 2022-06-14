@@ -13,6 +13,8 @@ import Address from "./views/Address";
 import BaseView from "./views/BaseView";
 import DocCookies from "./utils/Cookies";
 import FixedUtils from "./utils/FixedUtils";
+import JavaView from "./views/JavaView";
+import BaseDetails from "./views/BaseDetails";
 import {APILoader} from "@uiw/react-amap";
 
 const {Header, Content, Footer } = Layout;
@@ -38,7 +40,9 @@ function App() {
     const locationPath = useLocation();
     let locationKey='5';
     menusTitle.forEach(item => {
-        if(item.path===locationPath.pathname){
+        if(locationPath.pathname === item.path){
+            locationKey = item.key;
+        }else if(item.path !== "/" && locationPath.pathname.includes(item.path)){
             locationKey = item.key;
         }
     });
@@ -103,7 +107,10 @@ function App() {
                             </APILoader>
                         } />
                         <Route path="/forget" element={<Forget />} />
-                        <Route path="/java" element={<BaseView type={"java"} />} />
+                        <Route path="/java" element={<JavaView />} >
+                            <Route index element={<BaseView type={"java"} />} />
+                            <Route path="details" element={<BaseDetails type={"java"} />} />
+                        </Route>
                         <Route path="/user" element={authToken?<UserView />:<Login onClick={(token) => {
                             DocCookies.setItem('auth-user',token,null,"/");
                             setAuthToken(token);
