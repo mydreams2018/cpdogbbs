@@ -1,8 +1,9 @@
+import BaseCkedit from "../components/BaseCkedit";
 
 function BaseDetails(){
     return (
-        <div>
-            BaseDetails
+        <div className={"base-details"}>
+            <BaseCkedit />
         </div>
     )
 }
