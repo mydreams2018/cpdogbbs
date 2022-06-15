@@ -1,4 +1,5 @@
 import { Avatar, Comment ,Image } from 'antd';
+import ReplyComment from "./ReplyComment";
 import './CommentList.css'
 
 const ExampleComment = ({ children }) => (
@@ -16,6 +17,10 @@ const ExampleComment = ({ children }) => (
     </Comment>
 );
 
+const replyComments = (obj) => {
+    console.log(obj);
+}
+
 const CommentList = () => (
     <div className={"comment-list"}>
         <h2 className={"reply-title"}>回贴</h2>
@@ -25,6 +30,7 @@ const CommentList = () => (
                 <ExampleComment />
             </ExampleComment>
         </ExampleComment>
+        <ReplyComment onAddComment={replyComments} />
     </div>
 
 );
