@@ -3,11 +3,12 @@
   padding: 20px 10px;
   display: flex;
   justify-content: space-around;
-  align-items: center;
 }
 .base-details .details-left {
   width: 60%;
 }
 .base-details .details-right {
   width: 35%;
+  background-color: #f0f2f5;
+  padding: 5px;
 }

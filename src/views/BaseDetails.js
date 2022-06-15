@@ -4,6 +4,8 @@ import { Avatar, Image,Tag  } from 'antd';
 import {DownOutlined} from '@ant-design/icons';
 import PreContent from "../components/PreContent";
 import CommentList from "../components/CommentList";
+import HotList from "../components/HotList";
+import Cooperation from "../components/Cooperation";
 
 function BaseDetails(props){
     return (
@@ -22,7 +24,8 @@ function BaseDetails(props){
                 <CommentList />
             </div>
             <div className={"details-right"}>
-
+                <HotList />
+                <Cooperation />
             </div>
         </div>
     )
