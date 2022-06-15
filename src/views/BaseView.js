@@ -15,13 +15,13 @@ function BaseView(props){
     const [MyCarouselImgs] = useState(imgs);
     return (
         <div className={"base-view"}>
-            <div className={"left"}>
+            <div className={"view-left"}>
                 <MyCarousel imgs={MyCarouselImgs}/>
                 <BaseSearch />
                 <ListSimple />
                 <Pagination defaultCurrent={1} onChange={pageChange} total={50} />
             </div>
-            <div className={"right"}>
+            <div className={"view-right"}>
                 <HotList />
                 <div style={{width:'100%',height:56}}></div>
                 <ReplyWeek showTitle={true} imgs={MyCarouselImgs} />

@@ -6,7 +6,7 @@ import {DownOutlined} from '@ant-design/icons';
 function BaseDetails(props){
     return (
         <div className={"base-details"}>
-            <div className={"left"}>
+            <div className={"details-left"}>
                 <h3>JVM在linux下的随机数缓慢问题</h3>
                 <DetailsTitle />
                 <div className={"user-list"} style={{backgroundColor:"#f0f2f5"}}>
@@ -17,7 +17,7 @@ function BaseDetails(props){
                     <span>悬赏: 5飞吻</span>
                 </div>
             </div>
-            <div className={"right"}>
+            <div className={"details-right"}>
 
             </div>
         </div>

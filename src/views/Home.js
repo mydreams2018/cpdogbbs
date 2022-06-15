@@ -16,7 +16,7 @@ function Home() {
     const [MyCarouselImgs] = useState(imgs);
     return (
         <div className="home-view">
-            <div className={"left"}>
+            <div className={"home-left"}>
                 <MyCarousel imgs={MyCarouselImgs}/>
                 <Tabs defaultActiveKey="1" centered>
                     <TabPane tab={
@@ -36,7 +36,7 @@ function Home() {
                 </Tabs>
                 <ListSimple />
             </div>
-            <div className={"right"}>
+            <div className={"home-right"}>
                 <ReplyWeek showTitle={true} imgs={MyCarouselImgs} />
                 <SignIn />
                 <Cooperation />

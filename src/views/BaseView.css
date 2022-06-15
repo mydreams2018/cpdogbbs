@@ -2,9 +2,9 @@
   display: flex;
   justify-content: space-around;
 }
-.base-view .left {
+.base-view .view-left {
   width: 60%;
 }
-.base-view .right {
+.base-view .view-right {
   width: 35%;
 }

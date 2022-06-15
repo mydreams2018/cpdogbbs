@@ -5,9 +5,9 @@
   justify-content: space-around;
   align-items: center;
 }
-.base-details .left {
+.base-details .details-left {
   width: 60%;
 }
-.base-details .right {
+.base-details .details-right {
   width: 35%;
 }
