@@ -12,6 +12,9 @@
 
 1. 注册界面<img src="https://www.kungreat.cn/images/images_md/register-react.PNG" style="zoom:50%;" />
 2. 登录 <img src="https://www.kungreat.cn/images/images_md/login-react.PNG" alt="login" style="zoom:50%;" />
+3. <img src="https://www.kungreat.cn/images/images_md/react-1.PNG" alt="login" style="zoom:50%;" />
+4. <img src="https://www.kungreat.cn/images/images_md/react-2.PNG" alt="login" style="zoom:50%;" />
+5. <img src="https://www.kungreat.cn/images/images_md/react-3.PNG" alt="login" style="zoom:50%;" />
 
 #### 软件架构
 
