@@ -2,6 +2,8 @@ import './BaseDetails.css'
 import DetailsTitle from "../components/DetailsTitle";
 import { Avatar, Image,Tag  } from 'antd';
 import {DownOutlined} from '@ant-design/icons';
+import PreContent from "../components/PreContent";
+import CommentList from "../components/CommentList";
 
 function BaseDetails(props){
     return (
@@ -16,6 +18,8 @@ function BaseDetails(props){
                     <Tag color="success">2020-12-12</Tag>
                     <span>悬赏: 5飞吻</span>
                 </div>
+                <PreContent />
+                <CommentList />
             </div>
             <div className={"details-right"}>
 
