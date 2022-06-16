@@ -1,6 +1,6 @@
 import './App.css';
 import {Layout, Menu} from 'antd';
-import React,{useState} from 'react';
+import React,{useState,createContext} from 'react';
 import {Routes,Route ,useNavigate,useLocation} from "react-router-dom";
 import {HomeOutlined,createFromIconfontCN ,LinkedinFilled,SettingOutlined} from '@ant-design/icons';
 import Login from "./views/Login"
@@ -11,12 +11,11 @@ import Register from "./views/Register";
 import UserView from "./views/UserView";
 import Address from "./views/Address";
 import BaseView from "./views/BaseView";
-import DocCookies from "./utils/Cookies";
 import FixedUtils from "./utils/FixedUtils";
 import JavaView from "./views/JavaView";
 import BaseDetails from "./views/BaseDetails";
 import {APILoader} from "@uiw/react-amap";
-
+const Context = createContext("userToken");
 const {Header, Content, Footer } = Layout;
 const IconFont = createFromIconfontCN({
     scriptUrl: [
@@ -35,7 +34,7 @@ console.log(process.env);
 
 function App() {
     console.log("首页");
-    const [authToken, setAuthToken] = useState(() => DocCookies.getItem("auth-user"));
+    const [authToken, setAuthToken] = useState(() => "");
     const navigate = useNavigate();
     const locationPath = useLocation();
     let locationKey='5';
@@ -47,6 +46,7 @@ function App() {
         }
     });
   return (
+      <Context.Provider value={authToken}>
     <div className="App">
         <Layout>
             <Header
@@ -112,7 +112,6 @@ function App() {
                             <Route path="details" element={<BaseDetails type={"java"} />} />
                         </Route>
                         <Route path="/user" element={authToken?<UserView />:<Login onClick={(token) => {
-                            DocCookies.setItem('auth-user',token,null,"/");
                             setAuthToken(token);
                         }} />} />
                         <Route path="*" element={<NoFound />} />
@@ -128,6 +127,7 @@ function App() {
         </Layout>
         <FixedUtils />
     </div>
+      </Context.Provider>
   );
 }
 
