@@ -39,6 +39,7 @@ function SendPorts(){
             <div className={"send-message"}>
                 <Input
                     prefix={"4+3*9+0="}
+                    style={{width:160}}
                     placeholder={"请回答:"}/>
                 <Button type="primary" size="large" loading={false} >
                     发贴
