@@ -34,7 +34,7 @@ console.log(process.env);
 
 function App() {
     console.log("首页");
-    const [authToken, setAuthToken] = useState(() => "");
+    const [authToken, setAuthToken] = useState(() => true);
     const navigate = useNavigate();
     const locationPath = useLocation();
     let locationKey='5';

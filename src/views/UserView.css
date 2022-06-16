@@ -1,0 +1,8 @@
+.user-home {
+  background-color: #fff;
+  display: flex;
+}
+.user-home .user-right {
+  flex: 1;
+  margin-left: 20px;
+}
