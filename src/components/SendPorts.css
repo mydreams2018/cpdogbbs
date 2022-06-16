@@ -1,0 +1,10 @@
+.send-port .send-title {
+  display: flex;
+  justify-content: space-between;
+}
+.send-port .send-title .send-con {
+  flex: 1;
+}
+.send-port .send-message {
+  display: flex;
+}

@@ -2,6 +2,7 @@ import { HomeOutlined, SettingOutlined ,MessageOutlined} from '@ant-design/icons
 import { Menu } from 'antd';
 import { useState } from 'react';
 import UserHomepage from "../components/UserHomepage";
+import SendPorts from "../components/SendPorts";
 import './UserView.css'
 
 function getItem(label, key, icon, children, type) {
@@ -16,6 +17,7 @@ function getItem(label, key, icon, children, type) {
 const items = [
     getItem('个人主页', 'home', <HomeOutlined />, [
         getItem('详情', 'home-1'),
+        getItem('发贴', 'home-2')
     ]),
     getItem('贴子', 'comments', <MessageOutlined />, [
         getItem('我的发贴', 'comments-1'),
@@ -30,7 +32,7 @@ const rootSubmenuKeys = ['home', 'comments', 'edit'];
 
 function UserView(){
     const [openKeys, setOpenKeys] = useState(['home']);
-
+    const [openKeysItem, setOpenKeysItem] = useState( <UserHomepage />);
     const onOpenChange = (keys) => {
         const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
         if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
@@ -41,6 +43,16 @@ function UserView(){
     };
     const onSelectChange = (keys) => {
         console.log(keys);
+        //异步的
+        switch (keys.key) {
+            case 'home-1':
+                setOpenKeysItem( <UserHomepage />);
+                break;
+            case 'home-2':
+                setOpenKeysItem( <SendPorts />);
+                break;
+        }
+
     };
     return (
         <div className={"user-home"}>
@@ -59,7 +71,7 @@ function UserView(){
                 />
             </div>
             <div className={"user-right"}>
-                <UserHomepage />
+                {openKeysItem}
             </div>
         </div>
     );
