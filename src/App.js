@@ -121,9 +121,12 @@ function App() {
                             <Route index element={<BaseView type={"java"} />} />
                             <Route path="details" element={<BaseDetails type={"java"} />} />
                         </Route>
-                        <Route path="/user" element={authToken.id?<UserView />:<Login onClick={(token) => {
-                            setAuthToken(token);
-                            window.location.reload();
+                        <Route path="/user" element={authToken.id?<UserView />:<Login onUserChange={(token) => {
+                            getUserInfo({},(rt)=>{
+                                if(rt){
+                                    setAuthToken(rt);
+                                }
+                            });
                         }} />} />
                         <Route path="*" element={<NoFound />} />
                     </Routes>

@@ -23,7 +23,7 @@ function Login (props){
         userLogin(values,(rsp)=>{
             if(rsp.status===1){
                 openNotificationWithIcon('success',"登录成功");
-                props.onClick(rsp.msg);
+                props.onUserChange(rsp.msg);
             }else{
                 openNotificationWithIcon('warning',rsp.msg);
                 getApiImg(setCheckCode);
