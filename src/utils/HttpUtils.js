@@ -65,4 +65,21 @@ function rePassWord(obj,callback){
     });
 }
 
-export {getApiImg,getRigister,userLogin,rePassWord}
+function getUserInfo(obj,callback){
+    axios({
+        method: 'get',
+        url: '/api/getCurrentUser',
+        data:obj,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        responseType: 'json'
+    }).then(function (response) {
+        callback(response.data);
+    }).catch(function (error) {
+        console.log(error);
+        callback(null);
+    });
+}
+
+export {getApiImg,getRigister,userLogin,rePassWord,getUserInfo}

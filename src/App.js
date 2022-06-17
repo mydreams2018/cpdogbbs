@@ -1,6 +1,5 @@
-import './App.css';
 import {Layout, Menu} from 'antd';
-import React,{useState,createContext} from 'react';
+import React,{useState,createContext,useEffect} from 'react';
 import {Routes,Route ,useNavigate,useLocation} from "react-router-dom";
 import {HomeOutlined,createFromIconfontCN ,LinkedinFilled,SettingOutlined} from '@ant-design/icons';
 import Login from "./views/Login"
@@ -14,7 +13,9 @@ import BaseView from "./views/BaseView";
 import FixedUtils from "./utils/FixedUtils";
 import JavaView from "./views/JavaView";
 import BaseDetails from "./views/BaseDetails";
+import {getUserInfo} from "./utils/HttpUtils";
 import {APILoader} from "@uiw/react-amap";
+import './App.css';
 const Context = createContext("userToken");
 const {Header, Content, Footer } = Layout;
 const IconFont = createFromIconfontCN({
@@ -34,7 +35,20 @@ console.log(process.env);
 
 function App() {
     console.log("首页");
-    const [authToken, setAuthToken] = useState(() => true);
+    const [authToken, setAuthToken] = useState(()=>{
+        console.log("init-state");
+        //只有刷新时 或者 第一次才会进
+        return  false;
+    });
+    useEffect(()=>{
+        //只有刷新时 或者 第一次才会进
+        getUserInfo({},(rt)=>{
+            if(rt){
+                console.log("success",rt);
+                setAuthToken(rt);
+            }
+        });
+    },[]);
     const navigate = useNavigate();
     const locationPath = useLocation();
     let locationKey='5';
@@ -111,7 +125,7 @@ function App() {
                             <Route index element={<BaseView type={"java"} />} />
                             <Route path="details" element={<BaseDetails type={"java"} />} />
                         </Route>
-                        <Route path="/user" element={authToken?<UserView />:<Login onClick={(token) => {
+                        <Route path="/user" element={(authToken&&authToken.id)?<UserView />:<Login onClick={(token) => {
                             setAuthToken(token);
                         }} />} />
                         <Route path="*" element={<NoFound />} />
