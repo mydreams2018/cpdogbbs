@@ -35,11 +35,7 @@ console.log(process.env);
 
 function App() {
     console.log("首页");
-    const [authToken, setAuthToken] = useState(()=>{
-        console.log("init-state");
-        //只有刷新时 或者 第一次才会进
-        return  false;
-    });
+    const [authToken, setAuthToken] = useState(false);
     useEffect(()=>{
         //只有刷新时 或者 第一次才会进
         getUserInfo({},(rt)=>{
@@ -125,8 +121,9 @@ function App() {
                             <Route index element={<BaseView type={"java"} />} />
                             <Route path="details" element={<BaseDetails type={"java"} />} />
                         </Route>
-                        <Route path="/user" element={(authToken&&authToken.id)?<UserView />:<Login onClick={(token) => {
+                        <Route path="/user" element={authToken.id?<UserView />:<Login onClick={(token) => {
                             setAuthToken(token);
+                            window.location.reload();
                         }} />} />
                         <Route path="*" element={<NoFound />} />
                     </Routes>

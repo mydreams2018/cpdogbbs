@@ -69,7 +69,7 @@ function Register(){
         getRigister(values,(res)=>{
             if(res.status===1){
                 openNotificationWithIcon('success',res.msg);
-                navigate("/");
+                navigate("/user");
             }else{
                 openNotificationWithIcon('warning',res.msg);
                 getApiImg(setCheckCode);

@@ -9,9 +9,7 @@ StrictMode 不会渲染任何可见的 UI。它为其后代元素触发额外的
 */
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
       <BrowserRouter>
           <App />
       </BrowserRouter>
-  </React.StrictMode>
 );

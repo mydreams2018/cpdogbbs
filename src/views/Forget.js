@@ -38,7 +38,7 @@ function Forget() {
         rePassWord(values.user,(rps)=>{
             if(rps.status===1){
                 openNotificationWithIcon('success',rps.msg);
-                navigate("/");
+                navigate("/user");
             }else{
                 openNotificationWithIcon('warning',rps.msg);
                 getApiImg(setCheckCode);
