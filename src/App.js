@@ -1,5 +1,5 @@
 import {Layout, Menu} from 'antd';
-import React,{useState,createContext,useEffect} from 'react';
+import React,{useState,useEffect} from 'react';
 import {Routes,Route ,useNavigate,useLocation} from "react-router-dom";
 import {HomeOutlined,createFromIconfontCN ,LinkedinFilled,SettingOutlined} from '@ant-design/icons';
 import Login from "./views/Login"
@@ -16,7 +16,7 @@ import BaseDetails from "./views/BaseDetails";
 import {getUserInfo} from "./utils/HttpUtils";
 import {APILoader} from "@uiw/react-amap";
 import './App.css';
-const Context = createContext("userToken");
+import Context from "./MainContext";
 const {Header, Content, Footer } = Layout;
 const IconFont = createFromIconfontCN({
     scriptUrl: [
