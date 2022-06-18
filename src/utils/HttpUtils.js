@@ -82,4 +82,21 @@ function getUserInfo(obj,callback){
     });
 }
 
-export {getApiImg,getRigister,userLogin,rePassWord,getUserInfo}
+function sendPorts(obj,callback){
+    axios({
+        method: 'post',
+        url: '/api/report/insert',
+        data:obj,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        responseType: 'json'
+    }).then(function (response) {
+        callback(response.data);
+    }).catch(function (error) {
+        console.log(error);
+        callback(error);
+    });
+}
+
+export {getApiImg,getRigister,userLogin,rePassWord,getUserInfo,sendPorts}

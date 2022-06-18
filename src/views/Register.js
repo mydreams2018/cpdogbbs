@@ -169,12 +169,12 @@ function Register(){
 
 
             <Form.Item
-                name="intro"
-                label="Intro"
+                name="description"
+                label="description"
                 rules={[
                     {
                         required: true,
-                        message: 'Please input Intro',
+                        message: 'Please input description',
                     },
                 ]}>
                 <Input.TextArea showCount maxLength={100} />
