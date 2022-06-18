@@ -30,7 +30,7 @@ const menusTitle = [
     {key:'4',label:'地图',path:"/address",icon: <LinkedinFilled />},
     {key:'5',label:'用户',path:"/user",icon: <SettingOutlined /> },
 ];
-
+let locationKey='5';
 console.log(process.env);
 
 function App() {
@@ -47,7 +47,6 @@ function App() {
     },[]);
     const navigate = useNavigate();
     const locationPath = useLocation();
-    let locationKey='5';
     menusTitle.forEach(item => {
         if(locationPath.pathname === item.path){
             locationKey = item.key;
