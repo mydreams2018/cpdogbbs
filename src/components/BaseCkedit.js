@@ -41,13 +41,13 @@ class MyUploadAdapter {
     }
 }
 
-function BaseCkedit() {
+function BaseCkedit(props) {
     return (
         <div className="base-ckedit">
             <CKEditor
                 editor={ClassicEditor}
                 config={{}}
-                data=""
+                data={props.linkContext.detailsText}
                 onReady={editor => {
                     editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
                         return new MyUploadAdapter(loader);
@@ -56,7 +56,7 @@ function BaseCkedit() {
                 }}
                 onChange={(event, editor) => {
                     const data = editor.getData();
-                    console.log({event, editor, data});
+                    props.linkContext.detailsText = data;
                 }}
                 onBlur={(event, editor) => {
                     console.log('Blur.', editor);
