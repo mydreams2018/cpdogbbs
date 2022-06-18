@@ -35,7 +35,7 @@ console.log(process.env);
 
 function App() {
     console.log("首页");
-    const [authToken, setAuthToken] = useState(false);
+    const [authToken, setAuthToken] = useState(()=>false);
     useEffect(()=>{
         //只有刷新时 或者 第一次才会进
         getUserInfo({},(rt)=>{

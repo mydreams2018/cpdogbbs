@@ -9,3 +9,34 @@
 npm start: , , , .env.development.local .env.local .env.development .env
 npm run build: , , , .env.production.local .env.local .env.production .env
 npm test： ， ， （缺少注释） .env.test.local .env.test .env .env.local
+
+  // ⚠️ createRows() 每次渲染都会被调用
+  const [rows, setRows] = useState(createRows(props.count));
+    // ✅ createRows() 只会被调用一次
+    const [rows, setRows] = useState(() => createRows(props.count));
+
+    有类似 forceUpdate 的东西吗？
+    如果前后两次的值相同，useState 和 useReducer Hook 都会放弃更新。原地修改 state 并调用 setState 不会引起重新渲染。
+    通常，你不应该在 React 中修改本地 state。然而，作为一条出路，你可以用一个增长的计数器来在 state 没变的时候依然强制一次重新渲染：
+     const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
+      function handleClick() {
+        forceUpdate();
+      }
+
+      function Example({ someProp }) {
+        function doSomething() {
+          console.log(someProp);
+        }
+        useEffect(() => {
+          doSomething();
+        }, []); // 🔴 这样不安全（它调用的 `doSomething` 函数使用了 `someProp`）
+      }
+
+      function Example({ someProp }) {
+        useEffect(() => {
+          function doSomething() {
+            console.log(someProp);
+          }
+          doSomething();
+        }, [someProp]); // ✅ 安全（我们的 effect 仅用到了 `someProp`）
+      }
