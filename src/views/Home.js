@@ -37,7 +37,7 @@ function Home() {
         <div className="home-view">
             <div className={"home-left"}>
                 <MyCarousel imgs={MyCarouselImgs}/>
-                <Tabs defaultActiveKey="1" centered onChange={listParamChange}>
+                <Tabs defaultActiveKey="create_time" centered onChange={listParamChange}>
                     <TabPane tab={
                         <span>
                         <UndoOutlined />
@@ -53,7 +53,7 @@ function Home() {
                     } key="reply_number">
                     </TabPane>
                 </Tabs>
-                <ListSimple listParam={listParam}/>
+                <ListSimple listParam={listParam} showPaging={false}/>
             </div>
             <div className={"home-right"}>
                 <ReplyWeek showTitle={true} imgs={weekReplyUser} />
