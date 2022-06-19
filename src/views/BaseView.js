@@ -5,9 +5,11 @@ import BaseSearch from "../components/BaseSearch";
 import ListSimple from "../components/ListSimple";
 import HotList from "../components/HotList";
 import ReplyWeek from "../components/ReplyWeek";
+import HomeHook from "./HomeHook";
 const imgs = ["https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png", "/logo192.png","https://joeschmoe.io/api/v1/random"];
 function BaseView(props){
     const [MyCarouselImgs] = useState(imgs);
+    const [weekReplyUser] = HomeHook([]);
     const [listParam,setListParam] = useState(()=>{
         return {
             classId: props.classId,
@@ -56,7 +58,7 @@ function BaseView(props){
             <div className={"view-right"}>
                 <HotList />
                 <div style={{width:'100%',height:56}}></div>
-                <ReplyWeek showTitle={true} imgs={MyCarouselImgs} />
+                <ReplyWeek showTitle={true} imgs={weekReplyUser} />
             </div>
         </div>
     )
