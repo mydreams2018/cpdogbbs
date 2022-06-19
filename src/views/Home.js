@@ -1,5 +1,5 @@
 import './HomeView.css'
-import React, {useEffect, useState} from 'react';
+import {useState} from 'react';
 import MyCarousel from "../components/MyCarousel";
 import {Tabs} from 'antd';
 import {FireOutlined, UndoOutlined} from '@ant-design/icons';
@@ -8,11 +8,12 @@ import ReplyWeek from "../components/ReplyWeek";
 import SignIn from "../components/SignIn";
 import Cooperation from "../components/Cooperation";
 import TimeLine from "../components/TimeLine";
+import HomeHook from "./HomeHook";
 const {TabPane} = Tabs;
 
 const imgs = ["https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png", "/logo192.png","https://joeschmoe.io/api/v1/random"]
-
 function Home() {
+    const [weekReplyUser] = HomeHook([]);
     const [MyCarouselImgs] = useState(imgs);
     return (
         <div className="home-view">
@@ -37,7 +38,7 @@ function Home() {
                 <ListSimple />
             </div>
             <div className={"home-right"}>
-                <ReplyWeek showTitle={true} imgs={MyCarouselImgs} />
+                <ReplyWeek showTitle={true} imgs={weekReplyUser} />
                 <SignIn />
                 <Cooperation />
                 <TimeLine />

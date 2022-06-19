@@ -10,9 +10,9 @@ function ReplyWeek(props){
             }
             <Space size={[10, 10]} wrap>
                 {
-                    props.imgs.map((item)=>{
-                        return  <Badge count={3} key={item}>
-                            <Avatar size={56} src={<Image src={item} style={{ width: 56 }} />} shape="square" />
+                    props.imgs && props.imgs.map((item)=>{
+                        return  <Badge count={item.replyNumber} key={item.id}>
+                            <Avatar size={56} src={<Image title={item.userAccount} src={item.userImg} style={{ width: 56 }} />} shape="square" />
                         </Badge>
                     })
                 }
