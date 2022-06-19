@@ -15,27 +15,45 @@ const imgs = ["https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZf
 function Home() {
     const [weekReplyUser] = HomeHook([]);
     const [MyCarouselImgs] = useState(imgs);
+    const [listParam,setListParam] = useState(()=>{
+        return {
+            classId: 1,
+            orderType: 'create_time',
+            userAccount: 'kungreat',
+            currentPage: 1,
+            pageSize: 8,
+        }
+    });
+    const listParamChange = (e) => {
+        setListParam({
+            classId: 1,
+            orderType: e,
+            userAccount: 'kungreat',
+            currentPage: 1,
+            pageSize: 8,
+        });
+    }
     return (
         <div className="home-view">
             <div className={"home-left"}>
                 <MyCarousel imgs={MyCarouselImgs}/>
-                <Tabs defaultActiveKey="1" centered>
+                <Tabs defaultActiveKey="1" centered onChange={listParamChange}>
                     <TabPane tab={
                         <span>
                         <UndoOutlined />
                           最新
                         </span>
-                    } key="1">
+                    } key="create_time">
                     </TabPane>
                     <TabPane tab={
                         <span>
                          <FireOutlined />
                           热议
                         </span>
-                    } key="2">
+                    } key="reply_number">
                     </TabPane>
                 </Tabs>
-                <ListSimple />
+                <ListSimple listParam={listParam}/>
             </div>
             <div className={"home-right"}>
                 <ReplyWeek showTitle={true} imgs={weekReplyUser} />

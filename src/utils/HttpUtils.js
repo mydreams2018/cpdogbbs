@@ -149,4 +149,22 @@ function queryReplyWeek(obj,callback){
     });
 }
 
-export {getApiImg,getRigister,userLogin,rePassWord,getUserInfo,sendPorts,signByPrimaryKey, signByOn,queryReplyWeek}
+function queryHomeReport(obj,callback){
+    axios({
+        method: 'post',
+        url: '/api/report/queryReport',
+        data: obj,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        responseType: 'json'
+    }).then(function (response) {
+        callback(response.data);
+    }).catch(function (error) {
+        console.log(error);
+        callback(error);
+    });
+}
+
+export {getApiImg,getRigister,userLogin,rePassWord,getUserInfo,sendPorts,signByPrimaryKey, signByOn,queryReplyWeek
+    ,queryHomeReport }
