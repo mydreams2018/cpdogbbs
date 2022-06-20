@@ -68,7 +68,7 @@ function App() {
                 <Menu
                     theme="dark"
                     mode="horizontal"
-                    defaultSelectedKeys={[locationKey]}
+                    selectedKeys={[locationKey]}
                     forceSubMenuRender={true}
                     onSelect={function({ item, key, keyPath, selectedKeys, domEvent }){
                        switch (key) {
