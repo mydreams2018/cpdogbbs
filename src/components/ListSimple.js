@@ -2,6 +2,7 @@ import {Avatar, Image, List, Pagination, Skeleton, Space} from 'antd';
 import React , { useEffect, useState } from 'react';
 import {StarOutlined,LikeOutlined ,MessageOutlined} from '@ant-design/icons';
 import {queryHomeReport} from "../utils/HttpUtils";
+import UserDrawer from "./UserDrawer";
 import './ListSimple.css'
 import {useNavigate} from "react-router-dom";
 
@@ -40,10 +41,10 @@ const ListSimple = (props) => {
                                 avatar={<Avatar src={<Image src={item.userImg} />} />}
                                 title={
                                     <div>
-                                        <a href="https://ant.design">{item.alias}</a>
+                                        <UserDrawer alias={item.alias} />
                                         <span className={"title-time"}>{item.createTime}</span>
                                     </div>}
-                                description={<span onClick={()=> navigate(props.basePath+"?id="+item.id)}>{item.name}</span>}
+                                description={<span onClick={()=> navigate(props.basePath,{state:{id:item.id}})}>{item.name}</span>}
                             />
                         </Skeleton>
                     </List.Item>
