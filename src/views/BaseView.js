@@ -75,7 +75,7 @@ function BaseView(props){
             <div className={"view-left"}>
                 <MyCarousel imgs={MyCarouselImgs}/>
                 <BaseSearch handleChange={handleChange} onSearch={onSearch} onTabChange={onTabChange} />
-                <ListSimple listParam={listParam} pageChange={pageChange} showPaging={true} />
+                <ListSimple listParam={listParam} pageChange={pageChange} showPaging={true} basePath={props.basePath} />
             </div>
             <div className={"view-right"}>
                 <HotList />

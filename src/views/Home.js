@@ -53,7 +53,7 @@ function Home() {
                     } key="reply_number">
                     </TabPane>
                 </Tabs>
-                <ListSimple listParam={listParam} showPaging={false}/>
+                <ListSimple listParam={listParam} basePath={'/java/details'} showPaging={false}/>
             </div>
             <div className={"home-right"}>
                 <ReplyWeek showTitle={true} imgs={weekReplyUser} />

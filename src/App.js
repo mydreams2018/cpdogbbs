@@ -119,7 +119,7 @@ function App() {
                         } />
                         <Route path="/forget" element={<Forget />} />
                         <Route path="/java" element={<JavaView />} >
-                            <Route index element={<BaseView type={"java"} classId={1} />} />
+                            <Route index element={<BaseView type={"java"} classId={1} basePath={'/java/details'} />} />
                             <Route path="details" element={<BaseDetails type={"java"} />} />
                         </Route>
                         <Route path="/user" element={authToken.id?<UserView />:<Login onUserChange={(token) => {

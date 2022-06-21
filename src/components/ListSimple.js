@@ -3,6 +3,7 @@ import React , { useEffect, useState } from 'react';
 import {StarOutlined,LikeOutlined ,MessageOutlined} from '@ant-design/icons';
 import {queryHomeReport} from "../utils/HttpUtils";
 import './ListSimple.css'
+import {useNavigate} from "react-router-dom";
 
 const IconText = ({icon,text}) => (
     <Space>
@@ -19,7 +20,7 @@ const ListSimple = (props) => {
             setTotalRow(rsp.page.totalRow);
         });
     }, [props.listParam]);
-
+    const navigate = useNavigate();
     return (
         <>
             <List
@@ -42,7 +43,7 @@ const ListSimple = (props) => {
                                         <a href="https://ant.design">{item.alias}</a>
                                         <span className={"title-time"}>{item.createTime}</span>
                                     </div>}
-                                description={item.name}
+                                description={<span onClick={()=> navigate(props.basePath+"?id="+item.id)}>{item.name}</span>}
                             />
                         </Skeleton>
                     </List.Item>
