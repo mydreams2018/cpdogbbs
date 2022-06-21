@@ -1,10 +1,22 @@
 import './PreContent.css'
+import {CKEditor} from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-function PreContent(){
+/*
+const createMarkup = () => {
+    return {__html: props.portsInfoDetails.detailsText};
+}
+<div dangerouslySetInnerHTML={createMarkup()}></div>
+*/
+
+function PreContent(props){
     return(
-        <pre className={"pre-content"}>
-            pre 贴子内容
-        </pre>
+        <div className={"pre-content"}>
+            <CKEditor
+                editor={ClassicEditor}
+                disabled={true}
+                data={props.portsInfoDetails.detailsText}/>
+        </div>
     )
 }
 export default PreContent

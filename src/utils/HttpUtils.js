@@ -182,5 +182,22 @@ function queryUserByAlias(obj,callback){
     });
 }
 
+function queryPortDetails(obj,callback){
+    axios({
+        method: 'post',
+        url: '/api/report/selectByPrimaryKey',
+        data: obj,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        responseType: 'json'
+    }).then(function (response) {
+        callback(response.data);
+    }).catch(function (error) {
+        console.log(error);
+        callback(error);
+    });
+}
+
 export {getApiImg,getRigister,userLogin,rePassWord,getUserInfo,sendPorts,signByPrimaryKey, signByOn,queryReplyWeek
-    ,queryHomeReport,queryUserByAlias }
+    ,queryHomeReport,queryUserByAlias ,queryPortDetails }
