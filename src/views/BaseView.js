@@ -16,7 +16,8 @@ function BaseView(props){
             orderType: 'create_time',
             currentPage: 1,
             pageSize: 10,
-            name:""
+            name:"",
+            portState:""
         }
     });
 
@@ -26,24 +27,45 @@ function BaseView(props){
                 classId: props.classId,
                 orderType: listParam.orderType,
                 currentPage: page,
-                pageSize: 10
+                pageSize: 10,
+                portState:listParam.portState,
+                name:listParam.name,
             }
         );
     }
     const handleChange = (e) => {
-        console.log(e);
+        setListParam(
+            {
+                classId: props.classId,
+                orderType: listParam.orderType,
+                currentPage: 1,
+                pageSize: 10,
+                name:listParam.name,
+                portState:e,
+            }
+        );
     };
     const onSearch = (value) => {
-        console.log(value);
+            setListParam(
+                {
+                    classId: props.classId,
+                    orderType: listParam.orderType,
+                    currentPage: 1,
+                    pageSize: 10,
+                    name:value,
+                    portState:listParam.portState,
+                }
+            );
     }
     const onTabChange = (value) => {
         setListParam(
             {
                 classId: props.classId,
                 orderType: value,
-                currentPage: 1,
+                currentPage: listParam.currentPage,
                 pageSize: 10,
                 name:listParam.name,
+                portState:listParam.portState
             }
         );
     }
@@ -57,7 +79,7 @@ function BaseView(props){
             </div>
             <div className={"view-right"}>
                 <HotList />
-                <div style={{width:'100%',height:56}}></div>
+                <div style={{width:'100%',height:73}}></div>
                 <ReplyWeek showTitle={true} imgs={weekReplyUser} />
             </div>
         </div>

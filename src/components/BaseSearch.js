@@ -5,7 +5,7 @@ const { Option } = Select;
 const { Search } = Input;
 const {TabPane} = Tabs;
 
-const children = [<Option key={1}>全部</Option>,<Option key={2}>未结</Option>,<Option key={3}>已结</Option>,<Option key={4}>精华</Option>];
+const children = [<Option key={""}>全部</Option>,<Option key={"未结"}>未结</Option>,<Option key={"已结"}>已结</Option>];
 
 function BaseSearch(props){
     return(
