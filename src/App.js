@@ -87,6 +87,8 @@ function App() {
                            case "5":
                                navigate("/user");
                                break;
+                           default:
+
                        }
                     }}
                     items={menusTitle.map((item, index) => ({

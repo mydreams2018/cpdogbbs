@@ -51,6 +51,8 @@ function UserView(){
             case 'home-2':
                 setOpenKeysItem( <SendPorts />);
                 break;
+            default:
+
         }
 
     };
