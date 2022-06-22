@@ -45,7 +45,7 @@ function BaseDetails(props){
                     <span>悬赏: {portsInfo.experience}飞吻</span>
                 </div>
                 <PreContent portsInfoDetails={portsInfo.details} />
-                <CommentList />
+                <CommentList classId={props.classId} portId={locationPath.state.id} />
             </div>
             <div className={"details-right"}>
                 <HotList />
