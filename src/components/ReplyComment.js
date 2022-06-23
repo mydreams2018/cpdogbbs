@@ -19,15 +19,10 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
 
 const ReplyComment = (props) => {
     const [submitting, setSubmitting] = useState(false);
-    const [value, setValue] = useState('');
 
-    const handleSubmit = () => {
-        if (!value) return;
-        props.onAddComment(value);
-    };
 
     const handleChange = (e) => {
-        setValue(e.target.value);
+        props.setReplyMsg(e.target.value);
     };
 
     return (
@@ -37,9 +32,9 @@ const ReplyComment = (props) => {
                 content={
                     <Editor
                         onChange={handleChange}
-                        onSubmit={handleSubmit}
+                        onSubmit={props.onAddComment}
                         submitting={submitting}//loading
-                        value={value}/>}
+                        value={props.replyMsg}/>}
             />
         </div>
     );

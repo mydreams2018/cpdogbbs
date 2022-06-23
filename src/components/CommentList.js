@@ -1,33 +1,55 @@
-import { Avatar, Comment ,Image } from 'antd';
-import {useState,useEffect} from 'react';
+import {Avatar, Comment, Image, notification} from 'antd';
+import {useState,useEffect,useContext} from 'react';
 import ReplyComment from "./ReplyComment";
 import './CommentList.css'
-import {queryDetailsTextAnswer} from "../utils/HttpUtils";
+import {queryDetailsTextAnswer,sendReplyAnswer} from "../utils/HttpUtils";
+import MainContext from "../MainContext";
 
-const ExampleComment = ({ children,replyData }) => {
+const ExampleComment = ({ children,replyData,addParentAnswer }) => {
     return (
         <Comment
-            actions={[<span key="comment-nested-reply-to">Reply to</span>]}
-            author={<a>Han Solo</a>}
-            avatar={<Avatar src={<Image src="/logo192.png"/>} alt="Han Solo" />}
+            actions={[<span key="comment-nested-reply-to"  onClick={()=>addParentAnswer(replyData.id)}>Reply to</span>]}
+            author={<a>{replyData.alias}</a>}
+            avatar={<Avatar src={<Image src={replyData.userImg} />} alt={replyData.alias} />}
             content={
                 <p>
-                    We supply a series of design principles, practical patterns and high quality design
-                    resources (Sketch and Axure).
+                    {replyData.detailsText}
                 </p>
             }>
             {children}
         </Comment>)
 }
-
-const replyComments = (obj) => {
-    console.log(obj);
+const openNotificationWithIcon = (type,msg) => {
+    notification[type]({
+        message: '提醒',
+        description: msg,
+        duration:1.5
+    });
+};
+const sendReplyMessage = {
+    detailsText:'',
+    portId:0,
+    classId:0,
+    replyParent:'',
+    replyParentText:''
 }
 
-/* useCallback(fn, deps) 相当于 useMemo(() => fn, deps)*/
+const RenderData = ({details,addParentAnswer})=>{
+    return details.map(item => {
+        if(item.childAnswers){
+            return  (<ExampleComment key={item.id} replyData={item} addParentAnswer={addParentAnswer} >
+                <RenderData details={item.childAnswers} addParentAnswer={addParentAnswer} />
+            </ExampleComment>)
+        } else {
+            return (<ExampleComment key={item.id} replyData={item} addParentAnswer={addParentAnswer}/>)
+        }
+    });
+}
 
 const CommentList = (props) => {
+    const usercon = useContext(MainContext);
     const [portDetails,setPortDetails] = useState(() => ({ page:{},datas:[]}));
+    const [replyMsg,setReplyMsg] = useState(() => "");
 
     useEffect(()=>{
         queryDetailsTextAnswer({
@@ -36,20 +58,42 @@ const CommentList = (props) => {
         },(rsp)=>{
             if(rsp.page){
                 setPortDetails(rsp);
+                console.log(rsp);
             }
         });
+        sendReplyMessage.classId = props.classId;
+        sendReplyMessage.portId = props.portId;
     },[props.classId,props.portId]);
+
+    const replyComments = () => {
+        if(replyMsg){
+            let newReplyMsg = replyMsg;
+            if(sendReplyMessage.replyParent && replyMsg.startsWith(sendReplyMessage.replyParentText)){
+                newReplyMsg =  replyMsg.replace(sendReplyMessage.replyParentText,"");
+            }
+            sendReplyMessage.detailsText = newReplyMsg;
+            sendReplyAnswer(sendReplyMessage,(rsp)=>{
+                if(rsp.status === 1){
+                    openNotificationWithIcon('success',"回贴成功");
+                    setReplyMsg("");
+                    //修改返回数据
+                }else{
+                    openNotificationWithIcon('warning',"发贴失败");
+                }
+            });
+        }
+    }
+    const addParentAnswer = (e) => {
+        sendReplyMessage.replyParent = e;
+        sendReplyMessage.replyParentText=`[@${e}]`;
+        setReplyMsg(`[@${e}]`);
+    }
 
     return(
     <div className={"comment-list"}>
         <h2 className={"reply-title"}>回贴</h2>
-        <ExampleComment replyData={"dfsdf"}>
-            <ExampleComment>
-                <ExampleComment />
-                <ExampleComment />
-            </ExampleComment>
-        </ExampleComment>
-        <ReplyComment onAddComment={replyComments} />
+        <RenderData details={portDetails.datas} addParentAnswer={addParentAnswer}/>
+        {usercon &&  <ReplyComment onAddComment={replyComments} replyMsg={replyMsg} setReplyMsg={setReplyMsg}/> }
     </div>)
 };
 

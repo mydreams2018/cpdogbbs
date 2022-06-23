@@ -215,6 +215,22 @@ function queryDetailsTextAnswer(obj,callback){
        callback(error);
    });
 }
+function sendReplyAnswer(obj,callback){
+    axios({
+        method: 'post',
+        url: '/api/detailsText/sendReply',
+        data: obj,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        responseType: 'json'
+    }).then(function (response) {
+        callback(response.data);
+    }).catch(function (error) {
+        console.log(error);
+        callback(error);
+    });
+}
 
 export {getApiImg,getRigister,userLogin,rePassWord,getUserInfo,sendPorts,signByPrimaryKey, signByOn,queryReplyWeek
-    ,queryHomeReport,queryUserByAlias ,queryPortDetails ,queryDetailsTextAnswer}
+    ,queryHomeReport,queryUserByAlias ,queryPortDetails ,queryDetailsTextAnswer,sendReplyAnswer}
