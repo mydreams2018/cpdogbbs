@@ -1,4 +1,4 @@
-import { Avatar, Button, Comment, Form, Input, List } from 'antd';
+import { Avatar, Button, Comment, Form, Input } from 'antd';
 
 import { useState } from 'react';
 import './ReplyComment.css'

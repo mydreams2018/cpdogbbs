@@ -198,8 +198,9 @@ function queryPortDetails(obj,callback){
         callback(error);
     });
 }
-function queryDetailsTextAnswer(obj){
-   return  axios({
+
+function queryDetailsTextAnswer(obj,callback){
+    axios({
         method: 'post',
         url: '/api/detailsText/queryDetails',
         data: obj,
@@ -207,7 +208,12 @@ function queryDetailsTextAnswer(obj){
             'Content-Type': 'multipart/form-data'
         },
         responseType: 'json'
-    });
+    }).then(function (response) {
+       callback(response.data);
+   }).catch(function (error) {
+       console.log(error);
+       callback(error);
+   });
 }
 
 export {getApiImg,getRigister,userLogin,rePassWord,getUserInfo,sendPorts,signByPrimaryKey, signByOn,queryReplyWeek

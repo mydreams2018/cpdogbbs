@@ -1,5 +1,5 @@
 import { Avatar, Comment ,Image } from 'antd';
-import {useMemo} from 'react';
+import {useState,useEffect} from 'react';
 import ReplyComment from "./ReplyComment";
 import './CommentList.css'
 import {queryDetailsTextAnswer} from "../utils/HttpUtils";
@@ -24,25 +24,22 @@ const replyComments = (obj) => {
     console.log(obj);
 }
 
-const getDetailsTextAnswer = async (clasid,portid) => {
-    let rsp = {};
-    try {
-        rsp = await queryDetailsTextAnswer({
-            classId: clasid,
-            portId: portid,
-        });
-        console.log(rsp);
-    } catch (error) {
-        console.error(error);
-    }
-    return rsp;
-}
-
 /* useCallback(fn, deps) 相当于 useMemo(() => fn, deps)*/
 
 const CommentList = (props) => {
-    console.log(props);
-    const memoizedValue = useMemo(() => getDetailsTextAnswer(props.classId,props.portId),[props.classId,props.portId]);
+    const [portDetails,setPortDetails] = useState(() => ({ page:{},datas:[]}));
+
+    useEffect(()=>{
+        queryDetailsTextAnswer({
+            classId: props.classId,
+            portId: props.portId,
+        },(rsp)=>{
+            if(rsp.page){
+                setPortDetails(rsp);
+            }
+        });
+    },[props.classId,props.portId]);
+
     return(
     <div className={"comment-list"}>
         <h2 className={"reply-title"}>回贴</h2>
