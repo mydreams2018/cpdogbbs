@@ -78,7 +78,7 @@ function BaseView(props){
                 <ListSimple listParam={listParam} pageChange={pageChange} showPaging={true} basePath={props.basePath} />
             </div>
             <div className={"view-right"}>
-                <HotList />
+                <HotList classId={props.classId} basePath={props.basePath} />
                 <div style={{width:'100%',height:73}}></div>
                 <ReplyWeek showTitle={true} imgs={weekReplyUser} />
             </div>

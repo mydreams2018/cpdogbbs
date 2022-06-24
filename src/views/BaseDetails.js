@@ -48,7 +48,7 @@ function BaseDetails(props){
                 <CommentList classId={props.classId} portId={locationPath.state.id} />
             </div>
             <div className={"details-right"}>
-                <HotList />
+                <HotList classId={props.classId} basePath={props.basePath} />
                 <Cooperation />
             </div>
         </div>
