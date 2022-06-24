@@ -29,7 +29,6 @@ class MyUploadAdapter {
             .then(file => new Promise((resolve,reject) => {
                 this._sendRequest(file,(rsp)=>{
                     if(rsp.status===1){
-                        console.log(rsp);
                         resolve({
                             default: rsp.action
                         });
