@@ -5,8 +5,10 @@
 }
 .reply-title > span:nth-child(1) {
   margin-right: 10px;
-  font-size: 16px;
+  font-size: 15px;
+  font-weight: 700;
+  color: black;
 }
 .reply-title > span:nth-child(1):hover {
-  color: turquoise;
+  color: tomato;
 }
