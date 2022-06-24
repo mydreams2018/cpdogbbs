@@ -8,7 +8,7 @@ import MainContext from "../MainContext";
 const ExampleComment = ({ children,replyData,addParentAnswer }) => {
     return (
         <Comment
-            actions={[<span key="comment-nested-reply-to"  onClick={()=>addParentAnswer(replyData.id)}>Reply to</span>]}
+            actions={[<span key="comment-nested-reply-to"  onClick={()=>addParentAnswer(replyData)}>Reply to</span>]}
             author={<a>{replyData.alias}</a>}
             avatar={<Avatar src={<Image src={replyData.userImg} />} alt={replyData.alias} />}
             content={
@@ -31,7 +31,8 @@ const sendReplyMessage = {
     portId:0,
     classId:0,
     replyParent:'',
-    replyParentText:''
+    replyParentText:'',
+    replyObject:{}
 }
 
 const RenderData = ({details,addParentAnswer})=>{
@@ -74,6 +75,21 @@ const CommentList = (props) => {
             sendReplyMessage.detailsText = newReplyMsg;
             sendReplyAnswer(sendReplyMessage,(rsp)=>{
                 if(rsp.status === 1){
+                    if(sendReplyMessage.replyParent && replyMsg.startsWith(sendReplyMessage.replyParentText)){
+                        sendReplyMessage.replyObject.childAnswers=[{
+                            'alias':usercon.alias,
+                            'id':rsp.id,
+                            'userImg':usercon.img,
+                            'detailsText':newReplyMsg
+                        }];
+                    }else{
+                        portDetails.datas.push({
+                            'alias':usercon.alias,
+                            'id':rsp.id,
+                            'userImg':usercon.img,
+                            'detailsText':newReplyMsg
+                        });
+                    }
                     openNotificationWithIcon('success',"回贴成功");
                     setReplyMsg("");
                     //修改返回数据
@@ -84,15 +100,16 @@ const CommentList = (props) => {
         }
     }
     const addParentAnswer = (e) => {
-        sendReplyMessage.replyParent = e;
-        sendReplyMessage.replyParentText=`[@${e}]`;
-        setReplyMsg(`[@${e}]`);
+        sendReplyMessage.replyObject=e;
+        sendReplyMessage.replyParent = e.id;
+        sendReplyMessage.replyParentText=`[@${e.id}]`;
+        setReplyMsg(`[@${e.id}]`);
     }
 
     return(
     <div className={"comment-list"}>
         <h2 className={"reply-title"}>回贴</h2>
-        <RenderData details={portDetails.datas} addParentAnswer={addParentAnswer}/>
+        <RenderData details={portDetails.datas} addParentAnswer={addParentAnswer} />
         {usercon &&  <ReplyComment onAddComment={replyComments} replyMsg={replyMsg} setReplyMsg={setReplyMsg}/> }
     </div>)
 };
