@@ -82,6 +82,14 @@ function SignIn(){
         }
     }
     useEffect(()=>{
+        if(usercon){
+            setSignState({
+                accumulateSign: 0,
+                currentSign: false,
+                lastSignTime: 0,
+                countSign:5
+            });
+        }
         signByPrimaryKey({},(rt)=>{
             if(rt.id){
                 setCountSign(rt);
