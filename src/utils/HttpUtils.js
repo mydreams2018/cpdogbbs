@@ -232,5 +232,23 @@ function sendReplyAnswer(obj,callback){
     });
 }
 
+function portsUploadImg(obj,callback){
+    const data = new FormData();
+    data.append('file', obj);
+    axios({
+        method: 'post',
+        url: '/api/uploadImg',
+        data: data,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        responseType: 'json'
+    }).then(function (response) {
+        callback(response.data);
+    }).catch(function (error) {
+        callback(error);
+    });
+}
+
 export {getApiImg,getRigister,userLogin,rePassWord,getUserInfo,sendPorts,signByPrimaryKey, signByOn,queryReplyWeek
-    ,queryHomeReport,queryUserByAlias ,queryPortDetails ,queryDetailsTextAnswer,sendReplyAnswer}
+    ,queryHomeReport,queryUserByAlias ,queryPortDetails ,queryDetailsTextAnswer,sendReplyAnswer,portsUploadImg }
