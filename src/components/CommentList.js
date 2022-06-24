@@ -4,12 +4,16 @@ import ReplyComment from "./ReplyComment";
 import './CommentList.css'
 import {queryDetailsTextAnswer,sendReplyAnswer} from "../utils/HttpUtils";
 import MainContext from "../MainContext";
+import UserDrawer from "./UserDrawer";
 
 const ExampleComment = ({ children,replyData,addParentAnswer }) => {
     return (
         <Comment
             actions={[<span key="comment-nested-reply-to"  onClick={()=>addParentAnswer(replyData)}>Reply to</span>]}
-            author={<a>{replyData.alias}</a>}
+            author={<div className={"reply-title"}>
+                <UserDrawer alias={replyData.alias} />
+                <span>{replyData.createData}</span>
+            </div>}
             avatar={<Avatar src={<Image src={replyData.userImg} />} alt={replyData.alias} />}
             content={
                 <p>

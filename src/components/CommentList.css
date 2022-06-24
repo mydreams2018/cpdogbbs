@@ -3,3 +3,10 @@
   line-height: 46px;
   border-bottom: solid 1px black;
 }
+.reply-title > span:nth-child(1) {
+  margin-right: 10px;
+  font-size: 16px;
+}
+.reply-title > span:nth-child(1):hover {
+  color: turquoise;
+}
