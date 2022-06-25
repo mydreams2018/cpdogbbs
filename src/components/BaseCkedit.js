@@ -34,7 +34,7 @@ class MyUploadAdapter {
                         });
                     }else{
                         openNotificationWithIcon('warning',"只支持jpg或gif格式的图片<1M");
-                        reject(rsp.msg);
+                        reject();
                     }
                 });
             }));
@@ -62,17 +62,16 @@ function BaseCkedit(props) {
                     editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
                         return new MyUploadAdapter(loader);
                     };
-                    console.log('Editor is ready to use!', editor);
                 }}
                 onChange={(event, editor) => {
                     const data = editor.getData();
                     props.linkContext.detailsText = data;
                 }}
                 onBlur={(event, editor) => {
-                    console.log('Blur.', editor);
+
                 }}
                 onFocus={(event, editor) => {
-                    console.log('Focus.', editor);
+
                 }}
             />
         </div>

@@ -38,7 +38,7 @@ function BaseDetails(props){
                 <h3>{portsInfo.name}</h3>
                 <DetailsTitle portsInfo={portsInfo} />
                 <div className={"user-list"} style={{backgroundColor:"#f0f2f5"}}>
-                    <Avatar size={64} src={<Image src="https://joeschmoe.io/api/v1/random" style={{width: 64}}/>}/>
+                    <Avatar size={64} src={<Image src={portsInfo.userImg} style={{width: 64}}/>}/>
                     <Tag color="success">{portsInfo.alias}</Tag>
                     <Tag icon={<DownOutlined />} color="success">{portsInfo.vipLevel}</Tag>
                     <Tag color="success">{portsInfo.createTime}</Tag>

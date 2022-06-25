@@ -28,7 +28,7 @@ const ReplyComment = (props) => {
     return (
         <div className={"reply-comment"}>
             <Comment
-                avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
+                avatar={<Avatar src={props.usercon.img} alt={props.usercon.alias} />}
                 content={
                     <Editor
                         onChange={handleChange}

@@ -114,7 +114,7 @@ const CommentList = (props) => {
     <div className={"comment-list"}>
         <h2 className={"reply-title"}>回贴</h2>
         <RenderData details={portDetails.datas} addParentAnswer={addParentAnswer} />
-        {usercon &&  <ReplyComment onAddComment={replyComments} replyMsg={replyMsg} setReplyMsg={setReplyMsg}/> }
+        {usercon &&  <ReplyComment usercon={usercon} onAddComment={replyComments} replyMsg={replyMsg} setReplyMsg={setReplyMsg}/> }
     </div>)
 };
 
