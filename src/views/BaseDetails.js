@@ -9,6 +9,7 @@ import CommentList from "../components/CommentList";
 import HotList from "../components/HotList";
 import Cooperation from "../components/Cooperation";
 import {queryPortDetails} from "../utils/HttpUtils";
+import UserDrawer from "../components/UserDrawer";
 
 function BaseDetails(props){
     const locationPath = useLocation();
@@ -39,7 +40,7 @@ function BaseDetails(props){
                 <DetailsTitle portsInfo={portsInfo} />
                 <div className={"user-list"} style={{backgroundColor:"#f0f2f5"}}>
                     <Avatar size={64} src={<Image src={portsInfo.userImg} style={{width: 64}}/>}/>
-                    <Tag color="success">{portsInfo.alias}</Tag>
+                    <UserDrawer alias={portsInfo.alias} />
                     <Tag icon={<DownOutlined />} color="success">{portsInfo.vipLevel}</Tag>
                     <Tag color="success">{portsInfo.createTime}</Tag>
                     <span>悬赏: {portsInfo.experience}飞吻</span>

@@ -7,6 +7,14 @@
 .base-details .details-left {
   width: 60%;
 }
+.base-details .details-left span[hv="tomoto"] {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-weight: 700;
+}
+.base-details .details-left span[hv="tomoto"]:hover {
+  color: tomato;
+}
 .base-details .details-right {
   width: 35%;
   background-color: #f0f2f5;
