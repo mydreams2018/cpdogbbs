@@ -250,5 +250,36 @@ function portsUploadImg(obj,callback){
     });
 }
 
+function userIsCollect(obj,callback){
+    axios({
+        method: 'post',
+        url: '/api/userCollect/selectByPrimaryKey',
+        data: obj,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        responseType: 'json'
+    }).then(function (response) {
+        callback(response.data);
+    }).catch(function (error) {
+        callback(error);
+    });
+}
+function sendCollect(obj,callback){
+    axios({
+        method: 'post',
+        url: '/api/userCollect/sendCollect',
+        data: obj,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        responseType: 'json'
+    }).then(function (response) {
+        callback(response.data);
+    }).catch(function (error) {
+        callback(error);
+    });
+}
 export {getApiImg,getRigister,userLogin,rePassWord,getUserInfo,sendPorts,signByPrimaryKey, signByOn,queryReplyWeek
-    ,queryHomeReport,queryUserByAlias ,queryPortDetails ,queryDetailsTextAnswer,sendReplyAnswer,portsUploadImg }
+    ,queryHomeReport,queryUserByAlias ,queryPortDetails ,queryDetailsTextAnswer,sendReplyAnswer,portsUploadImg
+    ,userIsCollect ,sendCollect }

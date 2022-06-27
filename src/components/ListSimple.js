@@ -32,7 +32,6 @@ const ListSimple = (props) => {
                 renderItem={(item) => (
                     <List.Item
                         actions={[
-                            <IconText icon={StarOutlined} text={1} key="list-vertical-star-o" />,
                             <IconText icon={LikeOutlined} text={item.experience} key="list-vertical-like-o" />,
                             <IconText icon={MessageOutlined} text={item.replyNumber} key="list-vertical-message" />,
                         ]}>

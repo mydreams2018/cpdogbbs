@@ -37,7 +37,7 @@ function BaseDetails(props){
         <div className={"base-details"}>
             <div className={"details-left"}>
                 <h3>{portsInfo.name}</h3>
-                <DetailsTitle portsInfo={portsInfo} />
+                <DetailsTitle portsInfo={portsInfo} classId={props.classId} />
                 <div className={"user-list"} style={{backgroundColor:"#f0f2f5"}}>
                     <Avatar size={64} src={<Image src={portsInfo.userImg} style={{width: 64}}/>}/>
                     <UserDrawer alias={portsInfo.alias} />
