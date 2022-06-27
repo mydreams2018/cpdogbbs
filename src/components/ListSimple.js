@@ -1,6 +1,6 @@
 import {Avatar, Image, List, Pagination, Skeleton, Space} from 'antd';
 import React , { useEffect, useState } from 'react';
-import {StarOutlined,LikeOutlined ,MessageOutlined} from '@ant-design/icons';
+import {LikeOutlined ,MessageOutlined} from '@ant-design/icons';
 import {queryHomeReport} from "../utils/HttpUtils";
 import UserDrawer from "./UserDrawer";
 import './ListSimple.css'
