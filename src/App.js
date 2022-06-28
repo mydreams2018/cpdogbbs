@@ -1,10 +1,9 @@
-import {Layout, Menu} from 'antd';
-import React,{useState,useEffect} from 'react';
+import {Layout, Menu,Spin} from 'antd';
+import React,{useState,useEffect,Suspense} from 'react';
 import {Routes,Route ,useNavigate,useLocation} from "react-router-dom";
 import {HomeOutlined,createFromIconfontCN ,LinkedinFilled,SettingOutlined} from '@ant-design/icons';
 import Login from "./views/Login"
 import Home from "./views/Home";
-import NoFound from "./views/NoFound";
 import Forget from "./views/Forget";
 import Register from "./views/Register";
 import UserView from "./views/UserView";
@@ -17,6 +16,7 @@ import {getUserInfo} from "./utils/HttpUtils";
 import {APILoader} from "@uiw/react-amap";
 import './App.css';
 import Context from "./MainContext";
+const NoFound =  React.lazy(()=> import("./views/NoFound"));
 const {Header, Content, Footer } = Layout;
 const IconFont = createFromIconfontCN({
     scriptUrl: [
@@ -129,7 +129,18 @@ function App() {
                                 }
                             });
                         }} />} />
-                        <Route path="*" element={<NoFound />} />
+                        <Route path="*" element={
+                            <Suspense fallback={<div style={{
+                                margin:'20px 0',
+                                marginBottom: '20px',
+                                padding: '30px 50px',
+                                textAlign: 'center',
+                                background: 'rgba(0, 0, 0, 0.05)',
+                                borderRadius: '4px'}}>
+                                <Spin />
+                            </div>} >
+                                <NoFound />
+                            </Suspense> } />
                     </Routes>
                 </div>
             </Content>
