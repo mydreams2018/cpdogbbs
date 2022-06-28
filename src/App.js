@@ -2,21 +2,21 @@ import {Layout, Menu} from 'antd';
 import React,{useState,useEffect} from 'react';
 import {Routes,Route ,useNavigate,useLocation} from "react-router-dom";
 import {HomeOutlined,createFromIconfontCN ,LinkedinFilled,SettingOutlined} from '@ant-design/icons';
+import Login from "./views/Login"
 import Home from "./views/Home";
+import NoFound from "./views/NoFound";
+import Forget from "./views/Forget";
+import Register from "./views/Register";
+import UserView from "./views/UserView";
+import Address from "./views/Address";
+import BaseView from "./views/BaseView";
 import FixedUtils from "./utils/FixedUtils";
+import JavaView from "./views/JavaView";
+import BaseDetails from "./views/BaseDetails";
 import {getUserInfo} from "./utils/HttpUtils";
 import {APILoader} from "@uiw/react-amap";
 import './App.css';
 import Context from "./MainContext";
-const Login = React.lazy(()=> import ("./views/Login"));
-const NoFound = React.lazy(()=> import("./views/NoFound"));
-const Forget = React.lazy(()=> import("./views/Forget"));
-const Register = React.lazy(()=>import("./views/Register"));
-const UserView = React.lazy(()=>import("./views/UserView"));
-const Address =  React.lazy(()=>import("./views/Address"));
-const BaseView = React.lazy(()=>import("./views/BaseView"));
-const JavaView = React.lazy(()=>import("./views/JavaView"));
-const BaseDetails = React.lazy(()=>import("./views/BaseDetails"));
 const {Header, Content, Footer } = Layout;
 const IconFont = createFromIconfontCN({
     scriptUrl: [
