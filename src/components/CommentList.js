@@ -1,16 +1,30 @@
 import {Avatar, Comment, Image, notification} from 'antd';
+import { CheckCircleTwoTone } from '@ant-design/icons';
 import {useState,useEffect,useContext,useMemo} from 'react';
 import ReplyComment from "./ReplyComment";
 import './CommentList.css'
-import {queryDetailsTextAnswer,sendReplyAnswer} from "../utils/HttpUtils";
+import {queryDetailsTextAnswer,sendReplyAnswer,acceptReply} from "../utils/HttpUtils";
 import MainContext from "../MainContext";
 import UserDrawer from "./UserDrawer";
-
+let classIdLink = '';
 const ExampleComment = ({children,replyData,addParentAnswer,hasPortPermission}) => {
+    const accaptAnswer = () => {
+        acceptReply({
+            id: replyData.id,
+            classId: classIdLink
+        },(rsp)=>{
+            if(rsp.status===1){
+                openNotificationWithIcon('success',"接受成功");
+            }else{
+                openNotificationWithIcon('warning',rsp.msg);
+            }
+        });
+    }
     return (
         <Comment
             actions={[<span key="comment-nested-reply-to"  onClick={()=>addParentAnswer(replyData)}>Reply to</span>,
-                hasPortPermission && <span onClick={()=>console.log("1111")}>Accept it</span>]
+                hasPortPermission && <span onClick={accaptAnswer}>Accept it</span>,
+                replyData.isAdoption && <CheckCircleTwoTone twoToneColor="#52c41a" /> ]
             }
             author={<div className={"reply-title"}>
                 <UserDrawer alias={replyData.alias} />
@@ -55,10 +69,11 @@ const RenderData = ({details,addParentAnswer,hasPortPermission})=>{
 
 const CommentList = (props) => {
     const usercon = useContext(MainContext);
-    const hasPortPermission =  useMemo(()=>props.portAlias===usercon.alias,[props.portAlias, usercon.alias]);
+    const hasPortPermission =  useMemo(()=>props.portAlias===usercon.alias&&props.portState==="未结",
+        [props.portAlias, props.portState, usercon.alias]);
     const [portDetails,setPortDetails] = useState(() => ({ page:{},datas:[]}));
     const [replyMsg,setReplyMsg] = useState(() => "");
-
+    classIdLink = props.classId;
     useEffect(()=>{
         queryDetailsTextAnswer({
             classId: props.classId,

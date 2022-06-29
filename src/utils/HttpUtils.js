@@ -280,6 +280,23 @@ function sendCollect(obj,callback){
         callback(error);
     });
 }
+
+function acceptReply(obj,callback){
+    axios({
+        method: 'post',
+        url: '/api/detailsText/acceptReply',
+        data: obj,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        responseType: 'json'
+    }).then(function (response) {
+        callback(response.data);
+    }).catch(function (error) {
+        callback(error);
+    });
+}
+
 export {getApiImg,getRigister,userLogin,rePassWord,getUserInfo,sendPorts,signByPrimaryKey, signByOn,queryReplyWeek
     ,queryHomeReport,queryUserByAlias ,queryPortDetails ,queryDetailsTextAnswer,sendReplyAnswer,portsUploadImg
-    ,userIsCollect ,sendCollect }
+    ,userIsCollect ,sendCollect,acceptReply }
