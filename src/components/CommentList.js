@@ -1,15 +1,17 @@
 import {Avatar, Comment, Image, notification} from 'antd';
-import {useState,useEffect,useContext} from 'react';
+import {useState,useEffect,useContext,useMemo} from 'react';
 import ReplyComment from "./ReplyComment";
 import './CommentList.css'
 import {queryDetailsTextAnswer,sendReplyAnswer} from "../utils/HttpUtils";
 import MainContext from "../MainContext";
 import UserDrawer from "./UserDrawer";
 
-const ExampleComment = ({ children,replyData,addParentAnswer }) => {
+const ExampleComment = ({children,replyData,addParentAnswer,hasPortPermission}) => {
     return (
         <Comment
-            actions={[<span key="comment-nested-reply-to"  onClick={()=>addParentAnswer(replyData)}>Reply to</span>]}
+            actions={[<span key="comment-nested-reply-to"  onClick={()=>addParentAnswer(replyData)}>Reply to</span>,
+                hasPortPermission && <span onClick={()=>console.log("1111")}>Accept it</span>]
+            }
             author={<div className={"reply-title"}>
                 <UserDrawer alias={replyData.alias} />
                 <span>{replyData.createData}</span>
@@ -39,20 +41,21 @@ const sendReplyMessage = {
     replyObject:{}
 }
 
-const RenderData = ({details,addParentAnswer})=>{
+const RenderData = ({details,addParentAnswer,hasPortPermission})=>{
     return details.map(item => {
         if(item.childAnswers){
-            return  (<ExampleComment key={item.id} replyData={item} addParentAnswer={addParentAnswer} >
-                <RenderData details={item.childAnswers} addParentAnswer={addParentAnswer} />
+            return  (<ExampleComment key={item.id} replyData={item} addParentAnswer={addParentAnswer} hasPortPermission={hasPortPermission}>
+                <RenderData details={item.childAnswers} addParentAnswer={addParentAnswer} hasPortPermission={hasPortPermission} />
             </ExampleComment>)
         } else {
-            return (<ExampleComment key={item.id} replyData={item} addParentAnswer={addParentAnswer}/>)
+            return (<ExampleComment key={item.id} replyData={item} addParentAnswer={addParentAnswer} hasPortPermission={hasPortPermission}/>)
         }
     });
 }
 
 const CommentList = (props) => {
     const usercon = useContext(MainContext);
+    const hasPortPermission =  useMemo(()=>props.portAlias===usercon.alias,[props.portAlias, usercon.alias]);
     const [portDetails,setPortDetails] = useState(() => ({ page:{},datas:[]}));
     const [replyMsg,setReplyMsg] = useState(() => "");
 
@@ -113,7 +116,7 @@ const CommentList = (props) => {
     return(
     <div className={"comment-list"}>
         <h2 className={"reply-title"}>回贴</h2>
-        <RenderData details={portDetails.datas} addParentAnswer={addParentAnswer} />
+        <RenderData details={portDetails.datas} addParentAnswer={addParentAnswer} hasPortPermission={hasPortPermission}/>
         {usercon &&  <ReplyComment usercon={usercon} onAddComment={replyComments} replyMsg={replyMsg} setReplyMsg={setReplyMsg}/> }
     </div>)
 };
