@@ -1,4 +1,6 @@
 import axios from "axios";
+import cookies from "./Cookies";
+axios.defaults.headers.common['jwtToken'] = cookies.getItem("jwtToken") || '';
 
 function getApiImg(setCheckCode){
     axios({

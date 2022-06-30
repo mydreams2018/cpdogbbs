@@ -3,7 +3,8 @@ import {useEffect,useState} from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import {Button, Checkbox, Form, Input, notification} from 'antd';
 import {autoViewformlogin} from "../utils/customEvent";
-
+import cookies from "../utils/Cookies";
+import moment from "moment";
 import {getApiImg,userLogin} from '../utils/HttpUtils'
 const openNotificationWithIcon = (type,msg) => {
     notification[type]({
@@ -24,6 +25,11 @@ function Login (props){
             if(rsp.status===1){
                 openNotificationWithIcon('success',"登录成功");
                 props.onUserChange(rsp.msg);
+                if("true" === rsp.rememberMe){
+                    cookies.setItem('jwtToken',rsp.jwtToken,moment().add(7, 'days').toDate(),"/");
+                }else {
+                    cookies.setItem('jwtToken',rsp.jwtToken,null,"/");
+                }
             }else{
                 openNotificationWithIcon('warning',rsp.msg);
                 getApiImg(setCheckCode);
