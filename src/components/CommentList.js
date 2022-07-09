@@ -98,12 +98,21 @@ const CommentList = (props) => {
             sendReplyAnswer(sendReplyMessage,(rsp)=>{
                 if(rsp.status === 1){
                     if(sendReplyMessage.replyParent && replyMsg.startsWith(sendReplyMessage.replyParentText)){
-                        sendReplyMessage.replyObject.childAnswers=[{
-                            'alias':usercon.alias,
-                            'id':rsp.id,
-                            'userImg':usercon.img,
-                            'detailsText':newReplyMsg
-                        }];
+                        if(Array.isArray(sendReplyMessage.replyObject.childAnswers)){
+                            sendReplyMessage.replyObject.childAnswers.push({
+                                    'alias':usercon.alias,
+                                    'id':rsp.id,
+                                    'userImg':usercon.img,
+                                    'detailsText':newReplyMsg
+                                });
+                        }else{
+                            sendReplyMessage.replyObject.childAnswers=[{
+                                'alias':usercon.alias,
+                                'id':rsp.id,
+                                'userImg':usercon.img,
+                                'detailsText':newReplyMsg
+                            }];
+                        }
                     }else{
                         portDetails.datas.push({
                             'alias':usercon.alias,
