@@ -3,6 +3,7 @@ import { Menu } from 'antd';
 import { useState } from 'react';
 import UserHomepage from "../components/UserHomepage";
 import SendPorts from "../components/SendPorts";
+import UserDetailsEdit from "../components/UserDetailsEdit";
 import './UserView.css'
 
 function getItem(label, key, icon, children, type) {
@@ -50,6 +51,9 @@ function UserView(){
                 break;
             case 'home-2':
                 setOpenKeysItem( <SendPorts />);
+                break;
+            case 'edit-1':
+                setOpenKeysItem( <UserDetailsEdit />);
                 break;
             default:
 
