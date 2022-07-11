@@ -11,6 +11,7 @@ import Address from "./views/Address";
 import BaseView from "./views/BaseView";
 import FixedUtils from "./utils/FixedUtils";
 import JavaView from "./views/JavaView";
+import ReactView from "./views/ReactView";
 import BaseDetails from "./views/BaseDetails";
 import {getUserInfo} from "./utils/HttpUtils";
 import {APILoader} from "@uiw/react-amap";
@@ -121,6 +122,10 @@ function App() {
                         <Route path="/java" element={<JavaView />} >
                             <Route index element={<BaseView type={"java"} classId={1} basePath={'/java/details'} />} />
                             <Route path="details" element={<BaseDetails type={"java"} classId={1} basePath={'/java/details'} />} />
+                        </Route>
+                        <Route path="/react" element={<ReactView />} >
+                            <Route index element={<BaseView type={"react"} classId={2} basePath={'/react/details'} />} />
+                            <Route path="details" element={<BaseDetails type={"react"} classId={2} basePath={'/react/details'} />} />
                         </Route>
                         <Route path="/user" element={authToken.id?<UserView />:<Login onUserChange={(token) => {
                             getUserInfo({},(rt)=>{
