@@ -36,7 +36,7 @@ function UserDetailsEdit(props) {
     destemp.description=usercon.description;
     destemp.email = usercon.email || "";
     const [loading, setLoading] = useState(false);
-    const [imageUrl, setImageUrl] = useState();
+    const [imageUrl, setImageUrl] = useState(usercon.img);
     const [email, setEmail] = useState(destemp.email?true:false);
     const postDescription = () => {
         if(destemp.description && destemp.email){
@@ -114,9 +114,6 @@ function UserDetailsEdit(props) {
                     <Button type="primary" style={{marginTop:10}} onClick={postDescription}>
                         提并修改
                     </Button>
-                </TabPane>
-                <TabPane tab="Tab 3" key="3">
-                    Content of Tab Pane 3
                 </TabPane>
             </Tabs>
         </div>
