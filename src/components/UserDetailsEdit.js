@@ -1,6 +1,9 @@
-import { Tabs,Upload,message } from 'antd';
+import { Tabs,Upload,message,Input,Button } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { useState } from 'react';
+import { useState ,useContext } from 'react';
+import MainContext from "../MainContext";
+import {updateUserDes} from "../utils/HttpUtils";
+const { TextArea } = Input;
 
 const { TabPane } = Tabs;
 
@@ -16,10 +19,37 @@ const beforeUpload = (file) => {
     }
     return isJpgOrPng && isLt1M;
 };
+let destemp = {
+    description:"",
+    email:"email",
+    fromCity:"地球"
+};
+const descriptionChange = (e) => {
+    destemp.description = e.currentTarget.value;
+}
+const emailChange = (e) => {
+    destemp.email = e.target.value;
+}
 
 function UserDetailsEdit(props) {
+    const usercon = useContext(MainContext);
+    destemp.description=usercon.description;
+    destemp.email = usercon.email || "";
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState();
+    const [email, setEmail] = useState(destemp.email?true:false);
+    const postDescription = () => {
+        if(destemp.description && destemp.email){
+            updateUserDes(destemp,(rsp)=>{
+                if(rsp.status===1){
+                    setEmail(true);
+                    message.info(rsp.msg);
+                }else{
+                    message.error(rsp.msg);
+                }
+            });
+        }
+    }
     const handleChange = (info) => {
         if (info.file.status === 'uploading') {
             if(!loading){
@@ -71,8 +101,19 @@ function UserDetailsEdit(props) {
                             : (uploadButton)}
                     </Upload>
                 </TabPane>
-                <TabPane tab="Tab 2" key="2">
-                    Content of Tab Pane 2
+                <TabPane tab="个人描述信息" key="2" >
+                    <TextArea
+                        showCount
+                        allowClear
+                        maxLength={100}
+                        defaultValue={usercon.description}
+                        onChange={descriptionChange} />
+                    <Input addonBefore="输入密保问题" defaultValue={usercon.email} onChange={emailChange}
+                           disabled={email} maxLength={66} showCount={true}/>
+
+                    <Button type="primary" style={{marginTop:10}} onClick={postDescription}>
+                        提并修改
+                    </Button>
                 </TabPane>
                 <TabPane tab="Tab 3" key="3">
                     Content of Tab Pane 3

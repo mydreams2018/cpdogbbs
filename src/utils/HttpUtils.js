@@ -299,6 +299,22 @@ function acceptReply(obj,callback){
     });
 }
 
+function updateUserDes(obj,callback){
+    axios({
+        method: 'post',
+        url: '/api/user/updateByPrimaryKey',
+        data: obj,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        responseType: 'json'
+    }).then(function (response) {
+        callback(response.data);
+    }).catch(function (error) {
+        callback(error);
+    });
+}
+
 export {getApiImg,getRigister,userLogin,rePassWord,getUserInfo,sendPorts,signByPrimaryKey, signByOn,queryReplyWeek
     ,queryHomeReport,queryUserByAlias ,queryPortDetails ,queryDetailsTextAnswer,sendReplyAnswer,portsUploadImg
-    ,userIsCollect ,sendCollect,acceptReply }
+    ,userIsCollect ,sendCollect,acceptReply ,updateUserDes}
