@@ -315,6 +315,22 @@ function updateUserDes(obj,callback){
     });
 }
 
+function queryMyPorts(obj,callback){
+    axios({
+        method: 'post',
+        url: '/api/report/myQueryReport',
+        data: obj,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        responseType: 'json'
+    }).then(function (response) {
+        callback(response.data);
+    }).catch(function (error) {
+        callback(error);
+    });
+}
+
 export {getApiImg,getRigister,userLogin,rePassWord,getUserInfo,sendPorts,signByPrimaryKey, signByOn,queryReplyWeek
     ,queryHomeReport,queryUserByAlias ,queryPortDetails ,queryDetailsTextAnswer,sendReplyAnswer,portsUploadImg
-    ,userIsCollect ,sendCollect,acceptReply ,updateUserDes}
+    ,userIsCollect ,sendCollect,acceptReply ,updateUserDes,queryMyPorts}

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import UserHomepage from "../components/UserHomepage";
 import SendPorts from "../components/SendPorts";
 import UserDetailsEdit from "../components/UserDetailsEdit";
+import MySendPorts from "../components/MySendPorts";
 import './UserView.css'
 
 function getItem(label, key, icon, children, type) {
@@ -54,6 +55,9 @@ function UserView(){
                 break;
             case 'edit-1':
                 setOpenKeysItem( <UserDetailsEdit />);
+                break;
+            case 'comments-1':
+                setOpenKeysItem( <MySendPorts />);
                 break;
             default:
 
