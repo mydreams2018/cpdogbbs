@@ -1,30 +1,9 @@
 import {Button, Table,DatePicker,Input} from 'antd';
 import {useState ,useEffect} from 'react';
+import {useNavigate} from "react-router-dom";
 import './MySendPorts.css'
 import {queryMyPorts} from "../utils/HttpUtils";
 const { RangePicker } = DatePicker;
-
-const columns = [
-    {
-        title: '标题',
-        dataIndex: 'name',
-        render: (text) => <a>{text}</a>
-    },
-    {
-        title: '回复',
-        dataIndex: 'replyNumber',
-    },
-    {
-        title: '日期',
-        dataIndex: 'createTime',
-    },
-    {
-        title: 'Action',
-        dataIndex: '',
-        key: 'x',
-        render: (text,) => <a onClick={()=>editClick(text )} >edit</a>,
-    }
-];
 
 const editClick = (text) => {
     console.log(text);
@@ -36,6 +15,7 @@ let searchDatas = {
     pageSize:1000
 }
 function MySendPorts(props) {
+    const navigate = useNavigate();
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [loading, setLoading] = useState(false);
     const [data,setData] = useState([]);
@@ -50,6 +30,39 @@ function MySendPorts(props) {
         });
     }, []);
 
+    const columns = [
+        {
+            title: '标题',
+            dataIndex: 'name',
+            render: (text,obj) => <a onClick={()=>jumperPorts(text,obj)}>{text}</a>
+        },
+        {
+            title: '回复',
+            dataIndex: 'replyNumber',
+        },
+        {
+            title: '日期',
+            dataIndex: 'createTime',
+        },
+        {
+            title: 'Action',
+            dataIndex: '',
+            key: 'x',
+            render: (text) => <a onClick={()=>editClick(text )} >edit</a>,
+        }
+    ];
+
+    const jumperPorts = (text,obj) => {
+        switch (obj.classId) {
+            case 1:
+                navigate("/java/details",{state:{id:obj.id}});
+                break;
+            case 2:
+                navigate("/react/details",{state:{id:obj.id}});
+                break;
+        }
+        console.log(obj);
+    }
     const start = () => {
         setLoading(true);
         setTimeout(() => {
