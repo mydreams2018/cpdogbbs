@@ -19,29 +19,29 @@ function MySendPorts(props) {
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [loading, setLoading] = useState(false);
     const [data,setData] = useState([]);
+    const changeClassId = (classId) => {
+        switch (classId){
+            case 1:
+                return  "report_back";
+            case 2:
+                return  "report_front";
+            case 3:
+                return "report_data";
+            case 4:
+                return  "report_talk";
+        }
+        return classId;
+    }
     useEffect(() => {
         queryMyPorts(searchDatas,(rsp)=>{
             if(rsp.datas){
                 rsp.datas.forEach(item=>{
-                    item.key=item.id+'-'+changeClassId(item.classId);
-                })
+                    item.key=(item.id+'-'+changeClassId(item.classId));
+                });
                 setData(rsp.datas);
             }
         });
     }, []);
-const changeClassId = (classId) => {
-    switch (classId){
-        case 1:
-            return  "report_back";
-        case 2:
-            return  "report_front";
-        case 3:
-            return "report_data";
-        case 4:
-           return  "report_talk";
-    }
-    return classId;
-}
     const columns = [
         {
             title: '标题',
