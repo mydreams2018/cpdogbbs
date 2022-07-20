@@ -1,13 +1,11 @@
 import {Button, Table,DatePicker,Input} from 'antd';
 import {useState ,useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
+import EditMainPorts from "./EditMainPorts";
 import './MySendPorts.css'
 import {queryMyPorts,deleteMyPorts} from "../utils/HttpUtils";
 const { RangePicker } = DatePicker;
 
-const editClick = (text) => {
-    console.log(text);
-}
 let searchDatas = {
     beginTime:'',
     endTime:'',
@@ -19,6 +17,8 @@ function MySendPorts(props) {
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [loading, setLoading] = useState(false);
     const [data,setData] = useState([]);
+    const [editPorts,setEditPorts] = useState(false);
+    const [editParams,setEditParams] = useState({});
     const changeClassId = (classId) => {
         switch (classId){
             case 1:
@@ -120,6 +120,10 @@ function MySendPorts(props) {
     };
     const hasSelected = selectedRowKeys.length > 0;
 
+    const editClick = (text) => {
+        setEditParams(text);
+        setEditPorts(true);
+    }
     return (
         <div className={"my-send-ports"}>
 
@@ -144,6 +148,7 @@ function MySendPorts(props) {
                 </div>
                 <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
             </div>
+            {editPorts && <EditMainPorts visible={editPorts} setVisible={setEditPorts} editParams={editParams} />}
         </div>
     );
 }
