@@ -1,9 +1,7 @@
 import {Button, Table,DatePicker,Input} from 'antd';
 import {useState ,useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
-import EditMainPorts from "./EditMainPorts";
-import './MySendPorts.css'
-import {queryMyPorts,deleteMyPorts} from "../utils/HttpUtils";
+import {queryPortCollections,deletePortCollections} from "../utils/HttpUtils";
 const { RangePicker } = DatePicker;
 
 let searchDatas = {
@@ -12,31 +10,16 @@ let searchDatas = {
     name:'',
     pageSize:1000
 }
-function MySendPorts(props) {
+function MyCollection(props) {
     const navigate = useNavigate();
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [loading, setLoading] = useState(false);
     const [data,setData] = useState([]);
-    const [editPorts,setEditPorts] = useState(false);
-    const [editParams,setEditParams] = useState({});
-    const changeClassId = (classId) => {
-        switch (classId){
-            case 1:
-                return  "report_back";
-            case 2:
-                return  "report_front";
-            case 3:
-                return "report_data";
-            case 4:
-                return  "report_talk";
-        }
-        return classId;
-    }
     useEffect(() => {
-        queryMyPorts(searchDatas,(rsp)=>{
+        queryPortCollections(searchDatas,(rsp)=>{
             if(rsp.datas){
                 rsp.datas.forEach(item=>{
-                    item.key=(item.id+'-'+changeClassId(item.classId));
+                    item.key=item.id;
                 });
                 setData(rsp.datas);
             }
@@ -45,45 +28,35 @@ function MySendPorts(props) {
     const columns = [
         {
             title: '标题',
-            dataIndex: 'name',
+            dataIndex: 'portTitle',
             render: (text,obj) => <a onClick={()=>jumperPorts(text,obj)}>{text}</a>
         },
         {
-            title: '回复',
-            dataIndex: 'replyNumber',
-        },
-        {
             title: '日期',
-            dataIndex: 'createTime',
-        },
-        {
-            title: 'Action',
-            dataIndex: '',
-            key: 'x',
-            render: (text) => <a onClick={()=>editClick(text )} >edit</a>,
+            dataIndex: 'collectTime',
         }
     ];
 
     const jumperPorts = (text,obj) => {
         switch (obj.classId) {
             case 1:
-                navigate("/java/details",{state:{id:obj.id}});
+                navigate("/java/details",{state:{id:obj.portId}});
                 break;
             case 2:
-                navigate("/react/details",{state:{id:obj.id}});
+                navigate("/react/details",{state:{id:obj.portId}});
                 break;
         }
     }
     const start = () => {
         setLoading(true);
-        deleteMyPorts({
+        deletePortCollections({
             ids:selectedRowKeys.join(","),
         },(rsp)=>{
             if(rsp.status===1){
                 setSelectedRowKeys([]);
                 let ArrayData = [];
                 data.forEach(item=>{
-                    if(!selectedRowKeys.includes(item.id+'-'+changeClassId(item.classId))){
+                    if(!selectedRowKeys.includes(item.id)){
                         ArrayData.push(item);
                     }
                 });
@@ -100,14 +73,13 @@ function MySendPorts(props) {
         searchDatas.name=data.target.value;
     }
     const searchChangeData = () => {
-        queryMyPorts(searchDatas,(rsp)=>{
+        queryPortCollections(searchDatas,(rsp)=>{
             if(rsp.datas){
                 rsp.datas.forEach(item=>{
-                    item.key=(item.id+'-'+changeClassId(item.classId));
-                })
+                    item.key=item.id;
+                });
                 setData(rsp.datas);
             }
-            console.log(rsp);
         });
     }
 
@@ -120,10 +92,6 @@ function MySendPorts(props) {
     };
     const hasSelected = selectedRowKeys.length > 0;
 
-    const editClick = (text) => {
-        setEditParams(text);
-        setEditPorts(true);
-    }
     return (
         <div className={"my-send-ports"}>
 
@@ -142,15 +110,14 @@ function MySendPorts(props) {
                         Delete
                     </Button>
                     <span
-                        style={{marginLeft: 8,}}>
+                        style={{marginLeft: 8}}>
                         {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
                     </span>
                 </div>
                 <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
             </div>
-            {editPorts && <EditMainPorts visible={editPorts} setVisible={setEditPorts} editParams={editParams} />}
         </div>
     );
 }
 
-export default MySendPorts
+export default MyCollection

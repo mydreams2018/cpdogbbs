@@ -5,6 +5,7 @@ import UserHomepage from "../components/UserHomepage";
 import SendPorts from "../components/SendPorts";
 import UserDetailsEdit from "../components/UserDetailsEdit";
 import MySendPorts from "../components/MySendPorts";
+import MyCollection from "../components/MyCollection";
 import './UserView.css'
 
 function getItem(label, key, icon, children, type) {
@@ -58,6 +59,9 @@ function UserView(){
                 break;
             case 'comments-1':
                 setOpenKeysItem( <MySendPorts />);
+                break;
+            case 'comments-3':
+                setOpenKeysItem(<MyCollection />);
                 break;
             default:
 
