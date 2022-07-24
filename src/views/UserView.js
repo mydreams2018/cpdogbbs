@@ -6,6 +6,7 @@ import SendPorts from "../components/SendPorts";
 import UserDetailsEdit from "../components/UserDetailsEdit";
 import MySendPorts from "../components/MySendPorts";
 import MyCollection from "../components/MyCollection";
+import MyReplyPorts from "../components/MyReplyPorts";
 import './UserView.css'
 
 function getItem(label, key, icon, children, type) {
@@ -45,7 +46,6 @@ function UserView(){
         }
     };
     const onSelectChange = (keys) => {
-        console.log(keys);
         //异步的
         switch (keys.key) {
             case 'home-1':
@@ -59,6 +59,9 @@ function UserView(){
                 break;
             case 'comments-1':
                 setOpenKeysItem( <MySendPorts />);
+                break;
+            case 'comments-2':
+                setOpenKeysItem( <MyReplyPorts />);
                 break;
             case 'comments-3':
                 setOpenKeysItem(<MyCollection />);
