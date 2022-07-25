@@ -76,6 +76,7 @@ const CommentList = (props) => {
     const [replyMsg,setReplyMsg] = useState(() => "");
     classIdLink = props.classId;
     useEffect(()=>{
+        currentPage = 1;
         queryDetailsTextAnswer({
             classId: props.classId,
             portId: props.portId,

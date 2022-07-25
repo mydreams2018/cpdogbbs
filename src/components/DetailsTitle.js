@@ -6,7 +6,6 @@ import MainContext from "../MainContext";
 import {userIsCollect,sendCollect,likePorts} from "../utils/HttpUtils";
 
 function DetailsTitle(props) {
-    console.log(props);
     const usercon = useContext(MainContext);
     const [isCollect, setIsCollect] = useState(()=>({userAccount:""}));
     const [isliked, setIsliked] = useState(()=>false);
