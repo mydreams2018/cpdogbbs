@@ -1,4 +1,4 @@
-import {Avatar, Comment, Image, notification} from 'antd';
+import {Avatar, Comment, Image, notification,Button} from 'antd';
 import { CheckCircleTwoTone } from '@ant-design/icons';
 import {useState,useEffect,useContext,useMemo} from 'react';
 import ReplyComment from "./ReplyComment";
@@ -7,6 +7,7 @@ import {queryDetailsTextAnswer,sendReplyAnswer,acceptReply} from "../utils/HttpU
 import MainContext from "../MainContext";
 import UserDrawer from "./UserDrawer";
 let classIdLink = '';
+let currentPage = 1;
 const ExampleComment = ({children,replyData,addParentAnswer,hasPortPermission}) => {
     const accaptAnswer = () => {
         acceptReply({
@@ -71,17 +72,17 @@ const CommentList = (props) => {
     const usercon = useContext(MainContext);
     const hasPortPermission =  useMemo(()=>props.portAlias===usercon.alias&&props.portState==="未结",
         [props.portAlias, props.portState, usercon.alias]);
-    const [portDetails,setPortDetails] = useState(() => ({ page:{},datas:[]}));
+    const [portDetails,setPortDetails] = useState(() => ({ page:{totalPage:1},datas:[]}));
     const [replyMsg,setReplyMsg] = useState(() => "");
     classIdLink = props.classId;
     useEffect(()=>{
         queryDetailsTextAnswer({
             classId: props.classId,
             portId: props.portId,
+            currentPage:currentPage
         },(rsp)=>{
             if(rsp.page){
                 setPortDetails(rsp);
-                console.log(rsp);
             }
         });
         sendReplyMessage.classId = props.classId;
@@ -137,10 +138,33 @@ const CommentList = (props) => {
         setReplyMsg(`[@${e.id}]`);
     }
 
+    const loadMores = () => {
+        currentPage++;
+        queryDetailsTextAnswer({
+            classId: props.classId,
+            portId: props.portId,
+            currentPage:currentPage
+        },(rsp)=>{
+            if(rsp.datas){
+                setPortDetails({page:rsp.page,datas:portDetails.datas.concat(rsp.datas)});
+            }
+        });
+    }
+
     return(
     <div className={"comment-list"}>
         <h2 className={"reply-title"}>回贴</h2>
         <RenderData details={portDetails.datas} addParentAnswer={addParentAnswer} hasPortPermission={hasPortPermission}/>
+        {portDetails.page.totalPage > currentPage &&
+            <div
+            style={{
+                textAlign: 'center',
+                marginTop: 12,
+                height: 32,
+                lineHeight: '32px',
+            }}>
+            <Button onClick={loadMores}>loading more</Button>
+        </div>}
         {usercon &&  <ReplyComment usercon={usercon} onAddComment={replyComments} replyMsg={replyMsg} setReplyMsg={setReplyMsg}/> }
     </div>)
 };
