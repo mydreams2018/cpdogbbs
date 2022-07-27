@@ -34,5 +34,6 @@ React  antd-ui库  react-router  axios swiper ckeditor5
 5. npm start 启动项目/npm run build 打包项目
 #### 使用说明
 
-1.  需要配合后端使用.
-2.  https://github.com/mydreams2018/singlebbs
+1. 需要配合后端使用.
+2. singlebbs
+3. 说明地址 https://space.bilibili.com/384704339
