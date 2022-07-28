@@ -2,7 +2,8 @@ import { Tabs,Upload,message,Input,Button } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { useState ,useContext } from 'react';
 import MainContext from "../MainContext";
-import {updateUserDes} from "../utils/HttpUtils";
+import {updateUserDes,updateUserPassword} from "../utils/HttpUtils";
+import './UserDetailsEdit.css'
 const { TextArea } = Input;
 
 const { TabPane } = Tabs;
@@ -24,6 +25,38 @@ let destemp = {
     email:"email",
     fromCity:"地球"
 };
+const rePassword = {
+    password:'',
+    rePass:'',
+    rePassRepeet:''
+}
+const passwordChange = (e) => {
+    rePassword.password=e.target.value;
+}
+const rePassChange = (e) => {
+    rePassword.rePass=e.target.value;
+}
+const rePassRepeetChange = (e) => {
+    rePassword.rePassRepeet=e.target.value;
+}
+const changePasswordSend = () => {
+    if(rePassword.password && rePassword.rePass && rePassword.rePassRepeet){
+        if(rePassword.rePass===rePassword.rePassRepeet){
+            updateUserPassword(rePassword,(rsp)=>{
+                if(rsp.status===1){
+                    message.info(rsp.msg);
+                }else{
+                    message.error(rsp.msg);
+                }
+            });
+        }else{
+            message.error('新密码二次内容不一致');
+        }
+    }else{
+        message.error('数据不能为空');
+    }
+    console.log(rePassword);
+}
 const descriptionChange = (e) => {
     destemp.description = e.currentTarget.value;
 }
@@ -114,6 +147,19 @@ function UserDetailsEdit(props) {
                     <Button type="primary" style={{marginTop:10}} onClick={postDescription}>
                         提并修改
                     </Button>
+                </TabPane>
+                <TabPane tab="修改密码" key="3">
+                    <div className={"user-details-repas"}>
+                        <Input.Password addonBefore="输入旧密码" onChange={passwordChange}
+                               maxLength={12} showCount={true}/>
+                        <Input.Password addonBefore="输入新密码" onChange={rePassChange}
+                               maxLength={12} showCount={true}/>
+                        <Input.Password addonBefore="再次确认新密码" onChange={rePassRepeetChange}
+                               maxLength={12} showCount={true}/>
+                        <Button type="primary" style={{marginTop:10}} onClick={changePasswordSend}>
+                            提并修改
+                        </Button>
+                    </div>
                 </TabPane>
             </Tabs>
         </div>
