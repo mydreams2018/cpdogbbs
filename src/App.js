@@ -65,7 +65,7 @@ function App() {
                     zIndex: 6,
                     width: '100%',
                 }}>
-                <div className="logo" />
+                <div style={{float:'left',paddingLeft:30,paddingRight:30}} ><img src={"/favicon.ico"} style={{maxHeight:'100%'}}/></div>
                 <Menu
                     theme="dark"
                     mode="horizontal"
