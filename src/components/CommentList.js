@@ -95,6 +95,9 @@ const CommentList = (props) => {
             let newReplyMsg = replyMsg;
             if(sendReplyMessage.replyParent && replyMsg.startsWith(sendReplyMessage.replyParentText)){
                 newReplyMsg =  replyMsg.replace(sendReplyMessage.replyParentText,"");
+            }else{
+                //@用户 回贴没有配对上的情况
+                sendReplyMessage.replyParent=null;
             }
             sendReplyMessage.detailsText = newReplyMsg;
             sendReplyAnswer(sendReplyMessage,(rsp)=>{
