@@ -1,22 +1,24 @@
-import { List, Typography } from 'antd';
+import { List } from 'antd';
 const data = [
     'Racing car sprays burning fuel into crowd.',
     'Japanese princess to wed commoner.',
     'Australian walks 100km after outback crash.',
     'Man charged over missing wedding girl.',
-    'Los Angeles battles huge wildfires.',
+    'Los Angeles battles huge wildfires.'
 ];
 
 function Cooperation(){
     return(
         <List
             style={{backgroundColor:'#fff',marginTop:20}}
-            header={<div>Header</div>}
+            header={<div>合作区域</div>}
             bordered
             dataSource={data}
             renderItem={(item) => (
                 <List.Item>
-                    <Typography.Text mark style={{paddingRight:10}}>cpdog</Typography.Text> {item}
+                    <div className={"cooperation-img"}>
+                        {item}
+                    </div>
                 </List.Item>
             )}
         />
