@@ -5,7 +5,7 @@ import EditReplyPorts from "./EditReplyPorts";
 import {queryMyReplyPorts,deleteMyReplyPorts} from "../utils/HttpUtils";
 const { RangePicker } = DatePicker;
 
-let searchDatas = {
+const searchDatas = {
     beginTime:'',
     endTime:'',
     name:'',

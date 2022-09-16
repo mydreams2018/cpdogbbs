@@ -6,7 +6,7 @@ import './MySendPorts.css'
 import {queryMyPorts,deleteMyPorts} from "../utils/HttpUtils";
 const { RangePicker } = DatePicker;
 
-let searchDatas = {
+const searchDatas = {
     beginTime:'',
     endTime:'',
     name:'',

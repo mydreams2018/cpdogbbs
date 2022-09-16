@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {queryPortCollections,deletePortCollections} from "../utils/HttpUtils";
 const { RangePicker } = DatePicker;
 
-let searchDatas = {
+const searchDatas = {
     beginTime:'',
     endTime:'',
     name:'',
