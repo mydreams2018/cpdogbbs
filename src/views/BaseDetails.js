@@ -24,6 +24,23 @@ function BaseDetails(props){
         }
     });
     useEffect(()=>{
+        let elementDetailsLeft = document.getElementById("detailsLeft");
+        let elementDetailsRight = document.getElementById("detailsRight");
+        function scrollEv(ev){
+            let allHeight = 30;
+            for (let i = 0; i < elementDetailsRight.children.length; i++) {
+                allHeight+=elementDetailsRight.children[i].clientHeight;
+            }
+            if(elementDetailsLeft.clientHeight>(allHeight+document.documentElement.scrollTop)){
+                elementDetailsRight.style.paddingTop=Math.floor(document.documentElement.scrollTop)+"px";
+            }
+        }
+        window.addEventListener("scroll",scrollEv,false);
+        return () => {
+            window.removeEventListener("scroll", scrollEv, false);
+        };
+    },[]);
+    useEffect(()=>{
         queryPortDetails({
             classId:props.classId,
             id:locationPath.state.id
@@ -35,7 +52,7 @@ function BaseDetails(props){
     },[locationPath.state.id, props.classId]);
     return (
         <div className={"base-details"}>
-            <div className={"details-left"}>
+            <div className={"details-left"} id={"detailsLeft"}>
                 <h3>{portsInfo.name}</h3>
                 <DetailsTitle portsInfo={portsInfo} classId={props.classId} />
                 <div className={"user-list"} style={{backgroundColor:"#f0f2f5"}}>
@@ -48,7 +65,7 @@ function BaseDetails(props){
                 <PreContent portsInfoDetails={portsInfo.details} />
                 <CommentList portState={portsInfo.portState} classId={props.classId} portId={locationPath.state.id} portAlias={portsInfo.alias}/>
             </div>
-            <div className={"details-right"}>
+            <div className={"details-right"} id={"detailsRight"}>
                 <HotList classId={props.classId} basePath={props.basePath} />
                 <Cooperation />
             </div>
