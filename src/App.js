@@ -153,7 +153,7 @@ function App() {
                 style={{
                     textAlign: 'center',
                 }}>
-                Ant Design ©2022 Created by 刘大胖
+                ©2022 襄阳灯塔it公司 <a target={"_blank"} href={"https://beian.miit.gov.cn"}>鄂icp20155051222</a>
             </Footer>
         </Layout>
         <FixedUtils />
