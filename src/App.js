@@ -65,7 +65,7 @@ function App() {
                     zIndex: 6,
                     width: '100%',
                 }}>
-                <div style={{float:'left',paddingLeft:30,paddingRight:30}} ><img src={"/favicon.ico"} style={{maxHeight:'100%'}}/></div>
+                <div style={{float:'left',paddingLeft:30,paddingRight:30}} ><img alt={"襄阳it"} src={"/favicon.ico"} style={{maxHeight:'100%'}}/></div>
                 <Menu
                     theme="dark"
                     mode="horizontal"
@@ -153,7 +153,7 @@ function App() {
                 style={{
                     textAlign: 'center',
                 }}>
-                ©2022 襄阳灯塔it公司 <a target={"_blank"} href={"https://beian.miit.gov.cn"}>鄂icp20155051222</a>
+                ©2022 襄阳灯塔it公司 <a rel="noreferrer" target={"_blank"} href={"https://beian.miit.gov.cn"}>鄂icp20155051222</a>
             </Footer>
         </Layout>
         <FixedUtils />

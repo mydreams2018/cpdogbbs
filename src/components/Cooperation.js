@@ -1,13 +1,14 @@
 import { List } from 'antd';
-const data = [
-    'Racing car sprays burning fuel into crowd.',
-    'Japanese princess to wed commoner.',
-    'Australian walks 100km after outback crash.',
-    'Man charged over missing wedding girl.',
-    'Los Angeles battles huge wildfires.'
-];
+import {useState,useEffect} from 'react';
+import {collaborationCompanyQuery} from "../utils/HttpUtils";
 
 function Cooperation(){
+    const [data,setData] = useState([]);
+    useEffect(()=>{
+        collaborationCompanyQuery({"onlyStatus":2,"isActive":true},(rsp)=>{
+            setData(rsp.datas);
+        });
+    },[]);
     return(
         <List
             style={{backgroundColor:'#fff',marginTop:20}}
@@ -17,7 +18,8 @@ function Cooperation(){
             renderItem={(item) => (
                 <List.Item>
                     <div className={"cooperation-img"}>
-                        {item}
+                        <img style={{maxHeight:50,marginRight:5}} alt={item.describe} src={item.companyImages}/>
+                        <a rel="noreferrer" href={item.linkUrl} target={"_blank"}>{item.describe}</a>
                     </div>
                 </List.Item>
             )}

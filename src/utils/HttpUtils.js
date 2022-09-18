@@ -451,7 +451,24 @@ function updateUserPassword(obj,callback){
         callback(error);
     });
 }
+function collaborationCompanyQuery(obj,callback){
+    axios({
+        method: 'post',
+        url: '/api/collaborationCompany/selectAll',
+        data: obj,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        responseType: 'json'
+    }).then(function (response) {
+        callback(response.data);
+    }).catch(function (error) {
+        callback(error);
+    });
+}
+
 export {getApiImg,getRigister,userLogin,rePassWord,getUserInfo,sendPorts,signByPrimaryKey, signByOn,queryReplyWeek
     ,queryHomeReport,queryUserByAlias ,queryPortDetails ,queryDetailsTextAnswer,sendReplyAnswer,portsUploadImg
     ,userIsCollect ,sendCollect,acceptReply ,updateUserDes,queryMyPorts,deleteMyPorts,likePorts,editPortDetails,
-    queryPortCollections,deletePortCollections,queryMyReplyPorts ,deleteMyReplyPorts,updateUserPassword}
+    queryPortCollections,deletePortCollections,queryMyReplyPorts ,deleteMyReplyPorts,updateUserPassword,
+    collaborationCompanyQuery}
