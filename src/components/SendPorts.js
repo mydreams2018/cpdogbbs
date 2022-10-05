@@ -3,6 +3,7 @@ import {HeartTwoTone,HighlightTwoTone} from '@ant-design/icons';
 import BaseCkedit from "./BaseCkedit";
 import {useEffect,useState} from 'react';
 import {getApiImg,sendPorts} from "../utils/HttpUtils";
+import {partitionNames} from "../utils/partitionName";
 import './SendPorts.css';
 
 const { Option } = Select;
@@ -33,22 +34,30 @@ const experienceChange = (e) => {
 const titleChange = (e) => {
     portData.title=e.target.value;
 };
-const handleChange = (value,option ) => {
-    portData.classId=value;
-    portData.classIdType=option.children;
-};
 const imgcodeChange = (e) => {
     portData.image_code=e.target.value;
 };
 function SendPorts(){
     const [checkCode, setCheckCode] = useState(() => "");
     const [sendload, setSendload] = useState(() => false);
+    const [ptName, setPtName] = useState(()=>partitionNames[portData.classIdType]);
+    const [secondPt, setSecondPt] = useState(()=>partitionNames[portData.classIdType][0]);
     useEffect(()=>{
         getApiImg(setCheckCode);
     },[]);
+    const handleChange = (value,option ) => {
+        portData.classId=value;
+        portData.classIdType=option.children;
+        setPtName(partitionNames[portData.classIdType]);
+        setSecondPt(partitionNames[portData.classIdType][0]);
+    };
+    const ptHandleChange = (value,option) => {
+        setSecondPt(option.children);
+    };
     const handleSend = () => {
         setSendload(true);
         portData.name=portData.title;
+        portData.partitionName=secondPt;
         sendPorts(portData,(rsp)=>{
             if(rsp.status===1){
                 openNotificationWithIcon('success',rsp.msg);
@@ -70,6 +79,15 @@ function SendPorts(){
                         width: 160
                     }}>
                     {children}
+                </Select>
+                <Select
+                    size={'middle'}
+                    value={secondPt}
+                    onChange={ptHandleChange}
+                    style={{width: 160}}>
+                    {ptName.map((city,inx) => (
+                        <Option key={inx}>{city}</Option>
+                    ))}
                 </Select>
                 <Input placeholder="赏积分"
                        style={{
