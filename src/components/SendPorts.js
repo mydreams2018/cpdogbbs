@@ -57,7 +57,9 @@ function SendPorts(){
     const handleSend = () => {
         setSendload(true);
         portData.name=portData.title;
-        portData.partitionName=secondPt;
+        if(secondPt!=="全部"){
+            portData.partitionName=secondPt;
+        }
         sendPorts(portData,(rsp)=>{
             if(rsp.status===1){
                 openNotificationWithIcon('success',rsp.msg);

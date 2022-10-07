@@ -17,7 +17,8 @@ function BaseView(props){
             currentPage: 1,
             pageSize: 10,
             name:"",
-            portState:""
+            portState:"",
+            partitionName:""
         }
     });
 
@@ -30,6 +31,7 @@ function BaseView(props){
                 pageSize: 10,
                 portState:listParam.portState,
                 name:listParam.name,
+                partitionName:listParam.partitionName
             }
         );
     }
@@ -42,6 +44,21 @@ function BaseView(props){
                 pageSize: 10,
                 name:listParam.name,
                 portState:e,
+                partitionName:listParam.partitionName
+            }
+        );
+    };
+    const ptHandleChange = (e) => {
+        let ptName = (e==="全部"?"":e);
+        setListParam(
+            {
+                classId: props.classId,
+                orderType: listParam.orderType,
+                currentPage: 1,
+                pageSize: 10,
+                name:listParam.name,
+                portState:listParam.portState,
+                partitionName:ptName
             }
         );
     };
@@ -54,6 +71,7 @@ function BaseView(props){
                     pageSize: 10,
                     name:value,
                     portState:listParam.portState,
+                    partitionName:listParam.partitionName
                 }
             );
     }
@@ -65,7 +83,8 @@ function BaseView(props){
                 currentPage: listParam.currentPage,
                 pageSize: 10,
                 name:listParam.name,
-                portState:listParam.portState
+                portState:listParam.portState,
+                partitionName:listParam.partitionName
             }
         );
     }
@@ -74,7 +93,7 @@ function BaseView(props){
         <div className={"base-view"}>
             <div className={"view-left"}>
                 <MyCarousel imgs={MyCarouselImgs}/>
-                <BaseSearch handleChange={handleChange} onSearch={onSearch} onTabChange={onTabChange} />
+                <BaseSearch handleChange={handleChange} onSearch={onSearch} onTabChange={onTabChange} basePath={props.basePath} ptHandleChange={ptHandleChange} />
                 <ListSimple listParam={listParam} pageChange={pageChange} showPaging={true} basePath={props.basePath} />
             </div>
             <div className={"view-right"}>
