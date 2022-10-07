@@ -28,7 +28,7 @@ const HotList = (props) =>{
             renderItem={(item) => (
                 <List.Item>
                     <List.Item.Meta
-                        avatar={<Avatar src={<Image src={item.userImg} />} />}
+                        avatar={<Avatar size={64} style={{marginLeft:10}} src={<Image src={item.userImg} />} />}
                         title={
                             <div>
                                 <UserDrawer alias={item.alias} />
