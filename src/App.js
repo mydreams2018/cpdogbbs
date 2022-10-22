@@ -65,7 +65,7 @@ function App() {
                     zIndex: 6,
                     width: '100%',
                 }}>
-                <div style={{float:'left',paddingLeft:30,paddingRight:30}} ><img alt={"襄阳it"} src={"/favicon.ico"} style={{maxHeight:'100%'}}/></div>
+                <div className={"header-img"} style={{float:'left',paddingLeft:30,paddingRight:30}} ><img alt={"襄阳it"} src={"/favicon.ico"} style={{maxHeight:'100%'}}/></div>
                 <Menu
                     theme="dark"
                     mode="horizontal"
