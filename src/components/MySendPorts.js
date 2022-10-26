@@ -43,6 +43,12 @@ function MySendPorts(props) {
                 setData(rsp.datas);
             }
         });
+        return () => {
+            searchDatas.beginTime='';
+            searchDatas.endTime='';
+            searchDatas.name='';
+            searchDatas.authFlag=1;
+        };
     }, []);
     const columns = [
         {
