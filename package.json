@@ -10,7 +10,6 @@
     "@uiw/react-amap": "^3.0.3",
     "antd": "^4.20.7",
     "axios": "^0.27.2",
-    "http-proxy-middleware": "^2.0.6",
     "moment": "^2.29.3",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
@@ -42,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "http-proxy-middleware": "^2.0.6"
   }
 }
