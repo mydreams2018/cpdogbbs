@@ -1,5 +1,5 @@
 import {CKEditor} from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '../ckeditor/build/ckeditor';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {portsUploadImg} from "../utils/HttpUtils";
 import {notification} from "antd";
 /*
