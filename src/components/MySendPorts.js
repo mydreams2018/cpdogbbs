@@ -119,7 +119,7 @@ function MySendPorts(props) {
             if(rsp.datas){
                 rsp.datas.forEach(item=>{
                     item.key=(item.id+'-'+changeClassId(item.classId));
-                })
+                });
                 setData(rsp.datas);
             }
             console.log(rsp);
