@@ -1,6 +1,5 @@
 import {Button, Table,DatePicker,Input,Select } from 'antd';
 import {useState ,useEffect} from 'react';
-import {useNavigate} from "react-router-dom";
 import AuthMainPorts from "./AuthMainPorts";
 import './ManagerPorts.css'
 import {managerAuthPort} from "../utils/HttpUtils";
@@ -15,7 +14,6 @@ const searchDatas = {
     authFlag:0
 }
 function ManagerPorts(props) {
-    const navigate = useNavigate();
     const [data,setData] = useState([]);
     const [editPorts,setEditPorts] = useState(false);
     const [editParams,setEditParams] = useState({});
@@ -51,8 +49,7 @@ function ManagerPorts(props) {
     const columns = [
         {
             title: '标题',
-            dataIndex: 'name',
-            render: (text,obj) => <a onClick={()=>jumperPorts(text,obj)}>{text}</a>
+            dataIndex: 'name'
         },
         {
             title: '回复',
@@ -74,16 +71,6 @@ function ManagerPorts(props) {
         }
     ];
 
-    const jumperPorts = (text,obj) => {
-        switch (obj.classId) {
-            case 1:
-                navigate("/java/details",{state:{id:obj.id}});
-                break;
-            case 2:
-                navigate("/react/details",{state:{id:obj.id}});
-                break;
-        }
-    }
     const dataChanges = (data,dataString) => {
         searchDatas.beginTime=dataString[0];
         searchDatas.endTime=dataString[1];
