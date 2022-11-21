@@ -1,7 +1,7 @@
-import { Modal ,message} from 'antd';
+import { Modal ,Button,message} from 'antd';
 import { useState,useEffect } from 'react';
 import PreContent from "./PreContent";
-import {managerAuthPortDetails,editPortDetails} from "../utils/HttpUtils";
+import {managerAuthPortDetails,managerUpdatePortAuth} from "../utils/HttpUtils";
 
 function AuthMainPorts(props){
     const [confirmLoading, setConfirmLoading] = useState(false);
@@ -15,12 +15,12 @@ function AuthMainPorts(props){
         });
     },[props.editParams.id,props.editParams.classId,props.editParams.authFlag]);
 
-    const handleOk = () => {
+    const handleOk = (auth) => {
         setConfirmLoading(true);
-        editPortDetails({
-            detailsText:details.detailsText,
+        managerUpdatePortAuth({
+            authFlag:auth,
             classId:props.editParams.classId,
-            id:details.id
+            id:details.portId
         },(rsp)=>{
             if(rsp.status===1){
                 message.info("success");
@@ -41,11 +41,15 @@ function AuthMainPorts(props){
                 title="审核贴子内容"
                 width={710}
                 visible={props.visible}
-                onOk={handleOk}
-                confirmLoading={confirmLoading}
                 onCancel={handleCancel}
-                cancelText={"不通过"}
-                okText={"通过"}>
+                footer={[
+                    <Button key="nosuccess" type="primary" onClick={()=>handleOk(2)}  loading={confirmLoading}>
+                        不通过
+                    </Button>,
+                    <Button key="success" danger onClick={()=>handleOk(1)}  loading={confirmLoading}>
+                        通过
+                    </Button>
+                ]}>
                 <PreContent portsInfoDetails={details} />
             </Modal>
         </div>
