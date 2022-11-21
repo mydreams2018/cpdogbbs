@@ -1,12 +1,14 @@
 import { HomeOutlined, SettingOutlined ,MessageOutlined} from '@ant-design/icons';
 import { Menu } from 'antd';
-import { useState } from 'react';
+import { useState ,useContext} from 'react';
 import UserHomepage from "../components/UserHomepage";
 import SendPorts from "../components/SendPorts";
 import UserDetailsEdit from "../components/UserDetailsEdit";
 import MySendPorts from "../components/MySendPorts";
 import MyCollection from "../components/MyCollection";
 import MyReplyPorts from "../components/MyReplyPorts";
+import ManagerPorts from "../components/ManagerPorts";
+import MainContext from "../MainContext";
 import './UserView.css'
 
 function getItem(label, key, icon, children, type) {
@@ -26,15 +28,16 @@ const items = [
     getItem('贴子', 'comments', <MessageOutlined />, [
         getItem('我的发贴', 'comments-1'),
         getItem('我的回贴', 'comments-2'),
-        getItem('我的关注', 'comments-3'),
+        getItem('我的关注', 'comments-3')
     ]),
     getItem('设置', 'edit', <SettingOutlined />, [
         getItem('个人信息', 'edit-1')
-    ]),
+    ])
 ];
 const rootSubmenuKeys = ['home', 'comments', 'edit'];
 
 function UserView(){
+    const usercon = useContext(MainContext);
     const [openKeys, setOpenKeys] = useState(['home']);
     const [openKeysItem, setOpenKeysItem] = useState( <UserHomepage />);
     const onOpenChange = (keys) => {
@@ -66,11 +69,21 @@ function UserView(){
             case 'comments-3':
                 setOpenKeysItem(<MyCollection />);
                 break;
+            case 'port-1':
+                setOpenKeysItem(<ManagerPorts />);
+                break;
             default:
 
         }
 
     };
+    if(usercon && usercon.isManager === 1 && rootSubmenuKeys.length === 3){
+        items.push(getItem('管理', 'manager', <SettingOutlined />, [
+            getItem('主贴管理', 'port-1'),
+            getItem('回贴管理', 'reply-1')
+        ]));
+        rootSubmenuKeys.push("manager");
+    }
     return (
         <div className={"user-home"}>
             <div className={"user-left"}>
