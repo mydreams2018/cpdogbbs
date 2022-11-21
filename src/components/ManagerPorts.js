@@ -3,7 +3,7 @@ import {useState ,useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 import AuthMainPorts from "./AuthMainPorts";
 import './ManagerPorts.css'
-import {managerAuthPort,deleteMyPorts} from "../utils/HttpUtils";
+import {managerAuthPort} from "../utils/HttpUtils";
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 
@@ -16,8 +16,6 @@ const searchDatas = {
 }
 function ManagerPorts(props) {
     const navigate = useNavigate();
-    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-    const [loading, setLoading] = useState(false);
     const [data,setData] = useState([]);
     const [editPorts,setEditPorts] = useState(false);
     const [editParams,setEditParams] = useState({});
@@ -86,24 +84,6 @@ function ManagerPorts(props) {
                 break;
         }
     }
-    const start = () => {
-        setLoading(true);
-        deleteMyPorts({
-            ids:selectedRowKeys.join(","),
-        },(rsp)=>{
-            if(rsp.status===1){
-                setSelectedRowKeys([]);
-                let ArrayData = [];
-                data.forEach(item=>{
-                    if(!selectedRowKeys.includes(item.id+'-'+changeClassId(item.classId))){
-                        ArrayData.push(item);
-                    }
-                });
-                setData(ArrayData);
-            }
-            setLoading(false);
-        });
-    };
     const dataChanges = (data,dataString) => {
         searchDatas.beginTime=dataString[0];
         searchDatas.endTime=dataString[1];
@@ -125,15 +105,6 @@ function ManagerPorts(props) {
             console.log(rsp);
         });
     }
-
-    const onSelectChange = (newSelectedRowKeys) => {
-        setSelectedRowKeys(newSelectedRowKeys);
-    };
-    const rowSelection = {
-        selectedRowKeys,
-        onChange: onSelectChange,
-    };
-    const hasSelected = selectedRowKeys.length > 0;
 
     const editClick = (text) => {
         setEditParams(text);
@@ -158,21 +129,8 @@ function ManagerPorts(props) {
                 <Button type="primary" onClick={searchChangeData}>查询</Button>
             </div>
 
-            <div>
-                <div
-                    style={{
-                        marginBottom: 16,
-                    }}>
-                    <Button type="primary" onClick={start} disabled={!hasSelected} loading={loading}>
-                        不通过
-                    </Button>
-                    <span
-                        style={{marginLeft: 8,}}>
-                        {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
-                    </span>
-                </div>
-                <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
-            </div>
+            <Table columns={columns} dataSource={data} />
+
             {editPorts && <AuthMainPorts visible={editPorts} setVisible={setEditPorts} editParams={editParams} />}
         </div>
     );
