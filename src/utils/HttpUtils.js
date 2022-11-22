@@ -515,9 +515,40 @@ function managerUpdatePortAuth(obj,callback){
         callback(error);
     });
 }
-
+function managerAuthPortsReply(obj,callback){
+    axios({
+        method: 'post',
+        url: '/api/manager/getAllPortsReply',
+        data: obj,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        responseType: 'json'
+    }).then(function (response) {
+        callback(response.data);
+    }).catch(function (error) {
+        callback(error);
+    });
+}
+function managerUpdateReplyPort(obj,callback){
+    axios({
+        method: 'post',
+        url: '/api/manager/updateReplyPortAuth',
+        data: obj,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        responseType: 'json'
+    }).then(function (response) {
+        callback(response.data);
+    }).catch(function (error) {
+        console.log(error);
+        callback(error);
+    });
+}
 export {getApiImg,getRigister,userLogin,rePassWord,getUserInfo,sendPorts,signByPrimaryKey, signByOn,queryReplyWeek
     ,queryHomeReport,queryUserByAlias ,queryPortDetails ,queryDetailsTextAnswer,sendReplyAnswer,portsUploadImg
     ,userIsCollect ,sendCollect,acceptReply ,updateUserDes,queryMyPorts,deleteMyPorts,likePorts,editPortDetails,
     queryPortCollections,deletePortCollections,queryMyReplyPorts ,deleteMyReplyPorts,updateUserPassword,
-    collaborationCompanyQuery,managerAuthPort,managerAuthPortDetails,managerUpdatePortAuth}
+    collaborationCompanyQuery,managerAuthPort,managerAuthPortDetails,managerUpdatePortAuth,managerAuthPortsReply
+,managerUpdateReplyPort}

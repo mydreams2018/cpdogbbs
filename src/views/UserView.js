@@ -8,6 +8,7 @@ import MySendPorts from "../components/MySendPorts";
 import MyCollection from "../components/MyCollection";
 import MyReplyPorts from "../components/MyReplyPorts";
 import ManagerPorts from "../components/ManagerPorts";
+import ManagerReplyPorts from "../components/ManagerReplyPorts";
 import MainContext from "../MainContext";
 import './UserView.css'
 
@@ -71,6 +72,9 @@ function UserView(){
                 break;
             case 'port-1':
                 setOpenKeysItem(<ManagerPorts />);
+                break;
+            case 'reply-1':
+                setOpenKeysItem(<ManagerReplyPorts />);
                 break;
             default:
 
