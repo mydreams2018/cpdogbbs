@@ -1,6 +1,23 @@
 import axios from "axios";
 import cookies from "./Cookies";
 axios.defaults.headers.common['jwtToken'] = cookies.getItem("jwtToken") || '';
+axios.interceptors.response.use(function (response) {
+    //2xx范围内的状态码都会触发该函数
+    return response;
+}, function (error) {
+    //超出2xx范围的状态码都会触发该函数
+    if(error.response.data && "用户已失效" === error.response.data.msg){
+        userLogout({},(rsp)=>{
+            if(rsp.status===1){
+                cookies.removeItem("jwtToken","/");
+                cookies.removeItem("JSESSIONID","/");
+                cookies.removeItem("remember-me","/");
+                window.location.reload();
+            }
+        });
+    }
+    return Promise.reject(error);
+});
 
 function getApiImg(setCheckCode){
     axios({
@@ -45,6 +62,23 @@ function userLogin(obj,callback){
     }).then(function (response) {
         callback(response.data);
     }).catch(function (error) {
+        console.log(error);
+        callback(error);
+    });
+}
+
+function userLogout(obj,callback){
+    axios({
+        method: 'post',
+        url: '/api/clearAll',
+        data:obj,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        responseType: 'json'
+    }).then((response) => {
+        callback(response.data);
+    }).catch((error) => {
         console.log(error);
         callback(error);
     });
