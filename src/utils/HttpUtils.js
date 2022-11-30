@@ -585,4 +585,4 @@ export {getApiImg,getRigister,userLogin,rePassWord,getUserInfo,sendPorts,signByP
     ,userIsCollect ,sendCollect,acceptReply ,updateUserDes,queryMyPorts,deleteMyPorts,likePorts,editPortDetails,
     queryPortCollections,deletePortCollections,queryMyReplyPorts ,deleteMyReplyPorts,updateUserPassword,
     collaborationCompanyQuery,managerAuthPort,managerAuthPortDetails,managerUpdatePortAuth,managerAuthPortsReply
-,managerUpdateReplyPort}
+,managerUpdateReplyPort,userLogout}
