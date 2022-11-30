@@ -53,7 +53,7 @@ function BaseDetails(props){
     return (
         <div className={"base-details"}>
             <div className={"details-left"} id={"detailsLeft"}>
-                <h3>{portsInfo.name}</h3>
+                <h3 style={{fontWeight:'bold'}}>{portsInfo.name}</h3>
                 <DetailsTitle portsInfo={portsInfo} classId={props.classId} />
                 <div className={"user-list"} style={{backgroundColor:"#f0f2f5"}}>
                     <Avatar style={{marginLeft:10}} size={64} src={<Image src={portsInfo.userImg} style={{width: 64}}/>}/>
