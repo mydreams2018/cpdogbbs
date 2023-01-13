@@ -21,7 +21,7 @@ const NoFound =  React.lazy(()=> import("./views/NoFound"));
 const {Header, Content, Footer } = Layout;
 const IconFont = createFromIconfontCN({
     scriptUrl: [
-        '//at.alicdn.com/t/font_1788044_0dwu4guekcwr.js', // icon-javascript, icon-java, icon-shoppingcart (overrided)
+        '//at.alicdn.com/t/font_1788044_0dwu4guekcwr.js',
     ],
 });
 const menusTitle = [
