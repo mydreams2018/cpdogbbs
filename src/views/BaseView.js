@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import './BaseView.css'
 import MyCarousel from "../components/MyCarousel";
 import BaseSearch from "../components/BaseSearch";
@@ -6,9 +6,9 @@ import ListSimple from "../components/ListSimple";
 import HotList from "../components/HotList";
 import ReplyWeek from "../components/ReplyWeek";
 import HomeHook from "./HomeHook";
-const imgs = ["https://pic2.zhimg.com/v2-3b2133fc610d91bd17f71d3539040967_r.jpg?source=172ae18b", "/logo192.png","https://img.zcool.cn/community/01cb875613b3196ac7251df80a8907.jpg@1280w_1l_2o_100sh.jpg"];
+import {collaborationCompanyQuery} from "../utils/HttpUtils";
+
 function BaseView(props){
-    const [MyCarouselImgs] = useState(imgs);
     const [weekReplyUser] = HomeHook([]);
     const [listParam,setListParam] = useState(()=>{
         return {
@@ -21,7 +21,12 @@ function BaseView(props){
             partitionName:""
         }
     });
-
+    const [companyData,setCompanyData] = useState([]);
+    useEffect(()=>{
+        collaborationCompanyQuery({"onlyStatus":1,"isActive":true},(rsp)=>{
+            setCompanyData(rsp.datas);
+        });
+    },[]);
     const pageChange = (page) =>{
         setListParam(
             {
@@ -92,7 +97,7 @@ function BaseView(props){
     return (
         <div className={"base-view"}>
             <div className={"view-left"}>
-                <MyCarousel imgs={MyCarouselImgs}/>
+                <MyCarousel companyData={companyData} />
                 <BaseSearch handleChange={handleChange} onSearch={onSearch} onTabChange={onTabChange} basePath={props.basePath} ptHandleChange={ptHandleChange} />
                 <ListSimple listParam={listParam} pageChange={pageChange} showPaging={true} basePath={props.basePath} />
             </div>
