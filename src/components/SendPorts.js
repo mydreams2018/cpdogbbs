@@ -59,6 +59,8 @@ function SendPorts(){
         portData.name=portData.title;
         if(secondPt!=="全部"){
             portData.partitionName=secondPt;
+        }else{
+            portData.partitionName=null;
         }
         sendPorts(portData,(rsp)=>{
             if(rsp.status===1){
