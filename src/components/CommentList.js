@@ -140,6 +140,7 @@ const CommentList = (props) => {
         sendReplyMessage.replyParent = e.id;
         sendReplyMessage.replyParentText=`[@${e.id}]`;
         setReplyMsg(`[@${e.id}]`);
+        window.scrollTo( 0, document.documentElement.scrollHeight);
     }
 
     const loadMores = () => {
