@@ -19,7 +19,7 @@ function MyCarousel(props){
                     {
                         props.companyData.map((item)=>{
                           return <SwiperSlide key={item}>
-                                     <img title={item.describe} onClick={()=>window.open(item.linkUrl,item.describe)} src={item.companyImages} />
+                                     <img alt={item.describe} title={item.describe} onClick={()=>window.open(item.linkUrl,item.describe)} src={item.companyImages} />
                                 </SwiperSlide>
                         })
                     }
