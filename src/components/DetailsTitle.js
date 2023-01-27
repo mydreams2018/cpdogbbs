@@ -1,7 +1,7 @@
+import './DetailsTitle.css';
 import {CheckCircleTwoTone, LikeOutlined, MessageTwoTone, StarOutlined} from '@ant-design/icons';
 import {Tag,message} from "antd";
 import {useState,useEffect,useContext} from 'react';
-import './DetailsTitle.css'
 import MainContext from "../MainContext";
 import {userIsCollect,sendCollect,likePorts} from "../utils/HttpUtils";
 

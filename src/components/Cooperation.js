@@ -1,3 +1,4 @@
+import './Cooperation.css';
 import { List } from 'antd';
 import {useState,useEffect} from 'react';
 import {collaborationCompanyQuery} from "../utils/HttpUtils";
@@ -18,7 +19,7 @@ function Cooperation(){
             renderItem={(item) => (
                 <List.Item>
                     <div className={"cooperation-img"}>
-                        <img style={{maxHeight:50,marginRight:5}} alt={item.describe} src={item.companyImages}/>
+                        <img alt={item.describe} src={item.companyImages}/>
                         <a rel="noreferrer" href={item.linkUrl} target={"_blank"}>{item.describe}</a>
                     </div>
                 </List.Item>

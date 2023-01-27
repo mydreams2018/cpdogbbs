@@ -1,0 +1,8 @@
+.cooperation-img img {
+  max-height: 50px;
+  margin-right: 5px;
+  transition: all 1s;
+}
+.cooperation-img img:hover {
+  transform: scale(1.1);
+}
