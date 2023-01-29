@@ -18,7 +18,7 @@ function MyCarousel(props){
                     autoplay={true}>
                     {
                         props.companyData.map((item)=>{
-                          return <SwiperSlide key={item}>
+                          return <SwiperSlide key={item.id}>
                                      <img alt={item.describe} title={item.describe} onClick={()=>window.open(item.linkUrl,item.describe)} src={item.companyImages} />
                                 </SwiperSlide>
                         })
