@@ -25,7 +25,7 @@ const ExampleComment = ({children,replyData,addParentAnswer,hasPortPermission}) 
         <Comment
             actions={[<span key="comment-nested-reply-to"  onClick={()=>addParentAnswer(replyData)}>Reply to</span>,
                 hasPortPermission && <span onClick={accaptAnswer}>Accept it</span>,
-                replyData.isAdoption && <CheckCircleTwoTone twoToneColor="#52c41a" /> ]
+                replyData.isAdoption && <CheckCircleTwoTone twoToneColor="#52c41a" style={{fontSize:'30px'}}/> ]
             }
             author={<div className={"reply-title"}>
                 <UserDrawer alias={replyData.alias} />
