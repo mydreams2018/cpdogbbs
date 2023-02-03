@@ -29,7 +29,7 @@ function MyCollection(props) {
         {
             title: '标题',
             dataIndex: 'portTitle',
-            render: (text,obj) => <a onClick={()=>jumperPorts(text,obj)}>{text}</a>
+            render: (text,obj) => <a href={"javascript:void(0);"} onClick={()=>jumperPorts(text,obj)}>{text}</a>
         },
         {
             title: '日期',

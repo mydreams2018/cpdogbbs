@@ -71,7 +71,7 @@ function App() {
                     mode="horizontal"
                     selectedKeys={[locationKey]}
                     forceSubMenuRender={true}
-                    onClick={function({ item, key, keyPath, domEvent }){
+                    onClick={function({ key }){
                        switch (key) {
                            case "1":
                                navigate("/");
