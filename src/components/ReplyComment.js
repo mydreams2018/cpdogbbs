@@ -55,10 +55,10 @@ const Editor = ({ onChange, onSubmit, value,setReplyMsg }) => {
         </Form.Item>
         <Form.Item>
             <Button htmlType="submit" onClick={onSubmit} type="primary">
-                Add Comment
+                回贴
             </Button>
             <Button style={{marginLeft:10}} onClick={showGifImgs}>
-                Add Gif
+                添加gif
             </Button>
             <div id={"replyGifId"} className={"reply-gif scollbox"} ref={replyGifRef} style={{display:!replyGifShow?"none":"block"}}>
                 {imagesGif.map((element, index) => {
