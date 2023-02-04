@@ -15,6 +15,12 @@
 .base-details .details-left span[hv="tomoto"]:hover {
   color: tomato;
 }
+.base-details .details-left .user-list .ant-image {
+  height: 100%;
+}
+.base-details .details-left .user-list .ant-image img {
+  height: 100%;
+}
 .base-details .details-right {
   width: 35%;
   background-color: #f0f2f5;
