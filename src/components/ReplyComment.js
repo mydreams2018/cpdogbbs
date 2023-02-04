@@ -6,20 +6,27 @@ const { TextArea } = Input;
 const imagesGif = ["01.gif","02.gif","03.gif","04.gif","05.gif","06.gif","07.gif","08.gif","09.gif","10.gif"
                     ,"11.gif","12.gif","13.gif","14.gif","15.gif","16.gif","17.gif","18.gif","19.gif","20.gif"
                     ,"21.gif","22.gif","23.gif","24.gif","25.gif"];
-const Editor = ({ onChange, onSubmit, submitting, value }) => {
+const Editor = ({ onChange, onSubmit, value,setReplyMsg }) => {
     const replyGifRef = useRef(null);
+    const replyMsgRef = useRef(null);
     const [replyGifShow,setReplyGifShow] = useState(false);
     useEffect(()=>{
         function listen(event) {
             let dom = event.target;
             if(dom.parentElement.id === "replyGifId"){
-                console.log(dom.getAttribute('alt'));
+                replyMsgRef.current.focus();
+                let focusStart = replyMsgRef.current.resizableTextArea.textArea.selectionStart;
+                let newMsg = replyMsgRef.current.resizableTextArea.props.value.slice(0,focusStart)+
+                    `[img-${dom.getAttribute('alt')}]`
+                    +replyMsgRef.current.resizableTextArea.props.value.slice(focusStart);
+                setReplyMsg(newMsg);
             }
             setReplyGifShow(false);
             console.log("click");
         }
         document.getElementById("root").addEventListener("click", listen, false);
         return () => {
+            console.log("清理click事件");
             document.getElementById("root").removeEventListener("click",listen,false);
         };
     },[]);
@@ -44,10 +51,10 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => {
    return (
     <>
         <Form.Item>
-            <TextArea rows={4} onChange={onChange} value={value} />
+            <TextArea ref={replyMsgRef} rows={4} onChange={onChange} value={value} />
         </Form.Item>
         <Form.Item>
-            <Button htmlType="submit" loading={submitting} onClick={onSubmit} type="primary">
+            <Button htmlType="submit" onClick={onSubmit} type="primary">
                 Add Comment
             </Button>
             <Button style={{marginLeft:10}} onClick={showGifImgs}>
@@ -65,8 +72,6 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => {
 };
 
 const ReplyComment = (props) => {
-    const [submitting, setSubmitting] = useState(false);
-
 
     const handleChange = (e) => {
         props.setReplyMsg(e.target.value);
@@ -80,7 +85,8 @@ const ReplyComment = (props) => {
                     <Editor
                         onChange={handleChange}
                         onSubmit={props.onAddComment}
-                        submitting={submitting}//loading
+                        setReplyMsg={props.setReplyMsg}
+                        submitting={false}//loading
                         value={props.replyMsg}/>}
             />
         </div>
