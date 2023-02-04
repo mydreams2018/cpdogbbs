@@ -8,6 +8,13 @@ import MainContext from "../MainContext";
 import UserDrawer from "./UserDrawer";
 let classIdLink = '';
 let currentPage = 1;
+const imagesGif = ["[img-01.gif]","[img-02.gif]","[img-03.gif]","[img-04.gif]","[img-05.gif]","[img-06.gif]","[img-07.gif]","[img-08.gif]","[img-09.gif]","[img-10.gif]"
+    ,"[img-11.gif]","[img-12.gif]","[img-13.gif]","[img-14.gif]","[img-15.gif]","[img-16.gif]","[img-17.gif]","[img-18.gif]","[img-19.gif]","[img-20.gif]"
+    ,"[img-21.gif]","[img-22.gif]","[img-23.gif]","[img-24.gif]","[img-25.gif]"];
+const imagesGifPath = ["01.gif","02.gif","03.gif","04.gif","05.gif","06.gif","07.gif","08.gif","09.gif","10.gif"
+    ,"11.gif","12.gif","13.gif","14.gif","15.gif","16.gif","17.gif","18.gif","19.gif","20.gif"
+    ,"21.gif","22.gif","23.gif","24.gif","25.gif"];
+
 const ExampleComment = ({children,replyData,addParentAnswer,hasPortPermission}) => {
     const accaptAnswer = () => {
         acceptReply({
@@ -21,6 +28,16 @@ const ExampleComment = ({children,replyData,addParentAnswer,hasPortPermission}) 
             }
         });
     }
+
+    const replaceImgGifs = (data) => {
+        imagesGif.forEach((element,index) => {
+            if(data.includes(element)){
+                let imgLabel = `<img src='/imagegifs/${imagesGifPath[index]}' alt='${imagesGifPath[index]}'>`;
+                data = data.replaceAll(element, imgLabel);
+            }
+        });
+        return {__html: data};
+    }
     return (
         <Comment
             actions={[<span key="comment-nested-reply-to"  onClick={()=>addParentAnswer(replyData)}>Reply to</span>,
@@ -33,9 +50,9 @@ const ExampleComment = ({children,replyData,addParentAnswer,hasPortPermission}) 
             </div>}
             avatar={<Avatar src={<Image src={replyData.userImg} />} alt={replyData.alias} />}
             content={
-                <p>
-                    {replyData.detailsText}
-                </p>
+                <pre className={"reply-pre"} dangerouslySetInnerHTML={replaceImgGifs(replyData.detailsText)}>
+
+                </pre>
             }>
             {children}
         </Comment>)
