@@ -34,7 +34,7 @@ const HotList = (props) =>{
                                 <UserDrawer alias={item.alias} />
                                 <span style={{marginLeft:10}}>{item.createTime}</span>
                             </div>}
-                        description={<span onClick={()=>navigate(props.basePath,{state:{id:item.id}})}>{item.name}</span>}
+                        description={<span style={{display:"inline-block",width:'100%'}} onClick={()=>navigate(props.basePath,{state:{id:item.id}})}>{item.name}</span>}
                     />
                 </List.Item>
             )}

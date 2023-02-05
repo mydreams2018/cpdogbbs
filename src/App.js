@@ -153,7 +153,7 @@ function App() {
                 style={{
                     textAlign: 'center',
                 }}>
-                ©2022 襄阳灯塔it公司 <a rel="noreferrer" target={"_blank"} href={"https://beian.miit.gov.cn"}>鄂icp20155051222</a>
+                ©2023 编程技术 <a rel="noreferrer" target={"_blank"} href={"https://beian.miit.gov.cn"}>粤ICP备19055569号-1</a>
             </Footer>
         </Layout>
         <FixedUtils />
