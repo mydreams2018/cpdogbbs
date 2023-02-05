@@ -43,7 +43,7 @@ const ListSimple = (props) => {
                                         <UserDrawer alias={item.alias} />
                                         <span className={"title-time"}>{item.createTime}</span>
                                     </div>}
-                                description={<span onClick={()=> navigate(props.basePath,{state:{id:item.id}})}>{item.name}</span>}
+                                description={<span style={{ display: "inline-block", width: '100%'}} onClick={()=> navigate(props.basePath,{state:{id:item.id}})}>{item.name}</span>}
                             />
                         </Skeleton>
                     </List.Item>
