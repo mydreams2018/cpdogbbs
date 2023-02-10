@@ -1,6 +1,6 @@
 import {Avatar, Comment, Image, notification,Button} from 'antd';
 import { CheckCircleTwoTone } from '@ant-design/icons';
-import {useState,useEffect,useContext,useMemo} from 'react';
+import {useState,useEffect,useContext,useMemo,useRef} from 'react';
 import ReplyComment from "./ReplyComment";
 import './CommentList.css'
 import {queryDetailsTextAnswer,sendReplyAnswer,acceptReply} from "../utils/HttpUtils";
@@ -16,6 +16,37 @@ const imagesGifPath = ["01.gif","02.gif","03.gif","04.gif","05.gif","06.gif","07
     ,"21.gif","22.gif","23.gif","24.gif","25.gif"];
 
 const ExampleComment = ({children,replyData,addParentAnswer,hasPortPermission}) => {
+    const replyMsgCover = useRef(null);
+    useEffect(()=>{
+        function changeImgGif() {
+            const regex = /\[img-\d\d\.gif]/;
+            let msgContent = replyData.detailsText;
+            let indexOfFirst = 0;
+            while((indexOfFirst = msgContent.search(regex)) !== -1){
+                let gifStr = msgContent.substring(indexOfFirst,indexOfFirst+12);
+                for (let i = 0; i < imagesGif.length; i++) {
+                    if(imagesGif[i] === gifStr){
+                        replyMsgCover.current.appendChild(
+                            document.createTextNode(msgContent.substring(0,indexOfFirst)));
+                        let faceImg = document.createElement("img");
+                        faceImg.src=`/imagegifs/${imagesGifPath[i]}`;
+                        faceImg.title=`${imagesGifPath[i]}`;
+                        replyMsgCover.current.appendChild(faceImg);
+                        msgContent = msgContent.substring(indexOfFirst+12);
+                        break;
+                    } else if(i === imagesGif.length-1){
+                        replyMsgCover.current.appendChild(
+                            document.createTextNode(msgContent.substring(0,indexOfFirst+12)));
+                        msgContent = msgContent.substring(indexOfFirst+12);
+                    }
+                }
+            }
+            if(msgContent){
+                replyMsgCover.current.appendChild(document.createTextNode(msgContent));
+            }
+        }
+        changeImgGif();
+    },[]);
     const accaptAnswer = () => {
         acceptReply({
             id: replyData.id,
@@ -29,15 +60,6 @@ const ExampleComment = ({children,replyData,addParentAnswer,hasPortPermission}) 
         });
     }
 
-    const replaceImgGifs = (data) => {
-        imagesGif.forEach((element,index) => {
-            if(data.includes(element)){
-                let imgLabel = `<img src='/imagegifs/${imagesGifPath[index]}' alt='${imagesGifPath[index]}'>`;
-                data = data.replaceAll(element, imgLabel);
-            }
-        });
-        return {__html: data};
-    }
     return (
         <Comment
             actions={[<span key="comment-nested-reply-to"  onClick={()=>addParentAnswer(replyData)}>Reply to</span>,
@@ -50,7 +72,7 @@ const ExampleComment = ({children,replyData,addParentAnswer,hasPortPermission}) 
             </div>}
             avatar={<Avatar src={<Image src={replyData.userImg} />} alt={replyData.alias} />}
             content={
-                <pre className={"reply-pre"} dangerouslySetInnerHTML={replaceImgGifs(replyData.detailsText)}>
+                <pre className={"reply-pre"} ref={replyMsgCover}>
 
                 </pre>
             }>
