@@ -8,3 +8,14 @@
 .reply-week .ant-space-item {
   border: solid 2px gray;
 }
+.reply-week .ant-space-item .ant-image {
+  height: 100%;
+  width: 100%;
+}
+.reply-week .ant-space-item .ant-image .ant-image-img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
