@@ -29,7 +29,7 @@ const items = [
     getItem('贴子', 'comments', <MessageOutlined />, [
         getItem('我的发贴', 'comments-1'),
         getItem('我的回贴', 'comments-2'),
-        getItem('我的关注', 'comments-3')
+        getItem('我的收藏', 'comments-3')
     ]),
     getItem('设置', 'edit', <SettingOutlined />, [
         getItem('个人信息', 'edit-1')
