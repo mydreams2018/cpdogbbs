@@ -13,3 +13,5 @@ flushSync(callback)
 npm start === npm run start
 npm test  === npm run test
 别的需要写全 npm run 名称
+
+npx 命令名 [会在当前node_modules/bin/下查找命令名]

@@ -2,7 +2,7 @@ import { Map,ScaleControl, ToolBarControl, ControlBarControl, Geolocation ,Marke
 /*  eslint-disable  */
 function Address(){
     return(
-        <div className={"address-map"} style={{width:'100%',height: '480px',border:"solid 1px black"}}>
+        <div className={"address-map"} style={{width:'100%',height: '70vh',border:"solid 1px black",boxSizing:"border-box"}}>
             <Map>
                 <Marker visiable={true} title="老家" position={new AMap.LngLat(112.277112,31.785404)} />
                 <ScaleControl offset={[16, 30]} position="LB" />
