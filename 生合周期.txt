@@ -8,3 +8,8 @@ Routes 路由会触发组件的=>  销毁、创建
  useEffect  useLayoutEffect
  强制 React 同步刷新提供的回调函数中的任何更新。这确保了 DOM 会被立即 更新。
 flushSync(callback)
+
+
+npm start === npm run start
+npm test  === npm run test
+别的需要写全 npm run 名称
