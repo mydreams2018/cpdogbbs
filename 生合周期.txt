@@ -15,3 +15,8 @@ npm test  === npm run test
 别的需要写全 npm run 名称
 
 npx 命令名 [会在当前node_modules/bin/下查找命令名]
+
+eslint 可以在你的文件中使用以下格式的块注释来临时禁止规则出现警告：
+如果在整个文件范围内禁止规则出现警告，将 /* eslint-disable */ 块注释放在文件顶部：
+
+你也可以对指定的规则启用或禁用警告: /* eslint-disable no-alert, no-console */
