@@ -68,7 +68,7 @@ npm test： ， ， （缺少注释） .env.test.local .env.test .env .env.local
 
         useEffect(() => {
           const id = setInterval(() => {
-            setCount(c => c + 1); // ✅ 在这不依赖于外部的 `count` 变量
+            setCount(c => c + 1); // ✅ react 会传入最新的`count`
           }, 1000);
           return () => clearInterval(id);
         }, []); // ✅ 我们的 effect 不使用组件作用域中的任何变量
