@@ -1,3 +1,5 @@
+组件内使用setState,如果还处于渲染阶段,不会检查[是否相等]直接刷新,所以在外直接使用setState会死循环.
+
 function 外的数据 只在文件加载时执行一次
 function 组件内 有创建 销毁 刷新 过程
 
@@ -5,7 +7,8 @@ Routes 路由会触发组件的=>  销毁、创建
 
  useCallback(fn, deps) 相当于 useMemo(() => fn, deps)
 
- useEffect  useLayoutEffect
+ useEffect  --> 清理函数 会在下一次调用此useEffect --> 前执行清理
+ useLayoutEffect
  强制 React 同步刷新提供的回调函数中的任何更新。这确保了 DOM 会被立即 更新。
 flushSync(callback)
 
@@ -27,3 +30,7 @@ return ReactDOM.createPortal(
       组件,
       document.getElementById('app-root')
     );
+
+       <Descriptions.Item label="Status" span={3}>
+                    <Badge status="processing" text="Running"/>
+                </Descriptions.Item>

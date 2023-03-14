@@ -1,4 +1,4 @@
-import {Badge, Descriptions, Drawer, Image} from 'antd';
+import { Descriptions, Drawer, Image} from 'antd';
 import {useState} from 'react';
 import {queryUserByAlias} from "../utils/HttpUtils";
 
@@ -26,8 +26,8 @@ function UserDrawer(props) {
                     <Descriptions.Item label="状态">{userInfo.state ? '正常' : '异常'}</Descriptions.Item>
                     <Descriptions.Item label="注册时间">{userInfo.registerTime}</Descriptions.Item>
                     <Descriptions.Item label="邮箱" span={2}>{userInfo.email}</Descriptions.Item>
-                    <Descriptions.Item label="Status" span={3}>
-                        <Badge status="processing" text="Running"/>
+                    <Descriptions.Item label="认证信息" span={3} style={{color:"red"}}>
+                        {userInfo.authenticate}
                     </Descriptions.Item>
                     <Descriptions.Item label="总积分数">{userInfo.accumulatePoints}</Descriptions.Item>
                     <Descriptions.Item label="头像" span={2}>
