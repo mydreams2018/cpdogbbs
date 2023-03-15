@@ -54,7 +54,7 @@ function MySendPorts(props) {
         {
             title: '标题',
             dataIndex: 'name',
-            render: (text,obj) => <a onClick={()=>jumperPorts(text,obj)}>{text}</a>
+            render: (text,obj) => <a href="javascript:void(0);" onClick={()=>jumperPorts(text,obj)}>{text}</a>
         },
         {
             title: '回复',
@@ -171,7 +171,9 @@ function MySendPorts(props) {
                         {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
                     </span>
                 </div>
-                <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
+                <Table rowSelection={rowSelection} columns={columns} dataSource={data} pagination={{
+                    position: ["bottomCenter"]
+                }}/>
             </div>
             {editPorts && <EditMainPorts visible={editPorts} setVisible={setEditPorts} editParams={editParams} />}
         </div>

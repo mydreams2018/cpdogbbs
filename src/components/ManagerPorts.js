@@ -67,7 +67,7 @@ function ManagerPorts(props) {
             title: 'Action',
             dataIndex: '',
             key: 'x',
-            render: (text) => <a onClick={()=>editClick(text )} >edit</a>,
+            render: (text) => <a href="javascript:void(0);" onClick={()=>editClick(text )} >edit</a>,
         }
     ];
 
@@ -116,7 +116,9 @@ function ManagerPorts(props) {
                 <Button type="primary" onClick={searchChangeData}>查询</Button>
             </div>
 
-            <Table columns={columns} dataSource={data} />
+            <Table columns={columns} dataSource={data} pagination={{
+                position: ["bottomCenter"]
+            }}/>
 
             {editPorts && <AuthMainPorts visible={editPorts} setVisible={setEditPorts} editParams={editParams} />}
         </div>

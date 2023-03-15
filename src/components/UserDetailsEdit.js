@@ -1,10 +1,9 @@
 import { Tabs,Upload,message,Input,Button } from 'antd';
-import { LoadingOutlined, PlusOutlined,LogoutOutlined } from '@ant-design/icons';
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { useState ,useContext } from 'react';
 import MainContext from "../MainContext";
-import {updateUserDes,updateUserPassword,userLogout} from "../utils/HttpUtils";
+import {updateUserDes,updateUserPassword} from "../utils/HttpUtils";
 import './UserDetailsEdit.css'
-import cookies from "../utils/Cookies";
 const { TextArea } = Input;
 
 const { TabPane } = Tabs;
@@ -103,16 +102,7 @@ function UserDetailsEdit(props) {
         }
         setLoading(false);
     };
-    const logout = () => {
-        userLogout({},(rsp)=>{
-            if(rsp.status===1){
-                cookies.removeItem("jwtToken","/");
-                cookies.removeItem("JSESSIONID","/");
-                cookies.removeItem("remember-me","/");
-                window.location.reload();
-            }
-        });
-    };
+
     const uploadButton = (
         <div>
             {loading ? <LoadingOutlined /> : <PlusOutlined />}
@@ -171,11 +161,6 @@ function UserDetailsEdit(props) {
                             提并修改
                         </Button>
                     </div>
-                </TabPane>
-                <TabPane tab="退出登录" key="4">
-                    <Button type="primary" danger icon={<LogoutOutlined />} onClick={logout}>
-                        logout
-                    </Button>
                 </TabPane>
             </Tabs>
         </div>

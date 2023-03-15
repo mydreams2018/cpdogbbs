@@ -163,7 +163,9 @@ function MyReplyPorts(props) {
                         {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
                     </span>
                 </div>
-                <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
+                <Table rowSelection={rowSelection} columns={columns} dataSource={data} pagination={{
+                    position: ["bottomCenter"]
+                }}/>
             </div>
             {editReply && <EditReplyPorts visible={editReply} setVisible={setEditReply} editDatas={editDatas} />}
         </div>
