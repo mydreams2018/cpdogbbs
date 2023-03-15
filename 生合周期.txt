@@ -5,12 +5,41 @@ function 组件内 有创建 销毁 刷新 过程
 
 Routes 路由会触发组件的=>  销毁、创建
 
- useCallback(fn, deps) 相当于 useMemo(() => fn, deps)
+通过useCallback [deps] 创建的函数每次组件刷新,只有[deps]触发了,才会返回新对象,在有些情况下传递给子组件时会有用.
+                                         [] 只在初始时执行一次,
+                                         注意创建函数时的闭包环境,变量的copy
+ useCallback(fn, deps) //缓存函数
+  相当于 useMemo(() => fn, deps) 缓存结果
 
  useEffect  --> 清理函数 会在下一次调用此useEffect --> 前执行清理
  useLayoutEffect
  强制 React 同步刷新提供的回调函数中的任何更新。这确保了 DOM 会被立即 更新。
 flushSync(callback)
+
+以下是用 reducer 重写 useState 一节的计数器示例：
+const initialState = {count: 0};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return {count: state.count + 1};
+    case 'decrement':
+      return {count: state.count - 1};
+    default:
+      throw new Error();
+  }
+}
+----> 上边固定的方法可以在组件外边
+function Counter() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  return (
+    <>
+      Count: {state.count}
+      <button onClick={() => dispatch({type: 'decrement'})}>-</button>
+      <button onClick={() => dispatch({type: 'increment'})}>+</button>
+    </>
+  );
+}
 
 
 npm start === npm run start
@@ -34,3 +63,31 @@ return ReactDOM.createPortal(
        <Descriptions.Item label="Status" span={3}>
                     <Badge status="processing" text="Running"/>
                 </Descriptions.Item>
+
+   上级刷新时,是否刷新子组件,
+   React.memo();缓存子组件只有当此组件props发生变化时才重新渲染
+
+--------------------------------------------------------------------------------->
+React.forwardRef 接受渲染函数作为参数。React 将使用 props 和 ref 作为参数来调用此函数
+
+const FancyButton = React.forwardRef((props, ref) => (
+  <button ref={ref} className="FancyButton">
+    {props.children}
+  </button>
+));
+
+// 获得子级组件内指定的元素
+const ref = React.createRef();
+<FancyButton ref={ref}>Click me!</FancyButton>;
+
+useImperativeHandle 可以让你在使用 ref 时自定义暴露给父组件的实例值。
+在大多数情况下，应当避免使用 ref 这样的命令式代码。useImperativeHandle 应当与 forwardRef 一起使用：
+function FancyInput(props, ref) {
+  const inputRef = useRef();
+  useImperativeHandle(ref, () => ({
+    name: "kungreat"
+  }));
+  return <input  ... />;
+}
+const FancyButton = React.forwardRef(FancyInput);
+----------------------------------------------------------------------------------->
