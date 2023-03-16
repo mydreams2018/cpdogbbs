@@ -109,7 +109,7 @@ function UserView(){
                     onSelect={onSelectChange}
                     style={{
                         width: 220,
-                        minHeight:380
+                        minHeight:"70vh"
                     }}
                     items={items}
                 />
