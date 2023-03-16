@@ -66,7 +66,7 @@ function ManagerPorts(props) {
         {
             title: 'Action',
             dataIndex: '',
-            key: 'x',
+            key: 'id',
             render: (text) => <a href="javascript:void(0);" onClick={()=>editClick(text )} >edit</a>,
         }
     ];

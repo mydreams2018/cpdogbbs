@@ -1,5 +1,5 @@
 import {Button, Table,DatePicker,Input,Select } from 'antd';
-import {useState ,useEffect} from 'react';
+import React,{useState ,useEffect} from 'react';
 import AuthReplyPorts from "./AuthReplyPorts";
 import {managerAuthPortsReply} from "../utils/HttpUtils";
 const { RangePicker } = DatePicker;
@@ -61,7 +61,7 @@ function ManagerReplyPorts(props) {
         {
             title: 'Action',
             dataIndex: '',
-            key: 'x',
+            key: 'id',
             render: (text) => <a href="javascript:void(0);" onClick={()=>editClick(text )} >edit</a>,
         }
     ];
@@ -120,4 +120,4 @@ function ManagerReplyPorts(props) {
     );
 }
 
-export default ManagerReplyPorts
+export default React.memo(ManagerReplyPorts);

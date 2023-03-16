@@ -71,7 +71,7 @@ function MySendPorts(props) {
         {
             title: 'Action',
             dataIndex: '',
-            key: 'x',
+            key: 'id',
             render: (text) => <a onClick={()=>editClick(text )} >edit</a>,
         }
     ];

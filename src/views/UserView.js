@@ -1,4 +1,4 @@
-import { HomeOutlined, SettingOutlined ,MessageOutlined} from '@ant-design/icons';
+import { HomeOutlined, SettingOutlined ,MessageOutlined,UserAddOutlined} from '@ant-design/icons';
 import { Menu } from 'antd';
 import { useState ,useContext} from 'react';
 import UserHomepage from "../components/UserHomepage";
@@ -9,8 +9,9 @@ import MyCollection from "../components/MyCollection";
 import MyReplyPorts from "../components/MyReplyPorts";
 import ManagerPorts from "../components/ManagerPorts";
 import ManagerReplyPorts from "../components/ManagerReplyPorts";
+import RootManager from "../components/RootManager";
 import MainContext from "../MainContext";
-import './UserView.css'
+import './UserView.css';
 
 function getItem(label, key, icon, children, type) {
     return {
@@ -36,6 +37,7 @@ const items = [
     ])
 ];
 const rootSubmenuKeys = ['home', 'comments', 'edit'];
+const rootAlias = ["deathwater","kungreat"];
 
 function UserView(){
     const usercon = useContext(MainContext);
@@ -50,7 +52,6 @@ function UserView(){
         }
     };
     const onSelectChange = (keys) => {
-        //异步的
         switch (keys.key) {
             case 'home-1':
                 setOpenKeysItem( <UserHomepage />);
@@ -76,6 +77,9 @@ function UserView(){
             case 'reply-1':
                 setOpenKeysItem(<ManagerReplyPorts />);
                 break;
+            case 'root-user':
+                setOpenKeysItem(<RootManager />);
+                break;
             default:
 
         }
@@ -87,6 +91,12 @@ function UserView(){
             getItem('回贴管理', 'reply-1')
         ]));
         rootSubmenuKeys.push("manager");
+        if (rootAlias.includes(usercon.alias)){
+            items.push(getItem('用户管理', 'rootManager', <UserAddOutlined />, [
+                getItem('设置管理员', 'root-user')
+            ]));
+            rootSubmenuKeys.push("rootManager");
+        }
     }
     return (
         <div className={"user-home"}>
