@@ -146,7 +146,7 @@ function MySendPorts(props) {
                 <RangePicker onChange={dataChanges} bordered={false} size={"large"}/>
                 <Input placeholder="贴子标题" onChange={inputChanges} style={{maxWidth:256,marginRight:10}}/>
                 <Select
-                    defaultValue="已审核"
+                    defaultValue="1"
                     style={{
                         width: 120
                     }}

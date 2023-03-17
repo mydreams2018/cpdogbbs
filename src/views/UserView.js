@@ -10,6 +10,7 @@ import MyReplyPorts from "../components/MyReplyPorts";
 import ManagerPorts from "../components/ManagerPorts";
 import ManagerReplyPorts from "../components/ManagerReplyPorts";
 import RootManager from "../components/RootManager";
+import RootDeleteUser from "../components/RootDeleteUser";
 import MainContext from "../MainContext";
 import './UserView.css';
 
@@ -80,6 +81,9 @@ function UserView(){
             case 'root-user':
                 setOpenKeysItem(<RootManager />);
                 break;
+            case 'delete-user':
+                setOpenKeysItem(<RootDeleteUser />);
+                break;
             default:
 
         }
@@ -93,7 +97,8 @@ function UserView(){
         rootSubmenuKeys.push("manager");
         if (rootAlias.includes(usercon.alias)){
             items.push(getItem('用户管理', 'rootManager', <UserAddOutlined />, [
-                getItem('设置管理员', 'root-user')
+                getItem('设置管理员', 'root-user'),
+                getItem('删除用户', 'delete-user')
             ]));
             rootSubmenuKeys.push("rootManager");
         }

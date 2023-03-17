@@ -24,7 +24,7 @@ function BaseSearch(props){
             <Select defaultValue="全部" style={{ width: 130 }} onChange={props.handleChange}>
                 {children}
             </Select>
-            <Select defaultValue={"全部"} style={{ width: 130 }} onChange={props.ptHandleChange} >
+            <Select defaultValue="全部" style={{ width: 130 }} onChange={props.ptHandleChange} >
                 {ptName.map((city) => (
                     <Option key={city}>{city}</Option>
                 ))}

@@ -97,7 +97,7 @@ function ManagerReplyPorts(props) {
                 <RangePicker onChange={dataChanges} bordered={false} size={"large"}/>
                 <Input placeholder="回贴内容" onChange={inputChanges} style={{maxWidth:256,marginRight:10}}/>
                 <Select
-                    defaultValue="审核中"
+                    defaultValue="0"
                     style={{
                         width: 120
                     }}

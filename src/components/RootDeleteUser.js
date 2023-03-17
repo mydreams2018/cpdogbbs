@@ -1,20 +1,18 @@
 import {Button, Table,Input,Select,Modal,message } from 'antd';
 import React, {useState ,useEffect} from 'react';
-import {managerGetUser,updateUserIsManager} from "../utils/HttpUtils";
+import {managerGetUser,deleteUser} from "../utils/HttpUtils";
 const { Option } = Select;
 
 const searchDatas = {
     alias:'',
     pageSize:100,
-    state:1,
-    isManager:0
+    state:1
 }
-const updateUser =  {
-    id:"",
-    "isManager":0
+const updateUserState =  {
+    id:""
 }
 
-function RootManager(props) {
+function RootDeleteUser(props) {
     const [data,setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
@@ -30,8 +28,8 @@ function RootManager(props) {
         });
         return () => {
             searchDatas.alias='';
-            searchDatas.isManager=0;
-            updateUser.id = "";
+            searchDatas.state=1;
+            updateUserState.id = "";
         };
     }, []);
     const columns = [
@@ -52,9 +50,9 @@ function RootManager(props) {
             dataIndex: 'authenticate',
         },
         {
-            title: '管理员',
-            dataIndex: 'isManager',
-            render: (isManager) =>isManager?"是":"否"
+            title: '状态',
+            dataIndex: 'state',
+            render: (state) =>state?"正常":"禁用"
         },
         {
             title: 'Action',
@@ -64,10 +62,10 @@ function RootManager(props) {
         }
     ];
     const handleOk = (managerState) => {
-        if (updateUser.id){
+        if (updateUserState.id){
             setLoading(true);
-            updateUser.isManager = managerState;
-            updateUserIsManager(updateUser,(rsp) => {
+            updateUserState.curStatus = managerState;
+            deleteUser(updateUserState,(rsp) => {
                 setLoading(false);
                 setOpen(false);
                 message.info(rsp.msg);
@@ -75,11 +73,11 @@ function RootManager(props) {
         }
     };
     const handleCancel = () => {
-        updateUser.id = "";
+        updateUserState.id = "";
         setOpen(false);
     };
     const seleteChanges = (dt) => {
-        searchDatas.isManager=dt;
+        searchDatas.state = dt;
     }
     const inputChanges = (data) => {
         searchDatas.alias=data.target.value;
@@ -96,41 +94,42 @@ function RootManager(props) {
     }
 
     const editClick = (text) => {
-        updateUser.id = text.id;
+        updateUserState.id = text.id;
         setOpen(true);
     }
     return (
         <>
             <Modal
                 visible={open}
-                title="管理员"
+                title="用户管理"
                 onCancel={handleCancel}
                 confirmLoading={loading}
                 footer={[
                     <Button type="primary" key="add" onClick={()=>handleOk(1)}>
-                        添加管理员
+                        激活用户
                     </Button>,
                     <Button
                         key="remove"
                         type="primary"
                         onClick={()=>handleOk(0)}>
-                        取消管理员
+                        禁用用户
                     </Button>
                 ]}>
-                <p>把当前用户设置为管理员,或者取消当前用户的管理员</p>
+                <p>激活用户:可以让用户正常使用,贴子全部初始状态<br/>
+                    禁用用户:用户不能正常使用,并且把发的贴子全部禁用掉</p>
             </Modal>
 
             <div className={"manager-user"}>
             <div className={"search"}>
                 <Input placeholder="用户别名" onChange={inputChanges} style={{maxWidth:256,marginRight:10}}/>
                 <Select
-                    defaultValue="0"
+                    defaultValue="1"
                     style={{
                         width: 120
                     }}
                     onChange={seleteChanges}>
-                    <Option value="0">否</Option>
                     <Option value="1">是</Option>
+                    <Option value="0">否</Option>
                 </Select>
                 <Button type="primary" onClick={searchChangeData}>查询</Button>
             </div>
@@ -145,4 +144,4 @@ function RootManager(props) {
     );
 }
 
-export default React.memo(RootManager);
+export default React.memo(RootDeleteUser);

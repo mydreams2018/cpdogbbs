@@ -104,7 +104,7 @@ function ManagerPorts(props) {
                 <RangePicker onChange={dataChanges} bordered={false} size={"large"}/>
                 <Input placeholder="贴子标题" onChange={inputChanges} style={{maxWidth:256,marginRight:10}}/>
                 <Select
-                    defaultValue="审核中"
+                    defaultValue="0"
                     style={{
                         width: 120
                     }}
