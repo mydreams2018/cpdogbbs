@@ -11,6 +11,7 @@ import ManagerPorts from "../components/ManagerPorts";
 import ManagerReplyPorts from "../components/ManagerReplyPorts";
 import RootManager from "../components/RootManager";
 import RootDeleteUser from "../components/RootDeleteUser";
+import ManagerPortTop from "../components/ManagerPortTop";
 import MainContext from "../MainContext";
 import './UserView.css';
 
@@ -84,6 +85,9 @@ function UserView(){
             case 'delete-user':
                 setOpenKeysItem(<RootDeleteUser />);
                 break;
+            case 'recommend-port':
+                setOpenKeysItem(<ManagerPortTop />);
+                break;
             default:
 
         }
@@ -98,7 +102,8 @@ function UserView(){
         if (rootAlias.includes(usercon.alias)){
             items.push(getItem('用户管理', 'rootManager', <UserAddOutlined />, [
                 getItem('设置管理员', 'root-user'),
-                getItem('删除用户', 'delete-user')
+                getItem('删除用户', 'delete-user'),
+                getItem('推荐贴子', 'recommend-port')
             ]));
             rootSubmenuKeys.push("rootManager");
         }
