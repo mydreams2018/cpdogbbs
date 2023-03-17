@@ -615,7 +615,7 @@ function updateUserIsManager(obj,callback){
 function deleteUser(obj,callback){
     axios({
         method: 'post',
-        url: '/api/manager/deleteUser',
+        url: '/api/manager/updateUserState',
         data:obj,
         headers: {
             'Content-Type': 'multipart/form-data'
