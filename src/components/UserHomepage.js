@@ -24,7 +24,7 @@ function UserHomepage(props) {
             <Descriptions.Item label="性别">纯爷们</Descriptions.Item>
             <Descriptions.Item label="状态">{usercon.state?'正常':'异常'}</Descriptions.Item>
             <Descriptions.Item label="注册时间" >{usercon.registerTime}</Descriptions.Item>
-            <Descriptions.Item label="邮箱" span={2}>{usercon.email}</Descriptions.Item>
+            <Descriptions.Item label="vip等级" span={2}>{usercon.vipLevel}</Descriptions.Item>
             <Descriptions.Item label="认证信息" span={3} style={{color:"red"}}>
                 {usercon.authenticate}
             </Descriptions.Item>

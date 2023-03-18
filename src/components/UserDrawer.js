@@ -25,7 +25,7 @@ function UserDrawer(props) {
                     <Descriptions.Item label="呢称" span={2}>{userInfo.alias}</Descriptions.Item>
                     <Descriptions.Item label="状态">{userInfo.state ? '正常' : '异常'}</Descriptions.Item>
                     <Descriptions.Item label="注册时间">{userInfo.registerTime}</Descriptions.Item>
-                    <Descriptions.Item label="邮箱" span={2}>{userInfo.email}</Descriptions.Item>
+                    <Descriptions.Item label="vip等级" span={2}>{userInfo.vipLevel}</Descriptions.Item>
                     <Descriptions.Item label="认证信息" span={3} style={{color:"red"}}>
                         {userInfo.authenticate}
                     </Descriptions.Item>
