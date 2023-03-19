@@ -644,10 +644,26 @@ function updatePortIsTop(obj,callback){
         callback(null);
     });
 }
+function collaborationInsert(obj,callback){
+    axios({
+        method: 'post',
+        url: '/api/manager/collaborationInsert',
+        data:obj,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        responseType: 'json'
+    }).then((response) => {
+        callback(response.data);
+    }).catch((error) => {
+        console.log(error);
+        callback(null);
+    });
+}
 
 export {getApiImg,getRigister,userLogin,rePassWord,getUserInfo,sendPorts,signByPrimaryKey, signByOn,queryReplyWeek
     ,queryHomeReport,queryUserByAlias ,queryPortDetails ,queryDetailsTextAnswer,sendReplyAnswer,portsUploadImg
     ,userIsCollect ,sendCollect,acceptReply ,updateUserDes,queryMyPorts,deleteMyPorts,likePorts,editPortDetails,
     queryPortCollections,deletePortCollections,queryMyReplyPorts ,deleteMyReplyPorts,updateUserPassword,
     collaborationCompanyQuery,managerAuthPort,managerAuthPortDetails,managerUpdatePortAuth,managerAuthPortsReply
-,managerUpdateReplyPort,userLogout,managerGetUser,updateUserIsManager,deleteUser,updatePortIsTop}
+,managerUpdateReplyPort,userLogout,managerGetUser,updateUserIsManager,deleteUser,updatePortIsTop,collaborationInsert}
