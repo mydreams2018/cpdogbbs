@@ -1,6 +1,6 @@
 .cooperation-img img {
-  max-height: 50px;
-  margin-right: 5px;
+  width: 80px;
+  margin-right: 10px;
   transition: all 1s;
 }
 .cooperation-img img:hover {
