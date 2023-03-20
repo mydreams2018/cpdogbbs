@@ -2,6 +2,7 @@ import {Layout, Menu,Spin} from 'antd';
 import React,{useState,useEffect,Suspense} from 'react';
 import {Routes,Route ,useNavigate,useLocation} from "react-router-dom";
 import {HomeOutlined,createFromIconfontCN ,LinkedinFilled,SettingOutlined} from '@ant-design/icons';
+import {APILoader} from "@uiw/react-amap";
 import Login from "./views/Login"
 import Home from "./views/Home";
 import Forget from "./views/Forget";
@@ -14,7 +15,7 @@ import JavaView from "./views/JavaView";
 import ReactView from "./views/ReactView";
 import BaseDetails from "./views/BaseDetails";
 import {getUserInfo} from "./utils/HttpUtils";
-import {APILoader} from "@uiw/react-amap";
+import NotificationAuth from "./views/NotificationAuth";
 import './App.css';
 import Context from "./MainContext";
 const NoFound =  React.lazy(()=> import("./views/NoFound"));
@@ -157,6 +158,7 @@ function App() {
             </Footer>
         </Layout>
         <FixedUtils />
+        <NotificationAuth />
     </div>
       </Context.Provider>
   );
