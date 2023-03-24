@@ -26,6 +26,8 @@ function ManagerPortTop(props) {
         });
         return () => {
             searchDatas.name='';
+            updatePortTop.id = "";
+            updatePortTop.classId="";
         };
     }, []);
     const columns = [

@@ -4,10 +4,10 @@ import MainContext from "../MainContext";
 import {selectAuthCount} from "../utils/HttpUtils";
 
 function NotificationAuth(){
-    const usercon = useContext(MainContext);
+    const userContext = useContext(MainContext);
     useEffect(()=>{
         let id = "";
-        if (usercon && usercon.isManager === 1){
+        if (userContext && userContext.isManager === 1){
             id = setInterval(()=>{
                 selectAuthCount({},(rsp)=>{
                     if (rsp.port > 0 || rsp.answerPort > 0){
@@ -27,7 +27,7 @@ function NotificationAuth(){
                 clearInterval(id);
             }
         };
-    },[usercon]);
+    },[userContext]);
     return <></>
 }
 

@@ -6,11 +6,11 @@ import MainContext from "../MainContext";
 import {userIsCollect,sendCollect,likePorts} from "../utils/HttpUtils";
 
 function DetailsTitle(props) {
-    const usercon = useContext(MainContext);
+    const userContext = useContext(MainContext);
     const [isCollect, setIsCollect] = useState(()=>({userAccount:""}));
-    const [isliked, setIsliked] = useState(()=>false);
+    const [isLiked, setIsLiked] = useState(()=>false);
     useEffect(()=>{
-        if(usercon){
+        if(userContext){
             userIsCollect({
                 "classId": props.classId,
                 "portId": props.portsInfo.id
@@ -22,15 +22,15 @@ function DetailsTitle(props) {
                 }
             });
         }
-    },[props.classId, props.portsInfo.id, usercon]);
+    },[props.classId, props.portsInfo.id, userContext]);
     useEffect(()=>{
-        if(usercon && props.portsInfo.details.likeAccount &&
-            props.portsInfo.details.likeAccount.includes(usercon.alias)){
-            setIsliked(true);
+        if(userContext && props.portsInfo.details.likeAccount &&
+            props.portsInfo.details.likeAccount.includes(userContext.alias)){
+            setIsLiked(true);
         }
     });
     const addCollect = () => {
-        if(usercon){
+        if(userContext){
             sendCollect({
                 "classId": props.classId,
                 "portId": props.portsInfo.id,
@@ -46,14 +46,14 @@ function DetailsTitle(props) {
         }
     }
     const addLiked = () => {
-        if(usercon){
+        if(userContext){
             likePorts({
                 "classId": props.classId,
                 "portId": props.portsInfo.id,
                 "id": props.portsInfo.details.id
             },(rsp)=>{
                 if(rsp.status===1){
-                    setIsliked(true);
+                    setIsLiked(true);
                     props.portsInfo.details.likeNumber++;
                     message.info("点赞成功!");
                 }else{
@@ -67,7 +67,7 @@ function DetailsTitle(props) {
             <Tag color={props.portsInfo.portState==='未结'?'':"success"} icon={<CheckCircleTwoTone />}>{props.portsInfo.portState}</Tag>
             <Tag color={"success"} icon={<MessageTwoTone />}>{props.portsInfo.replyNumber}</Tag>
             <Tag color={isCollect.userAccount?"success":""} onClick={addCollect} icon={<StarOutlined />}>{isCollect.userAccount?"取消收藏":"收藏"}</Tag>
-            <Tag color={isliked?"success":""}
+            <Tag color={isLiked?"success":""}
                  onClick={addLiked}
                  icon={<LikeOutlined />}>{props.portsInfo.details.likeNumber}</Tag>
         </div>

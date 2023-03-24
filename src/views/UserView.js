@@ -43,7 +43,7 @@ const rootSubmenuKeys = ['home', 'comments', 'edit'];
 const rootAlias = ["deathwater","kungreat"];
 
 function UserView(){
-    const usercon = useContext(MainContext);
+    const userContext = useContext(MainContext);
     const [openKeys, setOpenKeys] = useState(['home']);
     const [openKeysItem, setOpenKeysItem] = useState( <UserHomepage />);
     const onOpenChange = (keys) => {
@@ -97,13 +97,13 @@ function UserView(){
         }
 
     };
-    if(usercon && usercon.isManager === 1 && rootSubmenuKeys.length === 3){
+    if(userContext && userContext.isManager === 1 && rootSubmenuKeys.length === 3){
         items.push(getItem('管理', 'manager', <SettingOutlined />, [
             getItem('主贴管理', 'port-1'),
             getItem('回贴管理', 'reply-1')
         ]));
         rootSubmenuKeys.push("manager");
-        if (rootAlias.includes(usercon.alias)){
+        if (rootAlias.includes(userContext.alias)){
             items.push(getItem('用户管理', 'rootManager', <UserAddOutlined />, [
                 getItem('设置管理员', 'root-user'),
                 getItem('删除用户', 'delete-user'),

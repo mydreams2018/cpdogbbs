@@ -20,7 +20,7 @@ const beforeUpload = (file) => {
     }
     return isJpgOrPng && isLt1M;
 };
-let destemp = {
+let desTemp = {
     description:"",
     email:"email",
     fromCity:"地球"
@@ -58,22 +58,22 @@ const changePasswordSend = () => {
     console.log(rePassword);
 }
 const descriptionChange = (e) => {
-    destemp.description = e.currentTarget.value;
+    desTemp.description = e.currentTarget.value;
 }
 const emailChange = (e) => {
-    destemp.email = e.target.value;
+    desTemp.email = e.target.value;
 }
 
 function UserDetailsEdit(props) {
-    const usercon = useContext(MainContext);
-    destemp.description=usercon.description;
-    destemp.email = usercon.email || "";
+    const userContext = useContext(MainContext);
+    desTemp.description=userContext.description;
+    desTemp.email = userContext.email || "";
     const [loading, setLoading] = useState(false);
-    const [imageUrl, setImageUrl] = useState(usercon.img);
-    const [email, setEmail] = useState(destemp.email?true:false);
+    const [imageUrl, setImageUrl] = useState(userContext.img);
+    const [email, setEmail] = useState(desTemp.email?true:false);
     const postDescription = () => {
-        if(destemp.description && destemp.email){
-            updateUserDes(destemp,(rsp)=>{
+        if(desTemp.description && desTemp.email){
+            updateUserDes(desTemp,(rsp)=>{
                 if(rsp.status===1){
                     setEmail(true);
                     message.info(rsp.msg);
@@ -140,9 +140,9 @@ function UserDetailsEdit(props) {
                         showCount
                         allowClear
                         maxLength={100}
-                        defaultValue={usercon.description}
+                        defaultValue={userContext.description}
                         onChange={descriptionChange} />
-                    <Input addonBefore="输入密保问题" defaultValue={usercon.email} onChange={emailChange}
+                    <Input addonBefore="输入密保问题" defaultValue={userContext.email} onChange={emailChange}
                            disabled={email} maxLength={66} showCount={true}/>
 
                     <Button type="primary" style={{marginTop:10}} onClick={postDescription}>

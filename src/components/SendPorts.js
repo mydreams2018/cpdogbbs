@@ -34,7 +34,7 @@ const experienceChange = (e) => {
 const titleChange = (e) => {
     portData.title=e.target.value;
 };
-const imgcodeChange = (e) => {
+const imgCodeChange = (e) => {
     portData.image_code=e.target.value;
 };
 function SendPorts(){
@@ -108,7 +108,7 @@ function SendPorts(){
             <BaseCkedit linkContext={portData} />
             <div className={"send-message"}>
                 <Input
-                    onChange={imgcodeChange}
+                    onChange={imgCodeChange}
                     maxLength={3}
                     prefix={<span>{checkCode}=</span>}
                     style={{width:160}}

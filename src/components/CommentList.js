@@ -108,9 +108,9 @@ const RenderData = ({details,addParentAnswer,hasPortPermission})=>{
 }
 
 const CommentList = (props) => {
-    const usercon = useContext(MainContext);
-    const hasPortPermission =  useMemo(()=>props.portAlias===usercon.alias&&props.portState==="未结",
-        [props.portAlias, props.portState, usercon.alias]);
+    const userContext = useContext(MainContext);
+    const hasPortPermission =  useMemo(()=>props.portAlias===userContext.alias&&props.portState==="未结",
+        [props.portAlias, props.portState, userContext.alias]);
     const [portDetails,setPortDetails] = useState(() => ({ page:{totalPage:1},datas:[]}));
     const [replyMsg,setReplyMsg] = useState(() => "");
     classIdLink = props.classId;
@@ -144,24 +144,24 @@ const CommentList = (props) => {
                     if(sendReplyMessage.replyParent && replyMsg.startsWith(sendReplyMessage.replyParentText)){
                         if(Array.isArray(sendReplyMessage.replyObject.childAnswers)){
                             sendReplyMessage.replyObject.childAnswers.push({
-                                    'alias':usercon.alias,
+                                    'alias':userContext.alias,
                                     'id':rsp.id,
-                                    'userImg':usercon.img,
+                                    'userImg':userContext.img,
                                     'detailsText':newReplyMsg
                                 });
                         }else{
                             sendReplyMessage.replyObject.childAnswers=[{
-                                'alias':usercon.alias,
+                                'alias':userContext.alias,
                                 'id':rsp.id,
-                                'userImg':usercon.img,
+                                'userImg':userContext.img,
                                 'detailsText':newReplyMsg
                             }];
                         }
                     }else{
                         portDetails.datas.push({
-                            'alias':usercon.alias,
+                            'alias':userContext.alias,
                             'id':rsp.id,
-                            'userImg':usercon.img,
+                            'userImg':userContext.img,
                             'detailsText':newReplyMsg
                         });
                     }
@@ -209,7 +209,7 @@ const CommentList = (props) => {
             }}>
             <Button onClick={loadMores}>loading more</Button>
         </div>}
-        {usercon &&  <ReplyComment usercon={usercon} onAddComment={replyComments} replyMsg={replyMsg} setReplyMsg={setReplyMsg}/> }
+        {userContext &&  <ReplyComment usercon={userContext} onAddComment={replyComments} replyMsg={replyMsg} setReplyMsg={setReplyMsg}/> }
     </div>)
 };
 

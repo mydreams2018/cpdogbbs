@@ -59,7 +59,7 @@ const openNotification = () => {
 
 
 function SignIn(){
-    const usercon = useContext(MainContext);
+    const userContext = useContext(MainContext);
     const [isLoad, setIsLoad] = useState(()=>false);
     const [signState, setSignState] = useState(()=>{
         return {
@@ -82,7 +82,7 @@ function SignIn(){
         }
     }
     useEffect(()=>{
-        if(usercon){
+        if(userContext){
             setSignState({
                 accumulateSign: 0,
                 currentSign: false,
@@ -95,9 +95,9 @@ function SignIn(){
                 setCountSign(rt);
             }
         });
-    },[usercon]);
+    },[userContext]);
     const signOn = () => {
-        if(usercon){
+        if(userContext){
             setIsLoad(true);
             signByOn({},(rt)=>{
                 if(rt.status===1){

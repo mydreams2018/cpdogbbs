@@ -24,6 +24,11 @@ function MyCollection(props) {
                 setData(rsp.datas);
             }
         });
+        return () => {
+            searchDatas.beginTime="";
+            searchDatas.endTime="";
+            searchDatas.name="";
+        };
     }, []);
     const columns = [
         {

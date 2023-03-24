@@ -1,11 +1,11 @@
 
 function autoViewformlogin(){
-   let viewformlogin = document.getElementById("view-form-login");
-   if(viewformlogin){
+   let viewFormLogin = document.getElementById("view-form-login");
+   if(viewFormLogin){
        let bodyHeight = document.documentElement.clientHeight;
-       let rtHeight = bodyHeight-65 - viewformlogin.clientHeight;
+       let rtHeight = bodyHeight-65 - viewFormLogin.clientHeight;
        if(rtHeight > 0){
-           viewformlogin.style.paddingTop = (rtHeight-65)/2+"px";
+           viewFormLogin.style.paddingTop = (rtHeight-65)/2+"px";
        }
    }
 }
