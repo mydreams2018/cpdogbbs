@@ -46,8 +46,8 @@ const ExampleComment = ({children,replyData,addParentAnswer,hasPortPermission}) 
             }
         }
         changeImgGif();
-    },[]);
-    const accaptAnswer = () => {
+    },[replyData.detailsText]);
+    const acceptAnswer = () => {
         acceptReply({
             id: replyData.id,
             classId: classIdLink
@@ -63,7 +63,7 @@ const ExampleComment = ({children,replyData,addParentAnswer,hasPortPermission}) 
     return (
         <Comment
             actions={[<span key="comment-nested-reply-to"  onClick={()=>addParentAnswer(replyData)}>Reply to</span>,
-                hasPortPermission && <span onClick={accaptAnswer}>Accept it</span>,
+                hasPortPermission && <span onClick={acceptAnswer}>Accept it</span>,
                 replyData.isAdoption && <CheckCircleTwoTone twoToneColor="#52c41a" style={{fontSize:'30px'}}/> ]
             }
             author={<div className={"reply-title"}>
