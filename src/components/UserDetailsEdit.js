@@ -1,11 +1,10 @@
 import { Tabs,Upload,message,Input,Button } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { useState ,useContext } from 'react';
+import { useState ,useContext,useEffect } from 'react';
 import MainContext from "../MainContext";
 import {updateUserDes,updateUserPassword} from "../utils/HttpUtils";
 import './UserDetailsEdit.css'
 const { TextArea } = Input;
-
 const { TabPane } = Tabs;
 
 const beforeUpload = (file) => {
@@ -55,7 +54,6 @@ const changePasswordSend = () => {
     }else{
         message.error('数据不能为空');
     }
-    console.log(rePassword);
 }
 const descriptionChange = (e) => {
     desTemp.description = e.currentTarget.value;
@@ -63,16 +61,27 @@ const descriptionChange = (e) => {
 const emailChange = (e) => {
     desTemp.email = e.target.value;
 }
+const fromCityChange = (e) => {
+    desTemp.fromCity = e.target.value;
+}
 
 function UserDetailsEdit(props) {
     const userContext = useContext(MainContext);
     desTemp.description=userContext.description;
     desTemp.email = userContext.email || "";
+    desTemp.fromCity = userContext.fromCity;
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState(userContext.img);
     const [email, setEmail] = useState(desTemp.email?true:false);
+    useEffect(()=>{
+        return ()=>{
+            rePassword.password='';
+            rePassword.rePass='';
+            rePassword.rePassRepeet='';
+        }
+    },[]);
     const postDescription = () => {
-        if(desTemp.description && desTemp.email){
+        if(desTemp.description && desTemp.email && desTemp.fromCity){
             updateUserDes(desTemp,(rsp)=>{
                 if(rsp.status===1){
                     setEmail(true);
@@ -81,6 +90,8 @@ function UserDetailsEdit(props) {
                     message.error(rsp.msg);
                 }
             });
+        }else{
+            message.error("必要数据为空");
         }
     }
     const handleChange = (info) => {
@@ -135,17 +146,21 @@ function UserDetailsEdit(props) {
                             : (uploadButton)}
                     </Upload>
                 </TabPane>
-                <TabPane tab="个人描述信息" key="2" >
+                <TabPane tab="个人描述信息" key="2" className={"user-details-update"}>
                     <TextArea
                         showCount
                         allowClear
+                        autoSize={ {minRows: 3, maxRows: 5}}
                         maxLength={100}
                         defaultValue={userContext.description}
                         onChange={descriptionChange} />
-                    <Input addonBefore="输入密保问题" defaultValue={userContext.email} onChange={emailChange}
-                           disabled={email} maxLength={66} showCount={true}/>
+                    <Input addonBefore="城市" defaultValue={userContext.fromCity} onChange={fromCityChange}
+                           maxLength={12} showCount={true} style={{marginTop:'16px'}}/>
 
-                    <Button type="primary" style={{marginTop:10}} onClick={postDescription}>
+                    <Input addonBefore="密保问题" defaultValue={userContext.email} onChange={emailChange}
+                           disabled={email} maxLength={66} showCount={true} style={{marginTop:'16px'}}/>
+
+                    <Button type="primary" style={{marginTop:16}} onClick={postDescription}>
                         提并修改
                     </Button>
                 </TabPane>

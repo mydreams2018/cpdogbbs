@@ -21,7 +21,7 @@ function UserHomepage() {
     return (
         <Descriptions title="用户详情" bordered style={{textAlign: 'center'}}>
             <Descriptions.Item label="呢称">{userContext.alias}</Descriptions.Item>
-            <Descriptions.Item label="性别">纯爷们</Descriptions.Item>
+            <Descriptions.Item label="城市">{userContext.fromCity}</Descriptions.Item>
             <Descriptions.Item label="状态">{userContext.state?'正常':'异常'}</Descriptions.Item>
             <Descriptions.Item label="注册时间" >{userContext.registerTime}</Descriptions.Item>
             <Descriptions.Item label="vip等级" span={2}>{userContext.vipLevel}</Descriptions.Item>
