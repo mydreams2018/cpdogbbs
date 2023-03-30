@@ -31,6 +31,8 @@ function MySendPorts(props) {
                 return "report_data";
             case 4:
                 return  "report_talk";
+            default:
+
         }
         return classId;
     }
@@ -84,6 +86,8 @@ function MySendPorts(props) {
             case 2:
                 navigate("/react/details",{state:{id:obj.id}});
                 break;
+            default:
+
         }
     }
     const start = () => {

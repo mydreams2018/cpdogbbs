@@ -27,6 +27,8 @@ function ManagerPorts(props) {
                 return "report_data";
             case 4:
                 return  "report_talk";
+            default:
+
         }
         return classId;
     }

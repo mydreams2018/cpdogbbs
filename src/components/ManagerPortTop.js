@@ -70,6 +70,8 @@ function ManagerPortTop(props) {
                 return  "数据库";
             case 4:
                 return  "report_talk";
+            default:
+
         }
         return classId;
     }
