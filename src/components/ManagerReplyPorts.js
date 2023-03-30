@@ -62,7 +62,7 @@ function ManagerReplyPorts(props) {
             title: 'Action',
             dataIndex: '',
             key: 'id',
-            render: (text) => <a href="javascript:void(0);" onClick={()=>editClick(text )} >edit</a>,
+            render: (text) => <span style={{color:"#1890ff",cursor:"pointer"}} onClick={()=>editClick(text)} >edit</span>,
         }
     ];
 

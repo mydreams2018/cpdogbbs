@@ -34,7 +34,7 @@ function MyCollection(props) {
         {
             title: '标题',
             dataIndex: 'portTitle',
-            render: (text,obj) => <a href="javascript:void(0);" onClick={()=>jumperPorts(text,obj)}>{text}</a>
+            render: (text,obj) => <span style={{color:"#1890ff",cursor:"pointer"}} onClick={()=>jumperPorts(text,obj)}>{text}</span>
         },
         {
             title: '日期',

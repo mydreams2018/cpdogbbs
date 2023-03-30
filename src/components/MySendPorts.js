@@ -54,7 +54,7 @@ function MySendPorts(props) {
         {
             title: '标题',
             dataIndex: 'name',
-            render: (text,obj) => <a href="javascript:void(0);" onClick={()=>jumperPorts(text,obj)}>{text}</a>
+            render: (text,obj) => <span style={{color:"#1890ff",cursor:"pointer"}} onClick={()=>jumperPorts(text,obj)}>{text}</span>
         },
         {
             title: '回复',
@@ -72,7 +72,7 @@ function MySendPorts(props) {
             title: 'Action',
             dataIndex: '',
             key: 'id',
-            render: (text) => <a onClick={()=>editClick(text )} >edit</a>,
+            render: (text) => <span style={{color:"#1890ff",cursor:"pointer"}} onClick={()=>editClick(text)} >edit</span>,
         }
     ];
 
