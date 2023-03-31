@@ -30,6 +30,8 @@ function MyReplyPorts(props) {
                 return "details_text_data";
             case 4:
                 return  "details_text_talk";
+            default:
+
         }
         return classId;
     }

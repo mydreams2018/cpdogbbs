@@ -3,3 +3,4 @@ build/*
 public/*
 cert/*
 node_modules/*
+src/utils/Cookies.js
