@@ -3,7 +3,7 @@ import {useState} from 'react';
 import {queryUserByAlias} from "../utils/HttpUtils";
 
 function UserDrawer(props) {
-    const [userInfo, setUserInfo] = useState(() => {});
+    const [userInfo, setUserInfo] = useState( {alias:''});
     const [visible, setVisible] = useState(() => false);
     const queryUserAlias = () => {
         queryUserByAlias({"alias": props.alias}, (rsp) => {
@@ -19,9 +19,9 @@ function UserDrawer(props) {
     return (
         <>
             <span hv={"tomoto"} onClick={queryUserAlias} style={{cursor: "pointer"}}>{props.alias}</span>
-            <Drawer width={560} title="用户信息" placement="right" onClose={onClose} visible={visible}>
-
-                {userInfo && <Descriptions bordered style={{textAlign: 'center'}}>
+            {userInfo.alias &&
+                <Drawer width={560} title="用户信息" placement="right" onClose={onClose} visible={visible}>
+                 <Descriptions bordered style={{textAlign: 'center'}}>
                     <Descriptions.Item label="呢称" span={2}>{userInfo.alias}</Descriptions.Item>
                     <Descriptions.Item label="状态">{userInfo.state ? '正常' : '异常'}</Descriptions.Item>
                     <Descriptions.Item label="注册时间">{userInfo.registerTime}</Descriptions.Item>
@@ -42,9 +42,9 @@ function UserDrawer(props) {
                             {userInfo.description}
                         </pre>
                     </Descriptions.Item>
-                </Descriptions> }
-
+                </Descriptions>
             </Drawer>
+            }
         </>
     );
 }
