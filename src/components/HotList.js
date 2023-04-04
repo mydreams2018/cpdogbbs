@@ -21,7 +21,7 @@ const HotList = (props) =>{
     },[props.classId]);
     return(
         <List
-            className={"hot-list scollbox"}
+            className={"hot-list scroll-box"}
             header={<h4 style={{textAlign:"center",color:"#389e0d",marginBottom:0,lineHeight:'30px'}}>推荐贴</h4>}
             itemLayout="horizontal"
             dataSource={topDatas}

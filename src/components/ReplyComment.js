@@ -60,7 +60,7 @@ const Editor = ({ onChange, onSubmit, value,setReplyMsg }) => {
             <Button style={{marginLeft:10}} onClick={showGifImgs}>
                 添加gif
             </Button>
-            <div id={"replyGifId"} className={"reply-gif scollbox"} ref={replyGifRef} style={{display:!replyGifShow?"none":"block"}}>
+            <div id={"replyGifId"} className={"reply-gif scroll-box"} ref={replyGifRef} style={{display:!replyGifShow?"none":"block"}}>
                 {imagesGif.map((element, index) => {
                    return <img src={"/imagegifs/"+element} title={element} alt={element} key={element} className={"img-gifs"}/>
                 })}
