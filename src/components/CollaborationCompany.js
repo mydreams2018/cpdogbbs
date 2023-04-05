@@ -1,7 +1,7 @@
 import {Button, Table, Input, Modal, Form,DatePicker ,Select,Upload,message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import {collaborationCompanyQuery,collaborationInsert} from "../utils/HttpUtils";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState,useRef} from "react";
 const { Option } = Select;
 
 const searchDatas = {
@@ -49,6 +49,7 @@ const outProps = {
 };
 
 function CollaborationCompany() {
+    const buttonClickRef = useRef(null);
     const [data,setData] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     useEffect(() => {
@@ -113,7 +114,7 @@ function CollaborationCompany() {
         setIsModalOpen(true);
     };
     const handleOk = () => {
-        setIsModalOpen(false);
+        buttonClickRef.current.click();
     };
     const handleCancel = () => {
         setIsModalOpen(false);
@@ -216,12 +217,12 @@ function CollaborationCompany() {
                         </Upload>
                     </Form.Item>
 
-                    <Form.Item
+                    <Form.Item hidden={true}
                         wrapperCol={{
                             ...layout.wrapperCol,
                             offset: 8,
                         }}>
-                        <Button type="primary" htmlType="submit">
+                        <Button type="primary" ref={buttonClickRef} htmlType="submit">
                             提交数据
                         </Button>
                     </Form.Item>
