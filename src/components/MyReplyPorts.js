@@ -55,7 +55,7 @@ function MyReplyPorts(props) {
         {
             title: '标题',
             dataIndex: 'detailsText',
-            render: (text,obj) => <a onClick={()=>jumperPorts(text,obj)}>{text}</a>
+            render: (text,obj) => <span style={{color:"#1890ff",cursor:"pointer"}} onClick={()=>jumperPorts(text,obj)}>{text}</span>
         },
         {
             title: '日期',
@@ -69,7 +69,7 @@ function MyReplyPorts(props) {
             title: 'Action',
             dataIndex: '',
             key: 'id',
-            render: (text) => <a onClick={()=>editClick(text )} >edit</a>,
+            render: (text) => <span style={{color:"#1890ff",cursor:"pointer"}} onClick={()=>editClick(text)}>edit</span>,
         }
     ];
 
