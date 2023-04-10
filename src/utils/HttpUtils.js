@@ -6,9 +6,9 @@ axios.interceptors.response.use(function (response) {
     return response;
 }, function (error) {
     //超出2xx范围的状态码都会触发该函数
-    if(error.response.data && "用户已失效" === error.response.data.msg){
+    if(error && error.response && error.response.data && "用户已失效" === error.response.data.msg){
         userLogout({},(rsp)=>{
-            if(rsp.status===1){
+            if(rsp && rsp.status===1){
                 cookies.removeItem("jwtToken","/");
                 cookies.removeItem("JSESSIONID","/");
                 cookies.removeItem("remember-me","/");
@@ -45,8 +45,7 @@ function getRigister(obj,callback){
     }).then(function (response) {
             callback(response.data);
         }).catch(function (error) {
-            console.log(error);
-            callback(error);
+            callback({});
         });
 }
 
@@ -62,8 +61,7 @@ function userLogin(obj,callback){
     }).then(function (response) {
         callback(response.data);
     }).catch(function (error) {
-        console.log(error);
-        callback(error);
+        callback({});
     });
 }
 
@@ -79,8 +77,7 @@ function userLogout(obj,callback){
     }).then((response) => {
         callback(response.data);
     }).catch((error) => {
-        console.log(error);
-        callback(error);
+        callback({});
     });
 }
 
@@ -96,8 +93,7 @@ function rePassWord(obj,callback){
     }).then(function (response) {
         callback(response.data);
     }).catch(function (error) {
-        console.log(error);
-        callback(error);
+        callback({});
     });
 }
 
@@ -113,7 +109,6 @@ function getUserInfo(obj,callback){
     }).then(function (response) {
         callback(response.data);
     }).catch(function (error) {
-        console.log(error);
         callback(null);
     });
 }
@@ -130,8 +125,7 @@ function sendPorts(obj,callback){
     }).then(function (response) {
         callback(response.data);
     }).catch(function (error) {
-        console.log(error);
-        callback(error);
+        callback({});
     });
 }
 
@@ -147,7 +141,6 @@ function signByPrimaryKey(obj,callback){
     }).then(function (response) {
         callback(response.data);
     }).catch(function (error) {
-        console.log(error);
         callback(error);
     });
 }
@@ -164,7 +157,6 @@ function signByOn(obj,callback){
     }).then(function (response) {
         callback(response.data);
     }).catch(function (error) {
-        console.log(error);
         callback(error);
     });
 }
@@ -180,8 +172,7 @@ function queryReplyWeek(obj,callback){
     }).then(function (response) {
         callback(response.data);
     }).catch(function (error) {
-        console.log(error);
-        callback(error);
+        callback({});
     });
 }
 
@@ -197,7 +188,6 @@ function queryHomeReport(obj,callback){
     }).then(function (response) {
         callback(response.data);
     }).catch(function (error) {
-        console.log(error);
         callback(error);
     });
 }
@@ -213,7 +203,6 @@ function queryUserByAlias(obj,callback){
     }).then(function (response) {
         callback(response.data);
     }).catch(function (error) {
-        console.log(error);
         callback(error);
     });
 }
@@ -230,7 +219,6 @@ function queryPortDetails(obj,callback){
     }).then(function (response) {
         callback(response.data);
     }).catch(function (error) {
-        console.log(error);
         callback(error);
     });
 }
@@ -247,7 +235,6 @@ function queryDetailsTextAnswer(obj,callback){
     }).then(function (response) {
        callback(response.data);
    }).catch(function (error) {
-       console.log(error);
        callback(error);
    });
 }
@@ -263,7 +250,6 @@ function sendReplyAnswer(obj,callback){
     }).then(function (response) {
         callback(response.data);
     }).catch(function (error) {
-        console.log(error);
         callback(error);
     });
 }
@@ -513,7 +499,7 @@ function managerAuthPort(obj,callback){
     }).then(function (response) {
         callback(response.data);
     }).catch(function (error) {
-        callback(error);
+        callback(null);
     });
 }
 function managerAuthPortDetails(obj,callback){
@@ -528,7 +514,6 @@ function managerAuthPortDetails(obj,callback){
     }).then(function (response) {
         callback(response.data);
     }).catch(function (error) {
-        console.log(error);
         callback(error);
     });
 }
@@ -545,7 +530,6 @@ function managerUpdatePortAuth(obj,callback){
     }).then(function (response) {
         callback(response.data);
     }).catch(function (error) {
-        console.log(error);
         callback(error);
     });
 }
@@ -561,7 +545,7 @@ function managerAuthPortsReply(obj,callback){
     }).then(function (response) {
         callback(response.data);
     }).catch(function (error) {
-        callback(error);
+        callback(null);
     });
 }
 function managerUpdateReplyPort(obj,callback){
@@ -576,7 +560,6 @@ function managerUpdateReplyPort(obj,callback){
     }).then(function (response) {
         callback(response.data);
     }).catch(function (error) {
-        console.log(error);
         callback(error);
     });
 }
@@ -592,8 +575,7 @@ function managerGetUser(obj,callback){
     }).then((response) => {
         callback(response.data);
     }).catch((error) => {
-        console.log(error);
-        callback(null);
+        callback(error);
     });
 }
 function updateUserIsManager(obj,callback){
@@ -608,8 +590,7 @@ function updateUserIsManager(obj,callback){
     }).then((response) => {
         callback(response.data);
     }).catch((error) => {
-        console.log(error);
-        callback(null);
+        callback(error);
     });
 }
 function deleteUser(obj,callback){
@@ -624,8 +605,7 @@ function deleteUser(obj,callback){
     }).then((response) => {
         callback(response.data);
     }).catch((error) => {
-        console.log(error);
-        callback(null);
+        callback(error);
     });
 }
 function updatePortIsTop(obj,callback){
@@ -640,8 +620,7 @@ function updatePortIsTop(obj,callback){
     }).then((response) => {
         callback(response.data);
     }).catch((error) => {
-        console.log(error);
-        callback(null);
+        callback(error);
     });
 }
 function collaborationInsert(obj,callback){
@@ -656,8 +635,7 @@ function collaborationInsert(obj,callback){
     }).then((response) => {
         callback(response.data);
     }).catch((error) => {
-        console.log(error);
-        callback(null);
+        callback(error);
     });
 }
 function selectAuthCount(obj,callback){
@@ -672,8 +650,7 @@ function selectAuthCount(obj,callback){
     }).then((response) => {
         callback(response.data);
     }).catch((error) => {
-        console.log(error);
-        callback(null);
+        callback(error);
     });
 }
 export {getApiImg,getRigister,userLogin,rePassWord,getUserInfo,sendPorts,signByPrimaryKey, signByOn,queryReplyWeek

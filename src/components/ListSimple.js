@@ -17,8 +17,10 @@ const ListSimple = (props) => {
     const [totalRow,setTotalRow] = useState(()=>1);
     useEffect(() => {
         queryHomeReport(props.listParam,(rsp)=>{
-            setList(rsp.datas);
-            setTotalRow(rsp.page.totalRow);
+            if (rsp.datas){
+                setList(rsp.datas);
+                setTotalRow(rsp.page.totalRow);
+            }
         });
     }, [props.listParam]);
     const navigate = useNavigate();

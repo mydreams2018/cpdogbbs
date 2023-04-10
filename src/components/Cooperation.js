@@ -7,7 +7,9 @@ function Cooperation(){
     const [data,setData] = useState([]);
     useEffect(()=>{
         collaborationCompanyQuery({"onlyStatus":2,"isActive":true},(rsp)=>{
-            setData(rsp.datas);
+            if (rsp.datas){
+                setData(rsp.datas);
+            }
         });
     },[]);
     return(

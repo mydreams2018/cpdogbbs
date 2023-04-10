@@ -26,7 +26,9 @@ function Home() {
     const [companyData,setCompanyData] = useState([]);
     useEffect(()=>{
         collaborationCompanyQuery({"onlyStatus":1,"isActive":true},(rsp)=>{
-            setCompanyData(rsp.datas);
+            if (rsp.datas){
+                setCompanyData(rsp.datas);
+            }
         });
     },[]);
 
