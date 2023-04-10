@@ -43,6 +43,8 @@ function DetailsTitle(props) {
                     setIsCollect({userAccount:""});
                 }
             });
+        }else{
+            message.error("请先登录...");
         }
     }
     const addLiked = () => {
@@ -60,6 +62,8 @@ function DetailsTitle(props) {
                     message.error(rsp.msg);
                 }
             });
+        }else{
+            message.error("请先登录...");
         }
     }
     return (
