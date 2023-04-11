@@ -15,7 +15,9 @@ function BaseSearch(props){
             return partitionNames["java"];
         }else if(props.basePath.includes("react")){
             return partitionNames["react"];
-        }else{
+        }else if(props.basePath.includes("database")){
+            return partitionNames["database"];
+        } else {
             return [];
         }
     },[props.basePath]);

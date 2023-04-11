@@ -50,6 +50,9 @@ function MyCollection(props) {
             case 2:
                 navigate("/react/details",{state:{id:obj.portId}});
                 break;
+            case 3:
+                navigate("/database/details",{state:{id:obj.portId}});
+                break;
             default:
 
         }

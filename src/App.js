@@ -1,7 +1,7 @@
 import {Layout, Menu,Spin} from 'antd';
 import React,{useState,useEffect,Suspense} from 'react';
 import {Routes,Route ,useNavigate,useLocation} from "react-router-dom";
-import {HomeOutlined,createFromIconfontCN ,LinkedinFilled,SettingOutlined} from '@ant-design/icons';
+import {HomeOutlined,createFromIconfontCN ,LinkedinFilled,SettingOutlined,DatabaseOutlined} from '@ant-design/icons';
 import {APILoader} from "@uiw/react-amap";
 import Login from "./views/Login"
 import Home from "./views/Home";
@@ -13,6 +13,7 @@ import BaseView from "./views/BaseView";
 import FixedUtils from "./utils/FixedUtils";
 import JavaView from "./views/JavaView";
 import ReactView from "./views/ReactView";
+import DatabaseView from "./views/DatabaseView";
 import BaseDetails from "./views/BaseDetails";
 import {getUserInfo} from "./utils/HttpUtils";
 import NotificationAuth from "./views/NotificationAuth";
@@ -29,10 +30,11 @@ const menusTitle = [
     {key:'1',label:'首页',path:"/",icon:<HomeOutlined />},
     {key:'2',label:'java',path:"/java",icon: <IconFont type="icon-java" />},
     {key:'3',label:'react',path:"/react",icon: <IconFont type="icon-javascript" />},
-    {key:'4',label:'地图',path:"/address",icon: <LinkedinFilled />},
-    {key:'5',label:'用户',path:"/user",icon: <SettingOutlined /> },
+    {key:'4',label:'database',path:"/database",icon: <DatabaseOutlined />},
+    {key:'5',label:'地图',path:"/address",icon: <LinkedinFilled />},
+    {key:'6',label:'用户',path:"/user",icon: <SettingOutlined /> },
 ];
-let locationKey='5';
+let locationKey='6';
 console.log(process.env);
 
 function App() {
@@ -84,9 +86,12 @@ function App() {
                                navigate("/react");
                                break;
                            case "4":
-                               navigate("/address");
+                               navigate("/database");
                                break;
                            case "5":
+                               navigate("/address");
+                               break;
+                           case "6":
                                navigate("/user");
                                break;
                            default:
@@ -127,6 +132,10 @@ function App() {
                         <Route path="/react" element={<ReactView />} >
                             <Route index element={<BaseView type={"react"} classId={2} basePath={'/react/details'} />} />
                             <Route path="details" element={<BaseDetails type={"react"} classId={2} basePath={'/react/details'} />} />
+                        </Route>
+                        <Route path="/database" element={<DatabaseView />} >
+                            <Route index element={<BaseView type={"database"} classId={3} basePath={'/database/details'} />} />
+                            <Route path="details" element={<BaseDetails type={"database"} classId={3} basePath={'/database/details'} />} />
                         </Route>
                         <Route path="/user" element={authToken.id?<UserView />:<Login onUserChange={(token) => {
                             getUserInfo({},(rt)=>{

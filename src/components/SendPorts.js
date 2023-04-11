@@ -11,6 +11,7 @@ const children = [];
 
 children.push(<Option key={1}>java</Option>);
 children.push(<Option key={2}>react</Option>);
+children.push(<Option key={3}>database</Option>);
 const openNotificationWithIcon = (type,msg) => {
     notification[type]({
         message: '提醒',

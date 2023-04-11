@@ -86,6 +86,9 @@ function MySendPorts(props) {
             case 2:
                 navigate("/react/details",{state:{id:obj.id}});
                 break;
+            case 3:
+                navigate("/database/details",{state:{id:obj.id}});
+                break;
             default:
 
         }
