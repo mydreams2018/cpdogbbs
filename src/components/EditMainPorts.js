@@ -39,7 +39,7 @@ function EditMainPorts(props){
         <div className={"edit-main-ports"}>
             <Modal
                 title="编辑贴子内容"
-                width={710}
+                width={800}
                 visible={props.visible}
                 onOk={handleOk}
                 confirmLoading={confirmLoading}

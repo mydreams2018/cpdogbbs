@@ -15,7 +15,11 @@ function PreContent(props){
             <CKEditor
                 editor={ClassicEditor}
                 disabled={true}
-                data={props.portsInfoDetails.detailsText}/>
+                data={props.portsInfoDetails.detailsText}
+                onReady={editor => {
+                    const toolbarElement = editor.ui.view.toolbar.element;
+                    toolbarElement.style.display = 'none';
+                }} />
         </div>
     )
 }
