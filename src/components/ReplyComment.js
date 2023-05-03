@@ -86,7 +86,7 @@ const ReplyComment = (props) => {
                         onChange={handleChange}
                         onSubmit={props.onAddComment}
                         setReplyMsg={props.setReplyMsg}
-                        submitting={false}//loading
+                        submitting={false}
                         value={props.replyMsg}/>}
             />
         </div>

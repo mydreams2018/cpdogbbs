@@ -29,8 +29,8 @@ const IconFont = createFromIconfontCN({
 const menusTitle = [
     {key:'1',label:'首页',path:"/",icon:<HomeOutlined />},
     {key:'2',label:'java',path:"/java",icon: <IconFont type="icon-java" />},
-    {key:'3',label:'react',path:"/react",icon: <IconFont type="icon-javascript" />},
-    {key:'4',label:'database',path:"/database",icon: <DatabaseOutlined />},
+    {key:'3',label:'前端',path:"/react",icon: <IconFont type="icon-javascript" />},
+    {key:'4',label:'数据库',path:"/database",icon: <DatabaseOutlined />},
     {key:'5',label:'地图',path:"/address",icon: <LinkedinFilled />},
     {key:'6',label:'用户',path:"/user",icon: <SettingOutlined /> },
 ];
