@@ -94,7 +94,7 @@ function Register(){
         >
             <Form.Item
                 name="account"
-                label="account"
+                label="账号"
                 rules={[
                     {
                         required: true,
@@ -106,7 +106,7 @@ function Register(){
 
             <Form.Item
                 name="password"
-                label="Password"
+                label="密码"
                 rules={[
                     {
                         required: true,
@@ -120,7 +120,7 @@ function Register(){
 
             <Form.Item
                 name="repassword"
-                label="Confirm Password"
+                label="确认密码"
                 dependencies={['password']}
                 hasFeedback
                 rules={[
@@ -144,7 +144,7 @@ function Register(){
 
             <Form.Item
                 name="alias"
-                label="Nickname"
+                label="别名"
                 tooltip="What do you want others to call you?"
                 rules={[
                     {
@@ -158,7 +158,7 @@ function Register(){
 
             <Form.Item
                 name="phone"
-                label="Phone Number">
+                label="手机,可为空">
                 <Input
                     addonBefore={prefixSelector}
                     style={{
@@ -170,7 +170,7 @@ function Register(){
 
             <Form.Item
                 name="description"
-                label="description"
+                label="描述信息"
                 rules={[
                     {
                         required: true,
@@ -182,7 +182,7 @@ function Register(){
 
             <Form.Item
                 name="gender"
-                label="Gender"
+                label="性别"
                 rules={[
                     {
                         required: true,
@@ -191,13 +191,13 @@ function Register(){
                 ]}
             >
                 <Select placeholder="select your gender">
-                    <Option value="male">Male</Option>
-                    <Option value="female">Female</Option>
-                    <Option value="other">Other</Option>
+                    <Option value="male">男</Option>
+                    <Option value="female">女</Option>
+                    <Option value="other">其它</Option>
                 </Select>
             </Form.Item>
 
-                        <Form.Item label="Captcha" extra="We must make sure that your are a human."
+                        <Form.Item label="验证码" extra="请回答上边的数学问题"
                             name="image_code"
                             rules={[
                                 {
@@ -211,7 +211,7 @@ function Register(){
 
             <Form.Item {...tailFormItemLayout}>
                 <Button type="primary" htmlType="submit">
-                    Register
+                    注册
                 </Button>
             </Form.Item>
         </Form>

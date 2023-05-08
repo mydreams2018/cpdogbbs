@@ -96,11 +96,11 @@ function Login (props){
 
                 <Form.Item>
                     <Button type="primary" htmlType="submit" className="login-form-button">
-                        Log in
+                        登录
                     </Button>
-                    <a href={"/register"} > Register now</a>
+                    <a href={"/register"} >注册</a>
                     <a className="login-form-forgot" href={"/forget"}>
-                        Forgot password
+                        忘记密码
                     </a>
                 </Form.Item>
             </Form>

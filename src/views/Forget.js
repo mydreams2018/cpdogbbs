@@ -94,7 +94,7 @@ function Forget() {
             </Form.Item>
             <Form.Item wrapperCol={{...layout.wrapperCol, offset: 8}}>
                 <Button type="primary" htmlType="submit">
-                    Submit
+                    提交
                 </Button>
             </Form.Item>
         </Form>
