@@ -54,7 +54,7 @@ function Login (props){
                             message: 'Please input your Username!',
                         },
                     ]}>
-                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="账号" />
                 </Form.Item>
                 <Form.Item
                     name="password"
@@ -67,7 +67,7 @@ function Login (props){
                     <Input
                         prefix={<LockOutlined className="site-form-item-icon" />}
                         type="password"
-                        placeholder="Password"
+                        placeholder="密码"
                     />
                 </Form.Item>
 
