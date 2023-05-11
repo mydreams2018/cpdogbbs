@@ -38,6 +38,10 @@ function RootDeleteUser(props) {
             dataIndex: 'alias'
         },
         {
+            title: '描述',
+            dataIndex: 'description'
+        },
+        {
             title: '注册日期',
             dataIndex: 'registerTime',
         },
