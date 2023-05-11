@@ -51,7 +51,7 @@ function Login (props){
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your Username!',
+                            message: '请输入账号',
                         },
                     ]}>
                     <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="账号" />
@@ -61,7 +61,7 @@ function Login (props){
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your Password!',
+                            message: '请输入密码',
                         },
                     ]}>
                     <Input
@@ -76,7 +76,7 @@ function Login (props){
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your checkcode!',
+                            message: '请输入验证码',
                         },
                     ]}>
                     <Input
