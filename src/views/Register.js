@@ -145,11 +145,11 @@ function Register(){
             <Form.Item
                 name="alias"
                 label="别名"
-                tooltip="What do you want others to call you?"
+                tooltip="展示出来的别名,唯一不重复"
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your nickname!',
+                        message: '请填写你的别名!',
                         whitespace: true,
                     },
                 ]}>
@@ -174,7 +174,7 @@ function Register(){
                 rules={[
                     {
                         required: true,
-                        message: 'Please input description',
+                        message: '请填写你的描述信息',
                     },
                 ]}>
                 <Input.TextArea showCount maxLength={100} />
@@ -186,7 +186,7 @@ function Register(){
                 rules={[
                     {
                         required: true,
-                        message: 'Please select gender!',
+                        message: '请选择一个性别!',
                     },
                 ]}
             >
@@ -202,7 +202,7 @@ function Register(){
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input the captcha you got!',
+                                    message: '请回答上边的数学问题!',
                                 },
                             ]}>
                             <Input suffix={checkCode ? checkCode:<span />} />
