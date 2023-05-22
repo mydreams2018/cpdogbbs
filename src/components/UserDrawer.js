@@ -26,7 +26,7 @@ function UserDrawer(props) {
         <>
             <span hv={"tomoto"} onClick={queryUserAlias} style={{cursor: "pointer"}}>{props.alias}</span>
             {userInfo.alias &&
-                <Drawer width={drawerWidth} title="用户信息" placement="right" onClose={onClose} visible={visible}>
+                <Drawer width={drawerWidth} zIndex={1000} title="用户信息" placement="right" onClose={onClose} visible={visible}>
                  <Descriptions bordered style={{textAlign: 'center'}}>
                     <Descriptions.Item label="呢称" span={2}>{userInfo.alias}</Descriptions.Item>
                     <Descriptions.Item label="状态">{userInfo.state ? '正常' : '异常'}</Descriptions.Item>
