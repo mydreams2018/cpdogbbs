@@ -5,7 +5,13 @@ import {queryUserByAlias} from "../utils/HttpUtils";
 function UserDrawer(props) {
     const [userInfo, setUserInfo] = useState( {alias:''});
     const [visible, setVisible] = useState(() => false);
+    const [drawerWidth, setDrawerWidth] = useState(560);
     const queryUserAlias = () => {
+        let windowWidth = document.documentElement.clientWidth;
+        if (windowWidth < 610){
+            windowWidth = Math.floor(windowWidth * 0.9);
+            setDrawerWidth(windowWidth);
+        }
         queryUserByAlias({"alias": props.alias}, (rsp) => {
             if (rsp.alias) {
                 setUserInfo(rsp);
@@ -20,7 +26,7 @@ function UserDrawer(props) {
         <>
             <span hv={"tomoto"} onClick={queryUserAlias} style={{cursor: "pointer"}}>{props.alias}</span>
             {userInfo.alias &&
-                <Drawer width={560} title="用户信息" placement="right" onClose={onClose} visible={visible}>
+                <Drawer width={drawerWidth} title="用户信息" placement="right" onClose={onClose} visible={visible}>
                  <Descriptions bordered style={{textAlign: 'center'}}>
                     <Descriptions.Item label="呢称" span={2}>{userInfo.alias}</Descriptions.Item>
                     <Descriptions.Item label="状态">{userInfo.state ? '正常' : '异常'}</Descriptions.Item>
