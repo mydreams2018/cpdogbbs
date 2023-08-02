@@ -3,6 +3,7 @@ import {useState ,useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 import EditReplyPorts from "./EditReplyPorts";
 import {queryMyReplyPorts,deleteMyReplyPorts} from "../utils/HttpUtils";
+import {changeClassId} from "../utils/BaseUtils";
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 
@@ -20,21 +21,6 @@ function MyReplyPorts(props) {
     const [data,setData] = useState([]);
     const [editReply,setEditReply] = useState(false);
     const [editDatas,setEditDatas] = useState({});
-    const changeClassId = (classId) => {
-        switch (classId){
-            case 1:
-                return  "details_text_back";
-            case 2:
-                return  "details_text_front";
-            case 3:
-                return "details_text_data";
-            case 4:
-                return  "details_text_talk";
-            default:
-
-        }
-        return classId;
-    }
     useEffect(() => {
         queryMyReplyPorts(searchDatas,(rsp)=>{
             if(rsp.datas){

@@ -4,6 +4,7 @@ import { useState ,useContext} from 'react';
 import UserHomepage from "../components/UserHomepage";
 import SendPorts from "../components/SendPorts";
 import UserDetailsEdit from "../components/UserDetailsEdit";
+import UserMail from "../components/UserMail";
 import MySendPorts from "../components/MySendPorts";
 import MyCollection from "../components/MyCollection";
 import MyReplyPorts from "../components/MyReplyPorts";
@@ -36,7 +37,8 @@ const items = [
         getItem('我的收藏', 'comments-3')
     ]),
     getItem('设置', 'edit', <SettingOutlined />, [
-        getItem('个人信息', 'edit-1')
+        getItem('个人信息', 'edit-1'),
+        getItem('站内信', 'edit-2')
     ])
 ];
 const rootSubmenuKeys = ['home', 'comments', 'edit'];
@@ -64,6 +66,9 @@ function UserView(){
                 break;
             case 'edit-1':
                 setOpenKeysItem( <UserDetailsEdit />);
+                break;
+            case 'edit-2':
+                setOpenKeysItem(<UserMail />);
                 break;
             case 'comments-1':
                 setOpenKeysItem( <MySendPorts />);

@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import EditMainPorts from "./EditMainPorts";
 import './MySendPorts.css'
 import {queryMyPorts,deleteMyPorts} from "../utils/HttpUtils";
+import {changeClassPortId} from "../utils/BaseUtils";
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 
@@ -21,26 +22,11 @@ function MySendPorts(props) {
     const [data,setData] = useState([]);
     const [editPorts,setEditPorts] = useState(false);
     const [editParams,setEditParams] = useState({});
-    const changeClassId = (classId) => {
-        switch (classId){
-            case 1:
-                return  "report_back";
-            case 2:
-                return  "report_front";
-            case 3:
-                return "report_data";
-            case 4:
-                return  "report_talk";
-            default:
-
-        }
-        return classId;
-    }
     useEffect(() => {
         queryMyPorts(searchDatas,(rsp)=>{
             if(rsp.datas){
                 rsp.datas.forEach(item=>{
-                    item.key=(item.id+'-'+changeClassId(item.classId));
+                    item.key=(item.id+'-'+changeClassPortId(item.classId));
                 });
                 setData(rsp.datas);
             }
@@ -102,7 +88,7 @@ function MySendPorts(props) {
                 setSelectedRowKeys([]);
                 let ArrayData = [];
                 data.forEach(item=>{
-                    if(!selectedRowKeys.includes(item.id+'-'+changeClassId(item.classId))){
+                    if(!selectedRowKeys.includes(item.id+'-'+changeClassPortId(item.classId))){
                         ArrayData.push(item);
                     }
                 });
@@ -125,7 +111,7 @@ function MySendPorts(props) {
         queryMyPorts(searchDatas,(rsp)=>{
             if(rsp.datas){
                 rsp.datas.forEach(item=>{
-                    item.key=(item.id+'-'+changeClassId(item.classId));
+                    item.key=(item.id+'-'+changeClassPortId(item.classId));
                 });
                 setData(rsp.datas);
             }

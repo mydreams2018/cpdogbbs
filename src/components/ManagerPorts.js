@@ -3,6 +3,7 @@ import {useState ,useEffect} from 'react';
 import AuthMainPorts from "./AuthMainPorts";
 import './ManagerPorts.css'
 import {managerAuthPort} from "../utils/HttpUtils";
+import {changeClassPortId} from "../utils/BaseUtils";
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 
@@ -17,26 +18,11 @@ function ManagerPorts(props) {
     const [data,setData] = useState([]);
     const [editPorts,setEditPorts] = useState(false);
     const [editParams,setEditParams] = useState({});
-    const changeClassId = (classId) => {
-        switch (classId){
-            case 1:
-                return  "report_back";
-            case 2:
-                return  "report_front";
-            case 3:
-                return "report_data";
-            case 4:
-                return  "report_talk";
-            default:
-
-        }
-        return classId;
-    }
     useEffect(() => {
         managerAuthPort(searchDatas,(rsp)=>{
             if(rsp){
                 rsp.forEach(item=>{
-                    item.key=(item.id+'-'+changeClassId(item.classId));
+                    item.key=(item.id+'-'+changeClassPortId(item.classId));
                 });
                 setData(rsp);
             }
@@ -87,7 +73,7 @@ function ManagerPorts(props) {
         managerAuthPort(searchDatas,(rsp)=>{
             if(rsp){
                 rsp.forEach(item=>{
-                    item.key=(item.id+'-'+changeClassId(item.classId));
+                    item.key=(item.id+'-'+changeClassPortId(item.classId));
                 });
                 setData(rsp);
             }

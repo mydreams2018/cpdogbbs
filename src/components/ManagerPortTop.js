@@ -1,6 +1,7 @@
 import {Button, Table, Input, Modal, message} from 'antd';
 import React, {useState ,useEffect} from 'react';
 import {managerAuthPort, updatePortIsTop} from "../utils/HttpUtils";
+import {changeClassPortName} from "../utils/BaseUtils";
 
 const searchDatas = {
     name:'',
@@ -19,7 +20,7 @@ function ManagerPortTop(props) {
         managerAuthPort(searchDatas,(rsp)=>{
             if(rsp){
                 rsp.forEach(item=>{
-                    item.key=(item.id+'-'+changeClassId(item.classId));
+                    item.key=(item.id+'-'+changeClassPortName(item.classId));
                 });
                 setData(rsp);
             }
@@ -46,7 +47,7 @@ function ManagerPortTop(props) {
         {
             title: '类型',
             dataIndex: 'classId',
-            render: (classId) => changeClassId(classId)
+            render: (classId) => changeClassPortName(classId)
         },
         {
             title: '推荐状态',
@@ -60,21 +61,6 @@ function ManagerPortTop(props) {
             render: (text) => <span style={{color:"#1890ff",cursor:"pointer"}} onClick={()=>editClick(text)}>edit</span>
         }
     ];
-    const changeClassId = (classId) => {
-        switch (classId){
-            case 1:
-                return  "java";
-            case 2:
-                return  "前端";
-            case 3:
-                return  "数据库";
-            case 4:
-                return  "report_talk";
-            default:
-
-        }
-        return classId;
-    }
     const handleOk = (state) => {
         if (updatePortTop.id && updatePortTop.classId){
             setLoading(true);
@@ -98,7 +84,7 @@ function ManagerPortTop(props) {
         managerAuthPort(searchDatas,(rsp)=>{
             if(rsp){
                 rsp.forEach(item=>{
-                    item.key=(item.id+'-'+changeClassId(item.classId));
+                    item.key=(item.id+'-'+changeClassPortName(item.classId));
                 });
                 setData(rsp);
             }

@@ -653,10 +653,41 @@ function selectAuthCount(obj,callback){
         callback(error);
     });
 }
+function selectUserMessageAll(obj,callback){
+    axios({
+        method: 'post',
+        url: '/api/userMessage/selectAll',
+        data:obj,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        responseType: 'json'
+    }).then((response) => {
+        callback(response.data);
+    }).catch((error) => {
+        callback(error);
+    });
+}
+function userMessageUpdateMsgState(obj,callback){
+    axios({
+        method: 'post',
+        url: '/api/userMessage/updateMsgState',
+        data:obj,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        responseType: 'json'
+    }).then((response) => {
+        callback(response.data);
+    }).catch((error) => {
+        callback(error);
+    });
+}
+
 export {getApiImg,getRigister,userLogin,rePassWord,getUserInfo,sendPorts,signByPrimaryKey, signByOn,queryReplyWeek
     ,queryHomeReport,queryUserByAlias ,queryPortDetails ,queryDetailsTextAnswer,sendReplyAnswer,portsUploadImg
     ,userIsCollect ,sendCollect,acceptReply ,updateUserDes,queryMyPorts,deleteMyPorts,likePorts,editPortDetails,
     queryPortCollections,deletePortCollections,queryMyReplyPorts ,deleteMyReplyPorts,updateUserPassword,
     collaborationCompanyQuery,managerAuthPort,managerAuthPortDetails,managerUpdatePortAuth,managerAuthPortsReply
 ,managerUpdateReplyPort,userLogout,managerGetUser,updateUserIsManager,deleteUser,updatePortIsTop,collaborationInsert
-,selectAuthCount}
+,selectAuthCount,selectUserMessageAll,userMessageUpdateMsgState}

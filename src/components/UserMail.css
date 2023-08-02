@@ -1,0 +1,28 @@
+.user-mail .user-mail-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+.user-mail .user-mail-header span {
+  line-height: 46px;
+  display: inline-block;
+  cursor: pointer;
+}
+.user-mail .user-mail-header span:first-child {
+  margin-left: 6px;
+}
+.user-mail .user-mail-header span:last-child {
+  margin-left: 16px;
+}
+.user-mail .user-mail-header .current-span {
+  color: #1890ff;
+  border-bottom: 1px solid #1890ff;
+}
+.user-mail pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  font-weight: 566;
+  margin-left: 55px;
+}
+.user-mail span[hv="tomoto"] {
+  color: #1890ff;
+}

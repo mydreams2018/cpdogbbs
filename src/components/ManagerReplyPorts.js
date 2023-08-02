@@ -2,6 +2,7 @@ import {Button, Table,DatePicker,Input,Select } from 'antd';
 import React,{useState ,useEffect} from 'react';
 import AuthReplyPorts from "./AuthReplyPorts";
 import {managerAuthPortsReply} from "../utils/HttpUtils";
+import {changeClassId} from "../utils/BaseUtils";
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 
@@ -16,21 +17,6 @@ function ManagerReplyPorts(props) {
     const [data,setData] = useState([]);
     const [editReply,setEditReply] = useState(false);
     const [editDatas,setEditDatas] = useState({});
-    const changeClassId = (classId) => {
-        switch (classId){
-            case 1:
-                return  "details_text_back";
-            case 2:
-                return  "details_text_front";
-            case 3:
-                return "details_text_data";
-            case 4:
-                return  "details_text_talk";
-            default:
-
-        }
-        return classId;
-    }
     useEffect(() => {
         managerAuthPortsReply(searchDatas,(rsp)=>{
             if(rsp){
