@@ -77,7 +77,6 @@ function ManagerPorts(props) {
                 });
                 setData(rsp);
             }
-            console.log(rsp);
         });
     }
 

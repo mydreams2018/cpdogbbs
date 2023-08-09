@@ -115,7 +115,6 @@ function MySendPorts(props) {
                 });
                 setData(rsp.datas);
             }
-            console.log(rsp);
         });
     }
 

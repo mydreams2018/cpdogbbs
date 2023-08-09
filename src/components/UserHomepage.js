@@ -7,7 +7,6 @@ import cookies from "../utils/Cookies";
 
 function UserHomepage() {
     const userContext = useContext(MainContext);
-    console.log(userContext);
     const logout = () => {
         userLogout({},(rsp)=>{
             if(rsp.status===1){

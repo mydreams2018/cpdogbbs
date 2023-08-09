@@ -22,11 +22,9 @@ const Editor = ({ onChange, onSubmit, value,setReplyMsg }) => {
                 setReplyMsg(newMsg);
             }
             setReplyGifShow(false);
-            console.log("click");
         }
         document.getElementById("root").addEventListener("click", listen, false);
         return () => {
-            console.log("清理click事件");
             document.getElementById("root").removeEventListener("click",listen,false);
         };
     },[]);

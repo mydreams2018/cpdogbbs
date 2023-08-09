@@ -109,7 +109,6 @@ function MyReplyPorts(props) {
                 });
                 setData(rsp.datas);
             }
-            console.log(rsp);
         });
     }
 
