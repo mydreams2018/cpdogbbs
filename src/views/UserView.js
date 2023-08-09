@@ -1,6 +1,6 @@
 import { HomeOutlined, SettingOutlined ,MessageOutlined,UserAddOutlined} from '@ant-design/icons';
 import { Menu } from 'antd';
-import { useState ,useContext} from 'react';
+import { useState ,useContext,useEffect} from 'react';
 import UserHomepage from "../components/UserHomepage";
 import SendPorts from "../components/SendPorts";
 import UserDetailsEdit from "../components/UserDetailsEdit";
@@ -15,6 +15,7 @@ import RootDeleteUser from "../components/RootDeleteUser";
 import ManagerPortTop from "../components/ManagerPortTop";
 import CollaborationCompany from "../components/CollaborationCompany";
 import MainContext from "../MainContext";
+import {useLocation} from "react-router-dom";
 import './UserView.css';
 
 function getItem(label, key, icon, children, type) {
@@ -46,8 +47,21 @@ const rootAlias = ["deathwater","kungreat"];
 
 function UserView(){
     const userContext = useContext(MainContext);
+    const locationPath = useLocation();
     const [openKeys, setOpenKeys] = useState(['home']);
+    const [defaultSelectedKey,setDefaultSelectedKey] = useState(()=>{
+        if(locationPath.state && locationPath.state.menuData && locationPath.state.menuData.defaultSelectedKey){
+            return locationPath.state.menuData.defaultSelectedKey;
+        }
+        return ['home-1'];
+    });
     const [openKeysItem, setOpenKeysItem] = useState( <UserHomepage />);
+    useEffect(()=>{
+        if(locationPath.state && locationPath.state.menuData){
+            setOpenKeys(locationPath.state.menuData.openKeys);
+            onSelectChange({key:locationPath.state.menuData.defaultSelectedKey[0]});
+        }
+    },[locationPath.state]);
     const onOpenChange = (keys) => {
         const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
         if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
@@ -59,42 +73,55 @@ function UserView(){
     const onSelectChange = (keys) => {
         switch (keys.key) {
             case 'home-1':
+                setDefaultSelectedKey(['home-1']);
                 setOpenKeysItem( <UserHomepage />);
                 break;
             case 'home-2':
+                setDefaultSelectedKey(['home-2']);
                 setOpenKeysItem( <SendPorts />);
                 break;
             case 'edit-1':
+                setDefaultSelectedKey(['edit-1']);
                 setOpenKeysItem( <UserDetailsEdit />);
                 break;
             case 'edit-2':
+                setDefaultSelectedKey(['edit-2']);
                 setOpenKeysItem(<UserMail />);
                 break;
             case 'comments-1':
+                setDefaultSelectedKey(['comments-1']);
                 setOpenKeysItem( <MySendPorts />);
                 break;
             case 'comments-2':
+                setDefaultSelectedKey(['comments-2']);
                 setOpenKeysItem( <MyReplyPorts />);
                 break;
             case 'comments-3':
+                setDefaultSelectedKey(['comments-3']);
                 setOpenKeysItem(<MyCollection />);
                 break;
             case 'port-1':
+                setDefaultSelectedKey(['port-1']);
                 setOpenKeysItem(<ManagerPorts />);
                 break;
             case 'reply-1':
+                setDefaultSelectedKey(['reply-1']);
                 setOpenKeysItem(<ManagerReplyPorts />);
                 break;
             case 'root-user':
+                setDefaultSelectedKey(['root-user']);
                 setOpenKeysItem(<RootManager />);
                 break;
             case 'delete-user':
+                setDefaultSelectedKey(['delete-user']);
                 setOpenKeysItem(<RootDeleteUser />);
                 break;
             case 'recommend-port':
+                setDefaultSelectedKey(['recommend-port']);
                 setOpenKeysItem(<ManagerPortTop />);
                 break;
             case 'collaboration-company':
+                setDefaultSelectedKey(['collaboration-company']);
                 setOpenKeysItem(<CollaborationCompany />);
                 break;
             default:
@@ -124,7 +151,7 @@ function UserView(){
                 <Menu
                     mode="inline"
                     openKeys={openKeys}
-                    defaultSelectedKeys={['home-1']}
+                    selectedKeys={defaultSelectedKey}
                     onOpenChange={onOpenChange}
                     onSelect={onSelectChange}
                     style={{
