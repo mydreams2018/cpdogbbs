@@ -31,12 +31,9 @@ function NotificationAuth(){
                     if (rsp && rsp.length > 0){
                         notification.info({
                             message: "站内信提醒",
-                            description: `有站内信,点击跳转查看...`,
+                            description: <span onClick={()=>navigate("/user",{state:{menuData:{openKeys:['edit'],defaultSelectedKey:['edit-2']}}})} style={{cursor:"pointer",color:'#6cb5f9'}}>有站内信,点击跳转查看...</span>,
                             placement:"bottomRight",
                             duration:3,
-                            onClick:()=>{
-                                navigate("/user",{state:{menuData:{openKeys:['edit'],defaultSelectedKey:['edit-2']}}});
-                            }
                         });
                         document.getElementById("clearMp3").play();
                     }
