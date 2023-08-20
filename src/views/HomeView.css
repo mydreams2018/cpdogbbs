@@ -5,6 +5,9 @@
 .home-view .home-left {
   width: 60%;
 }
+.home-view .home-left .demo-loadmore-list {
+  border-radius: 12px;
+}
 .home-view .home-right {
   width: 35%;
 }

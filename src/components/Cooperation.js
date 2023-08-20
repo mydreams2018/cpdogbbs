@@ -14,7 +14,7 @@ function Cooperation(){
     },[]);
     return(
         <List
-            style={{backgroundColor:'#fff',marginTop:20}}
+            style={{backgroundColor:'#fff',marginTop:20,borderRadius:12}}
             header={<div>合作区域</div>}
             bordered
             dataSource={data}

@@ -1,6 +1,7 @@
 .demo-loadmore-list {
   min-height: 350px;
   background-color: #fff;
+  border-radius: 12px!important;
 }
 .demo-loadmore-list .ant-list-item-meta {
   align-items: center;

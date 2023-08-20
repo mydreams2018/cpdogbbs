@@ -2,6 +2,7 @@
   background-color: #fff;
   margin-top: 73px;
   min-height: 120px;
+  border-radius: 12px;
 }
 .sign-in .sign-titile {
   display: flex;
